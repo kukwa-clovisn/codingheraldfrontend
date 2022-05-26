@@ -1,5 +1,6 @@
 <template>
-  <Cheader />
+<main>
+    <Cheader />
   <Nav />
   <div class="content">
     <div :class="{ blur: show, 'inner-content': mn }">
@@ -211,6 +212,8 @@
       </div>
     </div>
   </div>
+</main>
+
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
-  <header class="header">
+<main>
+    <header class="header">
     <nav class="left-header">
       <img src="../assets/kings.png" alt="Herald's chat" />
       <span title="HERALDSCHAT">He-chat</span>
@@ -180,6 +181,8 @@
       </div>
     </div>
   </section>
+</main>
+
 </template>
 
 <script>

@@ -207,7 +207,7 @@ export default {
     },
     sign() {
       if (this.password.length > 6 && this.password === this.confirmPassword) {
-        fetch("http://localhost:9001/register", {
+        fetch("api/register", {
           method: "Post",
           body: JSON.stringify({
             username: this.username,

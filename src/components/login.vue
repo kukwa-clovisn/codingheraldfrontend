@@ -74,51 +74,34 @@ export default {
     /**
      * creating a log in validation and authentication
      */
-    const login = async () => {
-      try {
-        await fetch("http://localhost:9001/login", {
-          method: "Post",
-          headers: {
-            // "Access-Control-Request-Headers": "Authorization",
-            // Authorization: "Bearer secretToken",
-            "Content-type": "application/json",
-          },
-          // credentials: "include",
-          body: JSON.stringify({
+    const login = () => {
+      axios
+        .post(
+          "api/login",
+          {
             username: user.username,
             password: user.password,
-          }),
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.statusText === "OK") {
+            router.push("/overview/Todo");
+            localStorage.setItem("codingheraldtoken", res.data.token);
+            localStorage.setItem("codingheraldtokenid", res.data.id);
+          }
         })
-          .then((res) => res.json())
-          .then(async (res) => {
-            console.log(res);
+        .catch((err) => console.log(err));
 
-            if (!res.token) {
-              errormsg.invalidMsg = res.msg;
-              errormsg.valid = true;
-              return;
-            }
-
-            let config = {
-              headers: {
-                Authorization: `Bearer ${res.token}`,
-              },
-            };
-            // await fetch('http://localhost:9001/login/token/' + `${req.id}`)
-            await axios("http://localhost:9001/login", config).then((res) => {
-              console.log(res);
-
-              localStorage.setItem("token", JSON.stringify(res.data._id));
-
-              router.push({
-                name: "Client",
-                // params: { id: `${res.data._id}` },
-              });
-            });
-          });
-      } catch (err) {
-        console.log(err);
-      }
+      //  let config = {
+      //       headers: {
+      //         Authorization: `Bearer ${res.token}`,
+      //       },
+      //     };
     };
 
     return { user, errormsg, login };

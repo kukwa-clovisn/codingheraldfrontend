@@ -135,7 +135,7 @@ export default {
     let status = ref(false);
     let username = ref("");
     let password = ref("");
-    let getFromLocalStorage = localStorage.getItem("token");
+    let getFromLocalStorage = localStorage.getItem("codingheraldtokenid");
     let token_id = ref("");
 
     // let   = {
@@ -154,7 +154,7 @@ export default {
         token_id.value = "";
         console.log("in the if section");
       } else {
-        token_id.value = JSON.parse(getFromLocalStorage);
+        token_id.value = getFromLocalStorage;
         console.log(token_id.value);
       }
 
@@ -164,7 +164,7 @@ export default {
 
     const displayTodo = async (id) => {
       try {
-        await axios("http://localhost:9001/user/" + `${id}`)
+        await axios("api/user/" + `${id}`)
           .then(async (res) => {
             console.log(res);
 
@@ -195,7 +195,7 @@ export default {
       try {
         await axios
           .post(
-            "http://localhost:9001/user/" + `${id}`,
+            "api/user/" + `${id}`,
             {
               data,
             },
@@ -231,7 +231,7 @@ export default {
           // }
 
           await axios(
-            "http://localhost:9001/user/" + `${token_id.value}` /*, {
+            "api/user/" + `${token_id.value}` /*, {
             headers: {
               Authorization: `Bearer ${res.token}`,
             },
@@ -247,7 +247,7 @@ export default {
 
           // axios
           //   .post(
-          //     "http://localhost:9001/user/data/" + "623b80a685b4097d966cfac5",
+          //     "api/user/data/" + "623b80a685b4097d966cfac5",
           //     {
           //       todoItems,
           //     },
@@ -285,17 +285,15 @@ export default {
         // todoItems = await getData().todos;
         // let id = await getData().id;
 
-        await axios("http://localhost:9001/user/" + `${token_id.value}`).then(
-          async (res) => {
-            console.log(res);
-            if (window.confirm("Are you sure you want to delete all items??")) {
-              todoItems.value = [];
-              await updateData(todoItems.value, res.data._id);
-              return;
-            }
-            await displayTodo(res.data._id);
+        await axios("api/user/" + `${token_id.value}`).then(async (res) => {
+          console.log(res);
+          if (window.confirm("Are you sure you want to delete all items??")) {
+            todoItems.value = [];
+            await updateData(todoItems.value, res.data._id);
+            return;
           }
-        );
+          await displayTodo(res.data._id);
+        });
       } catch (err) {
         console.log(err);
       }
@@ -312,31 +310,15 @@ export default {
         // await getData();
         // localStorage.setItem("new todo", JSON.stringify(todoItems.value)); //updating the local storage after deleting as item
 
-        await axios("http://localhost:9001/user/" + `${token_id.value}`).then(
-          async (res) => {
-            console.log(res);
+        await axios("api/user/" + `${token_id.value}`).then(async (res) => {
+          console.log(res);
 
-            if (!todoItems.value[index].done) {
-              if (
-                window.confirm(
-                  `Are you sure you want to delete item ${
-                    index + 1
-                  }? You're not done with it yet`
-                )
-              ) {
-                todoItems.value = await res.data.todos;
-                todoItems.value.splice(index, 1); //detete that item you've choosen
-                console.log(todoItems.value.indexOf(index));
-
-                await updateData(todoItems.value, res.data._id);
-                return;
-              }
-              await displayTodo(res.data._id);
-              return;
-            }
+          if (!todoItems.value[index].done) {
             if (
               window.confirm(
-                `Are you sure you want to delete item ${index + 1}?`
+                `Are you sure you want to delete item ${
+                  index + 1
+                }? You're not done with it yet`
               )
             ) {
               todoItems.value = await res.data.todos;
@@ -346,8 +328,20 @@ export default {
               await updateData(todoItems.value, res.data._id);
               return;
             }
+            await displayTodo(res.data._id);
+            return;
           }
-        );
+          if (
+            window.confirm(`Are you sure you want to delete item ${index + 1}?`)
+          ) {
+            todoItems.value = await res.data.todos;
+            todoItems.value.splice(index, 1); //detete that item you've choosen
+            console.log(todoItems.value.indexOf(index));
+
+            await updateData(todoItems.value, res.data._id);
+            return;
+          }
+        });
       } catch (err) {
         console.log(err);
       }
@@ -360,25 +354,23 @@ export default {
       try {
         // getFromLocalStorage = localStorage.getItem("new todo");
         // todoItems.value = JSON.parse(getFromLocalStorage);
-        await axios("http://localhost:9001/user/" + `${token_id.value}`).then(
-          async (res) => {
-            console.log(res);
-            todoItems.value = res.data.todos;
-            if (!todoItems.value[index].done) {
-              if (window.confirm(`Are you done with with item ${index + 1}`)) {
-                todoItems.value[index].done = true;
-                isDone.value = true;
+        await axios("api/user/" + `${token_id.value}`).then(async (res) => {
+          console.log(res);
+          todoItems.value = res.data.todos;
+          if (!todoItems.value[index].done) {
+            if (window.confirm(`Are you done with with item ${index + 1}`)) {
+              todoItems.value[index].done = true;
+              isDone.value = true;
 
-                await updateData(todoItems.value, res.data._id);
-                return;
-              }
-              await displayTodo(res.data._id);
+              await updateData(todoItems.value, res.data._id);
               return;
             }
-
-            // localStorage.setItem("new todo", JSON.stringify(todoItems.value));
+            await displayTodo(res.data._id);
+            return;
           }
-        );
+
+          // localStorage.setItem("new todo", JSON.stringify(todoItems.value));
+        });
       } catch (err) {
         console.log(err);
       }

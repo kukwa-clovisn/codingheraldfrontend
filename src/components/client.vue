@@ -19,7 +19,7 @@ export default {
   name: "Client",
   setup() {
     const router = useRouter();
-    let getFromLocalStorage = ref(localStorage.getItem("token"));
+    let getFromLocalStorage = ref(localStorage.getItem("codingheraldtoken"));
     onMounted(() => {
       if (!getFromLocalStorage.value) {
         router.push("/login");

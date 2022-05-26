@@ -1,5 +1,6 @@
 <template>
-  <header class="header">
+<main>
+    <header class="header">
     <h1>being in a world of creativity</h1>
     <h3>Go through our various applications</h3>
   </header>
@@ -104,6 +105,8 @@
       
     </div>
   </div>
+</main>
+
 </template>
 
 <script>
