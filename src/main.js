@@ -11,6 +11,6 @@ import './interceptors/axios'
 
 const app = createApp(App);
 
-app.component("font-awesome-icon", FontAwesomeIcon);
+
 
 app.use(router).mount('#app')
