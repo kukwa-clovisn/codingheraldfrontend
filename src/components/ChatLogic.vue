@@ -1,5 +1,6 @@
 <template>
-  <header class="header">
+<main>
+    <header class="header">
     <nav class="header-top">
       <button @click="myFunction()">
         <span class="fa fa-bars icon"></span>
@@ -117,6 +118,8 @@
       </div>
     </div>
   </section>
+</main>
+
 </template>
 
 <script>

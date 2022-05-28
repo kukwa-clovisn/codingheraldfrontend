@@ -1,5 +1,6 @@
 <template>
-  <Header />
+<main>
+   <Header />
   <Logo />
   <div class="home d-flex justify-content-between align-items-center">
     <Block />
@@ -36,6 +37,8 @@
   <br />
   <br />
   <Footer />
+</main>
+ 
 </template>
 
 <script>
