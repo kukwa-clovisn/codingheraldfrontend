@@ -291,9 +291,7 @@ export default {
       this.show = false;
       this.select = false;
     },
-    getCurrency() {
-      console.log("ok");
-    },
+    getCurrency() {},
   },
 };
 </script>
