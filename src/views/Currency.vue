@@ -258,8 +258,6 @@ export default {
       )
       .then((res) => {
         this.currencies = res.data.results;
-        console.log(res.data);
-        console.log(res.data.results.USD);
 
         for (let i = 0; i < res.data.results.length; i++) {
           this.currencyNames.push(res.data.results.currencyName[i]);
@@ -271,13 +269,10 @@ export default {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         this.currencyName = data.results;
         this.currencyNames = Object.keys(data.results).map((key) => {
           return this.currencyNames[key];
         });
-        console.log(this.currencyNames);
       });
   },
   methods: {
@@ -297,14 +292,7 @@ export default {
       this.select = false;
     },
     getCurrency() {
-      //   if (this.searchCurrency !== "") {
-      //     console.log(this.searchCurrency);
-      //   } else {
-      //     alert("currency doenst exist");
-      //   }
-      console.log(this.list);
-      //   console.log(this.currencies.Proxy);
-      //   console.log(this.currencies.currencyName);
+      console.log("ok");
     },
   },
 };
