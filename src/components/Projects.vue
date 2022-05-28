@@ -95,7 +95,6 @@
             <h1>body mass index(BMI)</h1>
       <span>Health is wealth...</span>
       <p>check out your health state to know how healthy you are </p>
-      <img src="../assets/bm.jpg" alt="">
       <p>find your body mass index accurately with aids on how to live a healthy life</p>
       <button class="explore">
         <router-link to="/BMI" class="route">explore</router-link>

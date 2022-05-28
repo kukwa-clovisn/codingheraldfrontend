@@ -15,17 +15,15 @@
       <div class="user-list">
         <!-- login users will be listed here from the backend -->
         <div class="user" v-for="(user, index) in users" :key="index">
-          <div class="user-profile">
-            <img src="../assets/p.jpg" alt="user profile" />
-          </div>
+          <div class="user-profile"></div>
           <div class="desc">
             <div class="title">
               <h2>{{ user.name }}</h2>
-              <p>{{time}}</p>
+              <p>{{ time }}</p>
             </div>
             <div class="content">
               <!-- <h3>username here:</h3> -->
-              <p>{{user.name}} joined HE-chat</p>
+              <p>{{ user.name }} joined HE-chat</p>
             </div>
           </div>
         </div>
@@ -37,9 +35,7 @@
     <div class="chat-board">
       <div class="header">
         <div class="logo">
-          <div class="img">
-            <img src="../assets/p.jpg" alt="" />
-          </div>
+          <div class="img"></div>
 
           <div class="user-desc">
             <h3>kukwa clovis</h3>
@@ -63,29 +59,26 @@
 </template>
 
 <script>
-import {ref} from "vue"
-import axios from "axios"
+import { ref } from "vue";
+import axios from "axios";
 export default {
-     name: "chatBox",
+  name: "chatBox",
 
-setup() {
-let users = ref([]);
-const time = ref("")
+  setup() {
+    let users = ref([]);
+    const time = ref("");
 
-time.value = new Date();
+    time.value = new Date();
 
-
-     function getUsers() {
-axios.get("http://localhost:3000/Database").then(res => {
-     users.value = res.data;
-});
-
-     }
-getUsers()
-     return {users, time
-     }
-}
-}
+    function getUsers() {
+      axios.get("http://localhost:3000/Database").then((res) => {
+        users.value = res.data;
+      });
+    }
+    getUsers();
+    return { users, time };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -211,16 +204,16 @@ main {
               text-transform: capitalize;
               overflow: hidden;
               text-overflow: ellipsis;
-              white-space:nowrap;
+              white-space: nowrap;
               width: 64%;
             }
             p {
               font: 500 10px "Poppins", sans-serif;
               padding: 1px 3px;
               width: 35%;
-              overflow:hidden;
+              overflow: hidden;
               text-overflow: ellipsis;
-              white-space:nowrap;
+              white-space: nowrap;
             }
           }
           .content {
