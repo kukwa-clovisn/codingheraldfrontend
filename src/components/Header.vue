@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header>
+    <header class="large-screens">
       <nav class="logo">
         <router-link to="/" class="logoName" title="go to home">CH</router-link>
       </nav>
@@ -40,47 +40,40 @@
         <router-link to="/login" class="route-to">sign in</router-link>
       </nav>
     </header>
-    <header class="small-screens">
-      <nav v-if="toggled" class="sidebar">
-        <div>
-          <h1 class="sidebar-logo">condingHerald.com</h1>
-          <span class="close" title="Close page" @click="untoggle()"
-            >&times;</span
-          >
-        </div>
-        <div class="sidebar-content-div" title="Click to see all Directories">
-          <span>directories</span> <i class="fas fa-arrows-alt"></i>
-        </div>
-
-        <div class="sidebar-content-div">sign up</div>
-        <div class="sidebar-content-div">
-          <router-link to="/Demo" class="route-to-sidebar-content"
-            >demo</router-link
-          >
-        </div>
-        <div class="sidebar-content-div">
-          <router-link to="/Page" class="route-to-sidebar-content"
-            >ACTA</router-link
-          >
-        </div>
+    <header class="small-screens" :class="{ whiteBg: showApps }">
+      <nav class="logo" title="In Christ alone#TeamJesus4Life">
+        <router-link to="/" class="logoName">CH</router-link>
       </nav>
-
-      <nav
-        class="
-          logo
-          d-flex
-          justify-content-center
-          align-items-center
-          flex-md-column
-          text-capitalize
-        "
-        title="In Christ alone#TeamJesus4Life"
-      >
-        codingHerald
+      <nav id="bars" @click="toggleMenu()">
+        <i class="fa-solid fa-bars" id="menu-bars"></i>
       </nav>
-      <nav id="bars" v-if="clicked" @click="toggleMenu()">
-        <i class="fa fa-bars" id="menu-bar" title="menu/projects"></i>
-      </nav>
+      <transition name="fade">
+        <div id="app-list" v-if="showApps">
+          <h1>our courses and services</h1>
+          <ul>
+            <li>
+              <a href="https://advancedtechacademy.herokuapp.com"
+                ><i class="fa-solid fa-graduation-cap"></i>academy</a
+              >
+            </li>
+            <li>
+              <a href="/course/crypto"
+                ><i class="fa-solid fa-calendar-check"></i>dairy</a
+              >
+            </li>
+            <li>
+              <a href="/course/forex"
+                ><i class="fa-brands fa-bitcoin"></i>cryptoswap</a
+              >
+            </li>
+            <li>
+              <a href="/https://advancedtechacademy.herokuapp.com"
+                ><i class="fa-solid fa-music"></i>piano lessons</a
+              >
+            </li>
+          </ul>
+        </div>
+      </transition>
     </header>
   </main>
 </template>
@@ -95,19 +88,15 @@ export default {
     let showApps = ref(false);
 
     function toggleMenu() {
-      toggled.value = true;
-      clicked.value = false;
-    }
-    function untoggle() {
-      toggled.value = false;
-      clicked.value = true;
+      toggled.value = !toggled.value;
+      showApps.value = !showApps.value;
     }
 
     function dropDownApps() {
       showApps.value = !showApps.value;
     }
 
-    return { showApps, clicked, toggled, toggleMenu, untoggle, dropDownApps };
+    return { showApps, clicked, toggled, toggleMenu, dropDownApps };
   },
 };
 </script>
@@ -255,10 +244,42 @@ main {
         }
       }
     }
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
   }
 
   .small-screens {
     display: none;
+    @media screen and (max-width: 600px) {
+      display: flex;
+
+      #app-list {
+        height: fit-content;
+        bottom: -280%;
+        left: 0;
+        ul {
+          flex-direction: column;
+          height: fit-content;
+
+          li {
+            width: 50%;
+
+            a {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+  .small-screens.whiteBg {
+    background: white;
+    width: 100vw;
+    padding: 0 20px;
   }
 }
 </style>

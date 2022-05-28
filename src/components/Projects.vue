@@ -59,7 +59,7 @@
       </div>
 
       <button class="explore">
-        <router-link to="/Todo" class="route">explore</router-link>
+        <router-link to="/overview/Todo" class="route">explore</router-link>
       </button>
     </div>
     <div class="project currency">
@@ -73,7 +73,7 @@
           
       </div>
       <button class="explore">
-        <router-link to="/Currency" class="route">explore</router-link>
+        <router-link to="/overview/Currency" class="route">explore</router-link>
       </button>
     </div>
     <div class="project exchange">
@@ -85,23 +85,10 @@
       <p>explore to find all the currencies you want</p>
       <p>BTC, USD,NGN, XAF and many more currencies</p>
       <button class="explore">
-        <router-link to="/Exchange" class="route">explore</router-link>
+        <router-link to="/overview/Exchange" class="route">explore</router-link>
       </button>
         </section>
-   <span class="hover">currencySwap! <p class="hide">explore</p></span>
-    </div>
-    <div class="project bmi">
-        <section>
-            <h1>body mass index(BMI)</h1>
-      <span>Health is wealth...</span>
-      <p>check out your health state to know how healthy you are </p>
-      <p>find your body mass index accurately with aids on how to live a healthy life</p>
-      <button class="explore">
-        <router-link to="/BMI" class="route">explore</router-link>
-      </button>
-        </section>
-        <span class="hover">body mass index <br> (BMI) <p class="hide">explore</p></span>
-      
+   <span class="hover">currencySwap<p class="hide">explore</p></span>
     </div>
   </div>
 </main>
@@ -127,7 +114,7 @@ header {
     font-weight: 700;
     text-align: center;
     padding: 10px;
-    font-family: "Russo One", sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   h3 {
     text-align: center;
@@ -260,7 +247,7 @@ header {
 
   .project {
     width: 530px;
-    height: 86vh;
+    height: 88vh;
     border-radius: 5px;
     // position: relative;
     z-index: 1;
@@ -407,7 +394,6 @@ header {
       font-weight: 500;
       padding-bottom: 10px;
       font-family: monospace;
-      color: rgb(255, 192, 0);
       color: teal;
     }
 

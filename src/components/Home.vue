@@ -34,8 +34,7 @@
     </div>
     <br />
     <Projects />
-    <br />
-    <br />
+
     <Footer />
   </main>
 </template>

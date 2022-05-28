@@ -1,224 +1,233 @@
 <template>
-<main>
+  <main>
     <Cheader />
-  <Nav />
-  <div class="content">
-    <div :class="{ blur: show, 'inner-content': mn }">
-      <div
-        v-if="hide"
-        class="
-          form
-          bg-white
-          d-flex
-          flex-column
-          justify-content-evenly
-          align-items-center
-        "
-      >
+    <Nav />
+    <div class="content">
+      <div :class="{ blur: show, 'inner-content': mn }">
         <div
+          v-if="hide"
           class="
-            form-head
-            d-flex
-            justify-content-between
-            px-4
-            align-items-center
-          "
-        >
-          <div
-            class="d-flex flex-column justify-content-start align-items-center"
-          >
-            <h2 class="text-capitalize">exchange</h2>
-            <p class="lead">trade tokens in an instant</p>
-          </div>
-          <div
-            class="d-flex justify-content-center align-items-center"
-            style="width: 35%; font-size: 20px; color: brown; cursor: pointer"
-          >
-            <i class="fa fa-cog mx-3"></i>
-            <i class="far fa-clock"></i>
-          </div>
-        </div>
-        <div
-          class="
-            form-input
-            d-flex
-            flex-column
-            justify-content-between
-            align-items-center
-          "
-        >
-          <p class="text-left px-3 py-2 text-capitalize">from</p>
-          <div
-            class="
-              cover
-              d-flex
-              flex-row
-              justify-content-between
-              align-items-center
-            "
-          >
-            <input
-              type="number"
-              name="currentamount"
-              id="c_amount"
-              min="0"
-              placeholder="0.0"
-            />
-            <button @click="toggle()" class="text-uppercase">
-              bnb<i class="fas fa-chevron-down mx-3"></i>
-            </button>
-          </div>
-        </div>
-        <div
-          class="d-flex justify-content-center align-items-center"
-          style="color: brown"
-        >
-          <i class="fa fa-arrow-down"></i>
-        </div>
-        <div
-          class="
-            form-input
+            form
+            bg-white
             d-flex
             flex-column
             justify-content-evenly
             align-items-center
           "
         >
-          <p class="px-3 py-2 text-capitalize">to</p>
           <div
             class="
-              cover
+              form-head
               d-flex
-              flex-row
-              justify-content-center
+              justify-content-between
+              px-4
               align-items-center
             "
           >
+            <div
+              class="
+                d-flex
+                flex-column
+                justify-content-start
+                align-items-center
+              "
+            >
+              <h2 class="text-capitalize">exchange</h2>
+              <p class="lead">trade tokens in an instant</p>
+            </div>
+            <div
+              class="d-flex justify-content-center align-items-center"
+              style="width: 35%; font-size: 20px; color: brown; cursor: pointer"
+            >
+              <i class="fa fa-cog mx-3"></i>
+              <i class="far fa-clock"></i>
+            </div>
+          </div>
+          <div
+            class="
+              form-input
+              d-flex
+              flex-column
+              justify-content-between
+              align-items-center
+            "
+          >
+            <p class="text-left px-3 py-2 text-capitalize">from</p>
+            <div
+              class="
+                cover
+                d-flex
+                flex-row
+                justify-content-between
+                align-items-center
+              "
+            >
+              <input
+                type="number"
+                name="currentamount"
+                id="c_amount"
+                min="0"
+                placeholder="0.0"
+              />
+              <button @click="toggle()" class="text-uppercase">
+                bnb<i class="fas fa-chevron-down mx-3"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-center align-items-center"
+            style="color: brown"
+          >
+            <i class="fa fa-arrow-down"></i>
+          </div>
+          <div
+            class="
+              form-input
+              d-flex
+              flex-column
+              justify-content-evenly
+              align-items-center
+            "
+          >
+            <p class="px-3 py-2 text-capitalize">to</p>
+            <div
+              class="
+                cover
+                d-flex
+                flex-row
+                justify-content-center
+                align-items-center
+              "
+            >
+              <input
+                type="number"
+                name="currentamount"
+                id="c_amount"
+                min="0"
+                placeholder="0.0"
+              />
+              <button @click="selected()">
+                select a currency<i class="fas fa-chevron-down mx-2"></i>
+              </button>
+            </div>
+          </div>
+          <Button
+            btn="connect wallet"
+            style="width: 90%; height: 50px; border-radius: 5px"
+          />
+        </div>
+        <div
+          class="currency d-flex justify-content-evenly flex-column"
+          v-if="show"
+        >
+          <div
+            class="
+              currency-head
+              d-flex
+              justify-content-between
+              align-items-center
+              flex-row
+              px-3
+            "
+          >
+            <p class="lead">select a token</p>
+            <span
+              @click="back()"
+              style="font-size: 30px; color: green; cursor: pointer"
+              >&times;</span
+            >
+          </div>
+          <div class="input">
             <input
-              type="number"
-              name="currentamount"
-              id="c_amount"
-              min="0"
-              placeholder="0.0"
+              type="search"
+              name="currency"
+              id="currency"
+              class="currency-input"
+              v-model="searchCurrency"
+              placeholder="Search name or paste address"
             />
-            <button @click="selected()">
-              select a currency<i class="fas fa-chevron-down mx-2"></i>
-            </button>
+          </div>
+          <div class="main">
+            <div
+              @click="getCurrency()"
+              class="currencies d-flex justify-content-between flex-column"
+              v-for="currency of currencies"
+              :key="currency.currencyName"
+            >
+              <h4 @click="alert('you clicked')">
+                {{ currency.currencySymbol }} <span> </span> {{ currency.id }}
+              </h4>
+              <p class="lead" v-bind="list">
+                {{ currency.currencyName }}
+              </p>
+            </div>
           </div>
         </div>
-        <Button
-          btn="connect wallet"
-          style="width: 90%; height: 50px; border-radius: 5px"
-        />
-      </div>
-      <div
-        class="currency d-flex justify-content-evenly flex-column"
-        v-if="show"
-      >
         <div
-          class="
-            currency-head
-            d-flex
-            justify-content-between
-            align-items-center
-            flex-row
-            px-3
-          "
+          class="currency d-flex justify-content-evenly flex-column"
+          v-if="select"
         >
-          <p class="lead">select a token</p>
-          <span
-            @click="back()"
-            style="font-size: 30px; color: green; cursor: pointer"
-            >&times;</span
-          >
-        </div>
-        <div class="input">
-          <input
-            type="search"
-            name="currency"
-            id="currency"
-            class="currency-input"
-            v-model="searchCurrency"
-            placeholder="Search name or paste address"
-          />
-        </div>
-        <div class="main">
           <div
-            @click="getCurrency()"
-            class="currencies d-flex justify-content-between flex-column"
-            v-for="currency of currencies"
-            :key="currency.currencyName"
+            class="
+              currency-head
+              d-flex
+              justify-content-between
+              align-items-center
+              flex-row
+              px-3
+            "
           >
-            <h4 @click="alert('you clicked')">
-              {{ currency.currencySymbol }} <span> </span> {{ currency.id }}
-            </h4>
-            <p class="lead" v-bind="list">
-              {{ currency.currencyName }}
-            </p>
+            <p class="lead">select a token</p>
+            <span
+              @click="back()"
+              style="font-size: 30px; color: green; cursor: pointer"
+              >&times;</span
+            >
           </div>
-        </div>
-      </div>
-      <div
-        class="currency d-flex justify-content-evenly flex-column"
-        v-if="select"
-      >
-        <div
-          class="
-            currency-head
-            d-flex
-            justify-content-between
-            align-items-center
-            flex-row
-            px-3
-          "
-        >
-          <p class="lead">select a token</p>
-          <span
-            @click="back()"
-            style="font-size: 30px; color: green; cursor: pointer"
-            >&times;</span
-          >
-        </div>
-        <div class="input">
-          <input
-            type="search"
-            name="currency"
-            id=""
-            class="currency-input"
-            v-model="searchCurrency"
-            placeholder="Search name or paste address"
-          />
-        </div>
-        <div class="main">
-          <div
-            @click="getCurrency()"
-            class="currencies d-flex justify-content-between flex-column"
-            v-for="currency of currencies"
-            :key="currency.currencyName"
-          >
-            <h4>
-              {{ currency.currencySymbol }} <span> </span> {{ currency.id }}
-            </h4>
-            <p class="lead" v-bind="list">
-              {{ currency.currencyName }}
-            </p>
+          <div class="input">
+            <input
+              type="search"
+              name="currency"
+              id=""
+              class="currency-input"
+              v-model="searchCurrency"
+              placeholder="Search name or paste address"
+            />
           </div>
+          <div class="main">
+            <div
+              @click="getCurrency()"
+              class="currencies d-flex justify-content-between flex-column"
+              v-for="currency of currencies"
+              :key="currency.currencyName"
+            >
+              <h4>
+                {{ currency.currencySymbol }} <span> </span> {{ currency.id }}
+              </h4>
+              <p class="lead" v-bind="list">
+                {{ currency.currencyName }}
+              </p>
+            </div>
+          </div>
+          <footer
+            class="
+              text-capitalize
+              d-flex
+              justify-content-center
+              align-items-end
+            "
+          >
+            manage tokens
+          </footer>
         </div>
-        <footer
-          class="text-capitalize d-flex justify-content-center align-items-end"
-        >
-          manage tokens
-        </footer>
       </div>
     </div>
-  </div>
-</main>
-
+  </main>
 </template>
 
 <script>
 import Cheader from "../components/Cheader.vue";
-import Nav from "../components/nav.vue";
+import Nav from "../components/contact.vue";
 import Button from "../components/Button.vue";
 import axios from "axios";
 

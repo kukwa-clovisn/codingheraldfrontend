@@ -3,6 +3,7 @@ import {
     createWebHistory
 } from 'vue-router'
 import Home from '@/components/Home'
+import Contact from '@/components/contact'
 
 const routes = [{
         path: '/',
@@ -12,6 +13,10 @@ const routes = [{
         path: '/Login',
         name: 'Login',
         component: () => import( /* webpackChunkName: "Login" */ '../components/login.vue')
+    }, {
+        path: '/contact',
+        name: 'Contact',
+        component: Contact
     }, {
         path: '/overview/Todo',
         name: 'Client',
@@ -43,10 +48,6 @@ const routes = [{
         name: 'Register',
         component: () => import( /* webpackChunkName: "Register" */ '../components/Register.vue')
     }, {
-        path: '/Page',
-        name: 'Page',
-        component: () => import( /* webpackChunkName: "Page" */ '../components/Page.vue')
-    }, {
         path: '/Demo',
         name: 'Demo',
         component: () => import( /* webpackChunkName: "Demo" */ '../components/Demo.vue')
@@ -56,18 +57,9 @@ const routes = [{
         component: () => import( /* webpackChunkName: "Dashboard" */ '../components/Dashboard.vue')
     },
     {
-        path: '/Directory',
-        name: 'Directory',
-        component: () => import( /* webpackChunkName: "Directory" */ '../components/Directory.vue')
-    },
-    {
         path: '/ChatLogic',
         name: 'ChatLogic',
         component: () => import( /* webpackChunkName: "ChatLogic" */ '../components/ChatLogic.vue')
-    }, {
-        path: '/Projects',
-        name: 'Projects',
-        component: () => import('../components/Projects.vue')
     }, {
         path: '/chatBox',
         name: 'chatBox',
