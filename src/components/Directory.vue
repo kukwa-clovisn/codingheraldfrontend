@@ -1,16 +1,16 @@
 <template>
-  <header>
-    <h1>projects</h1>
-    <nav>
-      <li>
-        <routerLink to="/" class="route">home</routerLink>
-      </li>
-      <li>
-        <routerLink to="/Register" class="route">sing up</routerLink>
-      </li>
-    </nav>
-  </header>
   <main>
+    <header>
+      <h1>projects</h1>
+      <nav>
+        <li>
+          <routerLink to="/" class="route">home</routerLink>
+        </li>
+        <li>
+          <routerLink to="/Register" class="route">sing up</routerLink>
+        </li>
+      </nav>
+    </header>
     <div class="projects">
       <div class="project">
         <h1 class="project-name">Herald's chat</h1>
@@ -30,9 +30,7 @@
       <div class="project">
         <h1 class="project-name">currency app</h1>
         <span>get all your crypto currencies exchange rates</span>
-        <div class="image-div">
-          <img src="../assets/currency.png" alt="" class="image" />
-        </div>
+        <div class="image-div"></div>
         <div class="desc">
           <p class="project-description">
             Get to know and exchange crypto currencies in pancakeswap. <br />
@@ -60,9 +58,7 @@
       <div class="project">
         <h1 class="project-name">Exchange app</h1>
         <span>Get the exchange rates of currencies worldwide</span>
-        <div class="image-div">
-          <img src="../assets/currency.png" alt="" class="image" />
-        </div>
+        <div class="image-div"></div>
         <div class="desc">
           <p class="project-description">
             Get the current value of currencies with respect to other currencies
@@ -72,20 +68,7 @@
           >
         </div>
       </div>
-      <div class="project">
-        <h1 class="project-name">BMI calculator</h1>
-        <span>Know your body mass index ration now!</span>
-        <div class="image-div">
-          <img src="../assets/bmi-icon.png" alt="" class="image" />
-        </div>
-        <div class="desc">
-          <p class="project-description">
-            Know you Body Mass Index(BMI) <br />
-            and tips to better your health
-          </p>
-          <router-link to="/BMI" class="route-to-project">open</router-link>
-        </div>
-      </div>
+
       <div class="project">
         <h1 class="project-name">Weather forcast</h1>
         <span
@@ -105,9 +88,7 @@
       <div class="project">
         <h1 class="project-name">stop watch</h1>
         <span>Your stop watch with accuracy and ease </span>
-        <div class="image-div">
-          <img src="../assets/wa.jpg" alt="" class="image" />
-        </div>
+        <div class="image-div"></div>
         <div class="desc">
           <p class="project-description">
             start, stop, and do more with our easy to use stop watch

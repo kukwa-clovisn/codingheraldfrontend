@@ -3,9 +3,7 @@
     <div>
       <br />
       <div class="logo-main">
-        <div class="logo">
-          <img src="../assets/p.jpg" title="CEO" alt="" />
-        </div>
+        <div class="logo"></div>
         <p>
           <span title="Kukwa Clovis Ngong">kcn</span> <br /><br />
           is inviting you to sign up <i class="fa fa-thumbs-up"></i>

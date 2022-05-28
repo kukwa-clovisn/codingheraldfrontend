@@ -35,7 +35,6 @@
         </div>
       </div>
 
-      <img class="img" src="../assets/animated/weather.svg" alt="" />
 
       <div class="results">
         <p class="text-white time">{{ hrs }}</p>
