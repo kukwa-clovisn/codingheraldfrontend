@@ -68,7 +68,7 @@
       <div class="desc">
           <p>looking for a way to swap crypto currecies with ease? <br> <span>cryptoSwap</span>
           Best crypto site....</p>
-          <img src="../assets/currency.png" alt="">
+          <img src="../assets/cross.jpg" alt="">
           <p>try our app and get current crypto news of BTC,Eth,and many other crytocurrencies you know</p>
           
       </div>
@@ -81,7 +81,7 @@
                <h1>currencySwap</h1>
       <span>swap currencies in seconds....</span>
       <p>current exchange rates of currencies.</p>
-      <img src="../assets/currency.png" alt="">
+      <img src="../assets/cross.jpg" alt="">
       <p>explore to find all the currencies you want</p>
       <p>BTC, USD,NGN, XAF and many more currencies</p>
       <button class="explore">

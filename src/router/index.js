@@ -24,15 +24,6 @@ const routes = [{
                 path: '/overview/Todo',
                 name: 'Todo',
                 component: () => import( /* webpackChunkName: "Todo" */ '../views/Todo.vue')
-            }, {
-                path: '/overview/User',
-                name: 'User',
-                component: () => import( /* webpackChunkName: "User" */ '../views/User.vue')
-            },
-            {
-                path: '/overview/Watch',
-                name: 'Stop Watch',
-                component: () => import( /* webpackChunkName: "Watch" */ '../views/Watch.vue')
             },
             {
                 path: '/overview/Weather',
@@ -43,11 +34,6 @@ const routes = [{
                 path: '/overview/Exchange',
                 name: 'Exchange',
                 component: () => import( /* webpackChunkName: "Exchange" */ '../views/Exchange.vue')
-            },
-            {
-                path: '/overview/BMI',
-                name: 'BMI',
-                component: () => import( /* webpackChunkName: "BMI" */ '../views/BMI.vue')
             }
         ]
     },
