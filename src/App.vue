@@ -14,6 +14,10 @@
   overflow-x: hidden;
 }
 
+* {
+  transition: all 0.3s ease;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 30px;
@@ -25,5 +29,30 @@
     rgb(2, 146, 57) 100%
   );
   border-radius: 30px;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+button,
+a,
+label {
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.9);
+  }
 }
 </style>

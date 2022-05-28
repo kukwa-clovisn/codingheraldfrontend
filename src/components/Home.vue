@@ -1,44 +1,43 @@
 <template>
-<main>
-   <Header />
-  <Logo />
-  <div class="home d-flex justify-content-between align-items-center">
-    <Block />
-    <img
-      src="../assets/desk.svg"
-      alt=""
-      id="desk"
-      class="d-none d-lg-block d-md-block d-sm-none"
-    />
-    <div
-      class="
-        code
-        d-none d-lg-flex d-md-flex d-sm-none
-        align-items-center
-        justify-content-evenly
-        flex-column
-      "
-    >
-      <li>code all-night</li>
-      <li>work hard</li>
-      <li>Jesus first</li>
+  <main>
+    <Header />
+    <Logo />
+    <div class="home d-flex justify-content-between align-items-center">
+      <Block />
+      <img
+        src="../assets/desk.svg"
+        alt=""
+        id="desk"
+        class="d-none d-lg-block d-md-block d-sm-none"
+      />
+      <div
+        class="
+          code
+          d-none d-lg-flex d-md-flex d-sm-none
+          align-items-center
+          justify-content-evenly
+          flex-column
+        "
+      >
+        <li>code all-night</li>
+        <li>work hard</li>
+        <li>Jesus first</li>
+      </div>
     </div>
-  </div>
-  <div class="bn d-flex justify-content-evenly align-items-center">
-    <button class="start" title="sign up to use our apps and products">
-      <router-link to="/login" class="route">get started</router-link>
-    </button>
-    <button class="demo" title="Get to know more about ACTA...">
-      <router-link to="/Demo" id="demo">ACTA</router-link>
-    </button>
-  </div>
-  <br />
-  <Projects />
-  <br />
-  <br />
-  <Footer />
-</main>
- 
+    <div class="bn d-flex justify-content-evenly align-items-center">
+      <button class="start" title="sign up to use our apps and products">
+        <router-link to="/login" class="route">get started</router-link>
+      </button>
+      <button class="demo" title="Get to know more about ACTA...">
+        <router-link to="/Demo" id="demo">ACTA</router-link>
+      </button>
+    </div>
+    <br />
+    <Projects />
+    <br />
+    <br />
+    <Footer />
+  </main>
 </template>
 
 <script>
