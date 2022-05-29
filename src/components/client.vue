@@ -10,8 +10,8 @@
           ></i>
         </div>
         <div class="user">
-          <h3>user name</h3>
-          <p>user@gmail.com</p>
+          <h3 :title="user.username">{{ user.username }}</h3>
+          <p :title="user.email">{{ user.email }}</p>
         </div>
 
         <router-link to="/overview/profile" class="route">
@@ -48,8 +48,8 @@
           ></i>
         </div>
         <div class="user">
-          <h3>user name</h3>
-          <p>user@gmail.com</p>
+          <h3 :title="user.username">{{ user.username }}</h3>
+          <p :title="user.email">{{ user.email }}</p>
         </div>
 
         <router-link
@@ -104,25 +104,39 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import axios from "axios";
+import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 export default {
   name: "Client",
   setup() {
     const router = useRouter();
     let squeeze = ref(false);
-    let getFromLocalStorage = ref(localStorage.getItem("codingheraldtoken"));
+
+    let user = reactive({
+      username: "",
+      email: "",
+    });
+    let getFromLocalStorage = ref(localStorage.getItem("codingheraldtokenid"));
     onMounted(() => {
       if (!getFromLocalStorage.value) {
-        router.push("/login");
+        return router.push("/login");
       }
-      console.log(getFromLocalStorage.value);
+
+      axios("api/user/" + `${getFromLocalStorage.value}`)
+        .then(async (res) => {
+          user.username = res.data.username;
+          user.email = res.data.email;
+        })
+        .catch((err) => {
+          return err;
+        });
     });
 
     function squeezeFunc() {
       squeeze.value = !squeeze.value;
     }
-    return { squeeze, squeezeFunc };
+    return { squeeze, squeezeFunc, user };
   },
 };
 </script>
@@ -186,9 +200,15 @@ main {
 
       h3 {
         font: 600 23px "Poppins", sans-serif;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       p {
         font: 500 16px "Poppins", sans-serif;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
