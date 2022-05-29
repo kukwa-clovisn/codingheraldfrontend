@@ -201,6 +201,10 @@ export default {
       color: white;
     }
   }
+
+  @media screen and (max-width: 450px) {
+    left: 5%;
+  }
 }
 
 @keyframes bounce {

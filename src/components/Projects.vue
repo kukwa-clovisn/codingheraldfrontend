@@ -115,6 +115,10 @@ header {
     text-align: center;
     padding: 10px;
     font-family: "Poppins", sans-serif;
+
+    @media screen and (max-width: 600px) {
+      font-size: 28px;
+    }
   }
   h3 {
     text-align: center;
@@ -253,21 +257,33 @@ header {
     z-index: 1;
     margin-bottom: 20px;
 
-    @media screen and (max-width: 560px) {
-      width: 400px;
+    @media screen and (max-width: 1111px) {
+      width: 800px;
+    }
+
+    @media screen and (max-width: 820px) {
+      width: 96vw;
       height: 92vh;
+      height: fit-content;
+      padding: 20px;
+    }
+
+    button {
+      height: 50px;
+      margin: 20px auto;
     }
   }
 
   .project.chat {
-    width: 90vw;
+    width: 96vw;
     margin: 5px auto;
+    padding: 20px;
     @media screen and (max-width: 984px) {
-      height: 130vh;
+      height: fit-content;
     }
     #content {
       width: 100%;
-      height: 85vh;
+      height: fit-content;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
@@ -346,9 +362,10 @@ header {
           color: white;
         }
         button {
-          width: 250px;
+          width: 70%;
+          height: 50px;
           color: gold;
-          margin: 0 auto;
+          margin: 20px auto;
         }
       }
 
@@ -380,7 +397,8 @@ header {
     background: white;
     border-radius: 3px;
     padding: 10px;
-    margin-top: 4vh;
+    margin: 20px auto;
+
     h1 {
       text-align: center;
       text-transform: capitalize;
@@ -441,12 +459,25 @@ header {
             }
           }
         }
+
+        @media screen and (max-width: 700px) {
+          width: 95%;
+          // display: none;
+        }
       }
 
       img {
         height: 90%;
         width: auto;
         cursor: pointer;
+
+        @media screen and (max-width: 820px) {
+          height: 300px;
+        }
+
+        @media screen and (max-width: 700px) {
+          display: none;
+        }
       }
     }
     button {
@@ -511,8 +542,7 @@ header {
       }
     }
   }
-  .project.exchange,
-  .project.bmi {
+  .project.exchange {
     padding-top: 40px;
     display: flex;
     justify-content: center;
@@ -522,7 +552,7 @@ header {
     section {
       background: white;
       width: 100%;
-      height: 86vh;
+      height: fit-content;
       border-radius: 4px;
       display: none;
       opacity: 0;

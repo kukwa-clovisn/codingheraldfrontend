@@ -1,24 +1,10 @@
 <template>
   <div class="main">
-    <!-- <div class="todo-head">
-      <div>
-        <img src="../assets/list.svg" alt="DAIRY" />
-      </div>
-      <h1>
-        welcome <br />
-        {{ profile.profileName }}
-      </h1>
-      <h2>
-        you Have<span>{{ todoCount }}</span
-        >pending task(s)
-      </h2>
-      <h2>fullstack web developer</h2>
-      <h2>{{ profile.profileEmail }}</h2>
-      <h3>💔 in Christ alone❣️</h3>
-    </div> -->
     <div class="content">
       <div class="todo-container">
-        <h1 id="text-run">KCN's Dairy<i class="far fa-heart"></i></h1>
+        <h1 id="text-run">
+          {{ profile.profileName }}'s Dairy<i class="far fa-heart"></i>
+        </h1>
         <textarea
           type="text"
           id="inputItem"
@@ -28,7 +14,7 @@
           required
         ></textarea>
         <div class="addItem">
-          <span><i class="far fa-laugh laugh"></i></span>
+          <span><i class="fa-solid fa-clipboard-list laugh"></i></span>
           <button @click="addTodo()">add todo item</button>
         </div>
         <div class="errorDiv">
@@ -109,9 +95,6 @@ export default {
   name: "Todo",
 
   setup() {
-    // const router = useRouter();
-    // const route = useRoute();
-
     let profile = reactive({
       profileName: "",
       profileEmail: "",
@@ -137,17 +120,6 @@ export default {
     let password = ref("");
     let getFromLocalStorage = localStorage.getItem("codingheraldtokenid");
     let token_id = ref("");
-
-    // let   = {
-    //   headers: {
-    //     Authorization: `Bearer ${res.token}`,
-    //   },
-    // };
-
-    /**
-     * creating a funtion that will display the todo items
-     *
-     */
 
     onMounted(() => {
       if (getFromLocalStorage == null) {
@@ -435,116 +407,53 @@ $whiteBorder: rgb(238, 238, 238);
 $secondaryCol: teal;
 $tertiaryCol: rgb(193, 248, 193);
 
-#pic {
-  width: 500px;
-  z-index: 0.6;
-}
-
 .main {
-  width: 85vw;
-  min-height: 100vh;
-  // padding-top: 10vh;
-  float: right;
+  width: 100%;
+  height: fit-content;
   background: linear-gradient(
     to top,
     rgba(21, 122, 253, 0.685) 0%,
     rgba(171, 250, 171, 0.623) 40%,
     rgba(20, 164, 212, 0.877) 100%
   );
+  background: rgb(212, 216, 228);
   background-attachment: fixed;
   background-size: cover;
   position: relative;
-  top: 0;
-  left: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
-
-  // .todo-head {
-  //   width: 25vw;
-  //   height: 75vh;
-  //   background: black;
-  //   position: fixed;
-  //   top: 17vh;
-  //   right: 5vw;
-  //   border-radius: 10px;
-  //   animation: profile 20s 1 linear alternate forwards;
-
-  //   @media screen and (max-width: 850px) {
-  //     width: 30vw;
-  //   }
-
-  //   div {
-  //     width: 100%;
-  //     height: 50%;
-  //     background: white;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-
-  //     img {
-  //       width: 50%;
-  //       // border-radius: 50%;
-  //       z-index: 1;
-  //       display: block;
-  //       position: relative;
-  //       animation: nameimg 5s infinite linear alternate forwards;
-  //     }
-  //   }
-
-  //   h1,
-  //   h2,
-  //   h3 {
-  //     color: #d3d1d1;
-  //     text-align: center;
-  //     font-size: 15px;
-  //     padding: 6px;
-  //     text-transform: capitalize;
-  //     font-weight: 300;
-  //     span {
-  //       color: red;
-  //       padding: 0 4px;
-  //       font: 600 17px "Russo One", sans-serif;
-  //     }
-
-  //     @media screen and (max-width: 768px) {
-  //       font-size: 12px;
-  //     }
-  //   }
-
-  //   h2 {
-  //     font-size: 12px;
-  //   }
-
-  //   @media screen and (max-width: 1000px) {
-  //     display: none;
-  //   }
-  // }
-
+  #pic {
+    width: 23%;
+    height: auto;
+    position: fixed;
+    right: 3%;
+    top: 20%;
+  }
   .content {
-    width: fit-content;
-    height: fit-content;
+    width: 75%;
+    height: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 20px;
+    position: relative;
+    z-index: 1;
     .todo-container {
       position: relative;
-      z-index: 0.9;
-      left: 100px;
-      width: 480px;
+      width: 95%;
       height: fit-content;
-      background: $white;
-      box-shadow: 0 0 1px 2px $white;
-      border-radius: 5px;
+      background: transparent;
       padding: 20px;
+      overflow-y: scroll;
 
       h1 {
         text-transform: capitalize;
-        font-size: 25px;
+        font-size: 35px;
         font-weight: 600;
-        padding: 12px 3px;
+        font-family: "Poppins", sans-serif;
+        padding: 20px;
         color: $secondaryCol;
         margin: auto;
         display: flex;
@@ -554,46 +463,31 @@ $tertiaryCol: rgb(193, 248, 193);
         width: 100%;
         position: relative;
 
-        &::before {
-          content: "";
-          width: 170px;
-          height: 26px;
-          background: white;
-          position: absolute;
-          left: 0;
-          animation: text-run 4s steps(10, end) infinite;
-        }
-
         i {
           margin-right: 6%;
           color: $secondaryCol;
           cursor: progress;
-        }
-      }
-
-      @keyframes text-run {
-        to {
-          left: 170px;
+          font-size: 30px;
         }
       }
 
       #inputItem {
         width: 100%;
-        height: 85px;
+        height: 50px;
         margin: auto;
         display: block;
-        padding: 10px;
+        padding: 10px 10px 3px 10px;
         outline: none;
         border: none;
-        border-radius: 3px;
-        background: rgb(240, 239, 239);
-        box-shadow: 0 0 2px 0.3px $whiteBorder;
+        background: transparent;
+        border-bottom: 2px solid teal;
       }
 
       .addItem {
         width: 100%;
         height: fit-content;
         display: flex;
+        margin: 15px auto;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
@@ -683,32 +577,29 @@ $tertiaryCol: rgb(193, 248, 193);
           justify-content: center;
           align-items: center;
           background: transparent;
-          box-shadow: 0 0 2px 1px $whiteBorder;
 
           #edit {
-            width: 90%;
-            height: fit-content;
+            width: 100%;
+            height: 50px;
             padding: 2px 10px 2px 16px;
             outline: none;
             border: none;
             background: transparent;
-            // box-shadow: 0 0 2px 1px $whiteBorder;
-            border-radius: 3px 0 0 3px;
+            border-bottom: 2px solid teal;
           }
           button {
             width: 10%;
-            height: 100%;
-            // box-shadow: 0 0 2px 1px $whiteBorder;
+            height: 50px;
             padding: 2px 0;
             border: none;
             display: block;
             border-radius: 0 3px 3px 0;
-            background: $primaryCol;
+            background: transparent;
             cursor: pointer;
 
             .edit {
               color: $secondaryCol;
-              font-size: 16px;
+              font-size: 23px;
             }
           }
         }
@@ -718,66 +609,46 @@ $tertiaryCol: rgb(193, 248, 193);
           text-align: center;
           margin: 0 auto;
           cursor: pointer;
-
-          // @media screen and (max-width: 768px) {
-          //   position: relative;
-          //   margin: 3% 0 -2% 0;
-          //   height: 40px;
-          //   width: 90%;
-          // }
         }
       }
 
       .todoItems {
         width: 100%;
-        height: 200px;
-        margin: 3% auto;
-        margin-bottom: 0;
-        border-radius: 10px;
+        max-height: 600px;
+        margin: 5px auto;
+        padding: 10px 0;
+        overflow-y: scroll;
 
         ul {
           width: 100%;
-          height: 200px;
+          height: 100%;
           padding: 0;
           margin: 0 auto;
           overflow: hidden;
           overflow-y: scroll;
-          background: $primaryCol;
-          border: 3px solid $primaryCol;
-          border-right: none;
-          border-left: none;
+          background: transparent;
 
           &::-webkit-scrollbar {
-            background: $primaryCol;
-            width: 6px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: $secondaryCol;
+            background: transparent;
+            width: 5px;
           }
 
           li {
-            width: 98%;
+            width: 100%;
             height: fit-content;
-            margin: 5px auto;
-            margin-top: 0;
-            padding: 2px 0;
+            margin: 10px auto;
+            padding: 5px 3px;
             list-style-type: none;
             font-size: 15px;
-            border-radius: 2px;
+            border-radius: 5px;
             display: block;
             text-transform: capitalize;
             position: relative;
             transition: all 0.3s ease;
             background: $white;
-            box-shadow: 0 0 1px 1px $whiteBorder;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
 
             span {
-              width: 15%;
+              width: 11%;
               height: 100%;
               position: absolute;
               right: -20%;
@@ -786,6 +657,7 @@ $tertiaryCol: rgb(193, 248, 193);
               display: flex;
               justify-content: center;
               align-items: center;
+              border-radius: 0 5px 5px 0;
               transition: all 0.3s ease;
               cursor: pointer;
 

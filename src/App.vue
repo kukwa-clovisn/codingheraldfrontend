@@ -37,13 +37,25 @@
 }
 
 .fade-enter-active,
-.fade-leave-active {
+.fade-leave-active,
+.move-enter-active,
+.move-leave-active {
   transition: all 0.5s ease;
 }
 
 .fade-leave-to {
   opacity: 0;
   transform: translateY(-30px);
+}
+
+.move-enter-from {
+  opacity: 0;
+  transform: translateX(-100vw);
+}
+
+.move-leave-to {
+  opacity: 0;
+  transform: translateX(100vw);
 }
 
 button,

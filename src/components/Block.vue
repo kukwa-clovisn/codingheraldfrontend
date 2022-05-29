@@ -35,6 +35,10 @@ div {
     animation: override 30s infinite steps(3);
     transition: all 0.3s ease;
     color: rgb(7, 145, 87);
+
+    @media screen and (max-width: 700px) {
+      font-size: 14px;
+    }
   }
 
   @keyframes override {
@@ -45,7 +49,7 @@ div {
 
   @media screen and (max-width: 500px) {
     li {
-      font-size: 20px;
+      font-size: 12px;
     }
   }
 }

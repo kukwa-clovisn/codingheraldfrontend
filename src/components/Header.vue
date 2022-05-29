@@ -17,12 +17,12 @@
               >
             </li>
             <li>
-              <a href="/course/crypto"
+              <a href="/overview/Todo"
                 ><i class="fa-solid fa-calendar-check"></i>dairy</a
               >
             </li>
             <li>
-              <a href="/course/forex"
+              <a href="/overview/currency"
                 ><i class="fa-brands fa-bitcoin"></i>cryptoswap</a
               >
             </li>
@@ -42,7 +42,7 @@
     </header>
     <header class="small-screens" :class="{ whiteBg: showApps }">
       <nav class="logo" title="In Christ alone#TeamJesus4Life">
-        <router-link to="/" class="logoName">CH</router-link>
+        <router-link to="/" class="logoName">Codingherald</router-link>
       </nav>
       <nav id="bars" @click="toggleMenu()">
         <i class="fa-solid fa-bars" id="menu-bars"></i>
@@ -57,12 +57,12 @@
               >
             </li>
             <li>
-              <a href="/course/crypto"
+              <a href="/overview/Todo"
                 ><i class="fa-solid fa-calendar-check"></i>dairy</a
               >
             </li>
             <li>
-              <a href="/course/forex"
+              <a href="/overview/currency"
                 ><i class="fa-brands fa-bitcoin"></i>cryptoswap</a
               >
             </li>
@@ -254,6 +254,14 @@ main {
     display: none;
     @media screen and (max-width: 600px) {
       display: flex;
+      width: 97%;
+      margin: auto;
+      .logo {
+        width: 50%;
+        .logoName {
+          font-size: 15px;
+        }
+      }
 
       #app-list {
         height: fit-content;

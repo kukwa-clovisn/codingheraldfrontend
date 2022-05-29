@@ -55,6 +55,10 @@ export default {
     div {
       cursor: pointer;
     }
+
+    @media screen and (max-width: 425px) {
+      left: 20%;
+    }
   }
 
   .logo {
@@ -133,7 +137,7 @@ export default {
     }
 
     @media screen and (max-width: 500px) {
-      left: -20%;
+      left: -40%;
     }
     li {
       cursor: pointer;
@@ -160,6 +164,10 @@ export default {
         left: 0;
         background: rgb(212, 216, 228);
         animation: hide 5s infinite alternate forwards;
+      }
+
+      @media screen and (max-width: 400px) {
+        font-size: 20px;
       }
     }
 
