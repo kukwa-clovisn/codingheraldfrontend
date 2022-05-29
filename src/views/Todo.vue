@@ -124,31 +124,28 @@ export default {
     onMounted(() => {
       if (getFromLocalStorage == null) {
         token_id.value = "";
-        console.log("in the if section");
       } else {
         token_id.value = getFromLocalStorage;
-        console.log(token_id.value);
       }
 
       displayTodo(token_id.value);
-      console.log("this page has just been mounted with an id...", token_id);
     });
 
     const displayTodo = async (id) => {
       try {
         await axios("api/user/" + `${id}`)
           .then(async (res) => {
-            console.log(res);
-
             todoItems.value = await res.data.todos;
 
             todoCount.value = todoItems.value.length;
             profile.profileName = res.data.username;
             profile.profileEmail = res.data.email;
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            throw err;
+          });
       } catch (err) {
-        console.log(err);
+        throw err;
       }
 
       // getFromLocalStorage = localStorage.getItem("new todo");
@@ -180,9 +177,11 @@ export default {
           .then(async (res) => {
             await displayTodo(res.data._id);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            throw error;
+          });
       } catch (err) {
-        console.log(err);
+        throw err;
       }
     };
 
@@ -209,30 +208,9 @@ export default {
             },
           }*/
           ).then(async (res) => {
-            console.log(res);
-
             todoItems.value.push(parseData.value);
             await updateData(todoItems.value, res.data._id);
           });
-
-          // localStorage.setItem("new todo", JSON.stringify(todoItems.value)); //transforming the json object into string
-
-          // axios
-          //   .post(
-          //     "api/user/data/" + "623b80a685b4097d966cfac5",
-          //     {
-          //       todoItems,
-          //     },
-          //     {
-          //       headers: {
-          //         "Content-Type": "application/json",
-          //       },
-          //     }
-          //   )
-          //   .then((res) => {
-          //     console.log(res);
-          //   })
-          //   .catch((err) => console.log(err));
 
           userData.value = "";
           invalidTask.value = false;
@@ -242,7 +220,7 @@ export default {
 
         todoCount.value = todoItems.value.length;
       } catch (err) {
-        console.log(err);
+        throw err;
       }
     };
 
@@ -258,7 +236,6 @@ export default {
         // let id = await getData().id;
 
         await axios("api/user/" + `${token_id.value}`).then(async (res) => {
-          console.log(res);
           if (window.confirm("Are you sure you want to delete all items??")) {
             todoItems.value = [];
             await updateData(todoItems.value, res.data._id);
@@ -267,7 +244,7 @@ export default {
           await displayTodo(res.data._id);
         });
       } catch (err) {
-        console.log(err);
+        throw err;
       }
     };
 
@@ -276,15 +253,12 @@ export default {
      */
     const removeTask = async (index) => {
       try {
-        console.log(index);
         // getFromLocalStorage = localStorage.getItem("new todo");
         // todoItems.value = JSON.parse(getFromLocalStorage);
         // await getData();
         // localStorage.setItem("new todo", JSON.stringify(todoItems.value)); //updating the local storage after deleting as item
 
         await axios("api/user/" + `${token_id.value}`).then(async (res) => {
-          console.log(res);
-
           if (!todoItems.value[index].done) {
             if (
               window.confirm(
@@ -295,7 +269,6 @@ export default {
             ) {
               todoItems.value = await res.data.todos;
               todoItems.value.splice(index, 1); //detete that item you've choosen
-              console.log(todoItems.value.indexOf(index));
 
               await updateData(todoItems.value, res.data._id);
               return;
@@ -308,15 +281,12 @@ export default {
           ) {
             todoItems.value = await res.data.todos;
             todoItems.value.splice(index, 1); //detete that item you've choosen
-            console.log(todoItems.value.indexOf(index));
 
             await updateData(todoItems.value, res.data._id);
             return;
           }
         });
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
 
     /**
@@ -327,7 +297,6 @@ export default {
         // getFromLocalStorage = localStorage.getItem("new todo");
         // todoItems.value = JSON.parse(getFromLocalStorage);
         await axios("api/user/" + `${token_id.value}`).then(async (res) => {
-          console.log(res);
           todoItems.value = res.data.todos;
           if (!todoItems.value[index].done) {
             if (window.confirm(`Are you done with with item ${index + 1}`)) {
@@ -344,7 +313,7 @@ export default {
           // localStorage.setItem("new todo", JSON.stringify(todoItems.value));
         });
       } catch (err) {
-        console.log(err);
+        throw err;
       }
     };
 
@@ -359,9 +328,6 @@ export default {
     const editTask = (index, taskToEdit) => {
       edit.task = `T${index + 1}` + ":" + taskToEdit;
       edit.val = true;
-      console.log(index);
-      console.log(taskToEdit);
-      console.log(edit.task);
     };
 
     /**
