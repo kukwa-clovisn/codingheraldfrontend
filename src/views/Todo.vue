@@ -142,10 +142,10 @@ export default {
             profile.profileEmail = res.data.email;
           })
           .catch((err) => {
-            throw err;
+            return err;
           });
       } catch (err) {
-        throw err;
+        return err;
       }
 
       // getFromLocalStorage = localStorage.getItem("new todo");
@@ -178,10 +178,10 @@ export default {
             await displayTodo(res.data._id);
           })
           .catch((err) => {
-            throw error;
+            return err;
           });
       } catch (err) {
-        throw err;
+        return err;
       }
     };
 
@@ -220,7 +220,7 @@ export default {
 
         todoCount.value = todoItems.value.length;
       } catch (err) {
-        throw err;
+        return err;
       }
     };
 
@@ -244,7 +244,7 @@ export default {
           await displayTodo(res.data._id);
         });
       } catch (err) {
-        throw err;
+        return err;
       }
     };
 
@@ -286,7 +286,9 @@ export default {
             return;
           }
         });
-      } catch (err) {}
+      } catch (err) {
+        return err;
+      }
     };
 
     /**
@@ -313,7 +315,7 @@ export default {
           // localStorage.setItem("new todo", JSON.stringify(todoItems.value));
         });
       } catch (err) {
-        throw err;
+        return err;
       }
     };
 
