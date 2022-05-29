@@ -1,12 +1,101 @@
 <template>
   <main>
-    <div class="menu">
-      <router-link to="/overview/todo" class="route">todo app</router-link>
-      <router-link to="/overview/currency" class="route">crypto</router-link>
-      <router-link to="/overview/Exchange" class="route">exchange</router-link>
-      <router-link to="/overview/weather" class="route">weather</router-link>
-    </div>
-    <div class="content">
+    <transition name="leave">
+      <div class="menu" :class="{ squeeze: squeeze }" v-if="!squeeze">
+        <div class="logo">
+          <h1>codingherald</h1>
+          <i
+            class="fa-solid fa-align-left small-screen"
+            @click="squeezeFunc()"
+          ></i>
+        </div>
+        <div class="user">
+          <h3>user name</h3>
+          <p>user@gmail.com</p>
+        </div>
+
+        <router-link to="/overview/profile" class="route">
+          <i class="fa-solid fa-address-card"></i> profile</router-link
+        >
+        <router-link to="/overview/todo" class="route">
+          <i class="fa-regular fa-address-book"></i>todo app</router-link
+        >
+        <router-link to="/overview/currency" class="route"
+          ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
+        >
+        <router-link to="/overview/Exchange" class="route"
+          ><i class="fa-solid fa-sack-dollar"></i>exchange</router-link
+        >
+        <router-link to="/overview/weather" class="route"
+          ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
+        >
+        <router-link to="/" class="route">
+          <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
+        >
+      </div>
+    </transition>
+    <transition name="leave">
+      <div
+        class="menu small-screen"
+        :class="{ squeeze: squeeze }"
+        v-if="squeeze"
+      >
+        <div class="logo">
+          <h1>codingherald</h1>
+          <i
+            class="fa-solid fa-align-left small-screen"
+            @click="squeezeFunc()"
+          ></i>
+        </div>
+        <div class="user">
+          <h3>user name</h3>
+          <p>user@gmail.com</p>
+        </div>
+
+        <router-link
+          to="/overview/profile"
+          class="route"
+          @click="squeezeFunc()"
+        >
+          <i class="fa-solid fa-address-card"></i> profile</router-link
+        >
+        <router-link to="/overview/todo" class="route" @click="squeezeFunc()">
+          <i class="fa-regular fa-address-book"></i>todo app</router-link
+        >
+        <router-link
+          to="/overview/currency"
+          class="route"
+          @click="squeezeFunc()"
+          ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
+        >
+        <router-link
+          to="/overview/Exchange"
+          class="route"
+          @click="squeezeFunc()"
+          ><i class="fa-solid fa-sack-dollar"></i>exchange</router-link
+        >
+        <router-link to="/overview/weather" class="route" @click="squeezeFunc()"
+          ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
+        >
+        <router-link to="/" class="route">
+          <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
+        >
+      </div>
+    </transition>
+
+    <header :class="{ squeeze: squeeze }">
+      <i class="fa-solid fa-align-left" @click="squeezeFunc()"></i>
+      <h1>dashboard</h1>
+      <a href="/contact" class="large-screen">contact</a>
+      <a href="/contact" class="small-screen"
+        ><i class="fa-solid fa-phone"></i
+      ></a>
+    </header>
+    <div class="content" :class="{ squeeze: squeeze }">
+      <transition name="fade">
+        <div class="blur" v-if="squeeze" @click="squeeze = !squeeze"></div>
+      </transition>
+
       <transition name="move">
         <router-view />
       </transition>
@@ -21,6 +110,7 @@ export default {
   name: "Client",
   setup() {
     const router = useRouter();
+    let squeeze = ref(false);
     let getFromLocalStorage = ref(localStorage.getItem("codingheraldtoken"));
     onMounted(() => {
       if (!getFromLocalStorage.value) {
@@ -28,20 +118,25 @@ export default {
       }
       console.log(getFromLocalStorage.value);
     });
-    return {};
+
+    function squeezeFunc() {
+      squeeze.value = !squeeze.value;
+    }
+    return { squeeze, squeezeFunc };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 $tertiaryCol: rgb(224, 222, 222);
-$secondCol: rgb(3, 63, 126);
+$col: #3d566f;
 main {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
   background: rgb(212, 216, 228);
+  background: white;
   padding: 0;
   margin: 0;
   display: flex;
@@ -49,46 +144,220 @@ main {
   align-items: flex-start;
 
   .menu {
-    width: 20vw;
+    width: 24vw;
     height: 100vh;
     z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
-    background: $secondCol;
+    background: white;
     background-attachment: fixed;
     background-size: cover;
     display: flex;
+
     align-items: center;
     flex-direction: column;
+    box-shadow: 1px 1px 0.2px 0.5px rgb(212, 216, 228);
+
+    .logo {
+      height: 12vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        text-transform: capitalize;
+        font: 600 30px "Grand Hotel", sans-serif;
+        color: teal;
+        text-align: center;
+      }
+      .small-screen {
+        display: none;
+        margin-left: 10px;
+      }
+    }
+
+    .user {
+      width: 90%;
+      margin: 7px auto;
+      padding: 0 10px;
+      color: teal;
+
+      h3 {
+        font: 600 23px "Poppins", sans-serif;
+      }
+      p {
+        font: 500 16px "Poppins", sans-serif;
+      }
+    }
 
     .route {
+      width: 80%;
+      height: 40px;
       text-decoration: none;
       color: white;
-      font: 500 21px "Poppins", sans-serif;
+      font: 400 19px "Poppins", sans-serif;
       cursor: pointer;
-
-      padding: 20px 10px;
+      color: $col;
+      padding: 10px;
+      margin: 8px auto;
+      margin-left: 18%;
       text-transform: capitalize;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      i {
+        width: 40px;
+        margin-right: 8px;
+        font-size: 25px;
+      }
 
       &.router-link-exact-active {
-        color: #f5ce23;
         background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+        font-weight: 600;
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
     }
+
+    @media screen and (max-width: 850px) {
+      display: none;
+      width: 40vw;
+      z-index: 1;
+
+      @media screen and (max-width: 700px) {
+        width: 100vw;
+        overflow-y: scroll;
+        .logo {
+          height: 20vh;
+          justify-content: space-between;
+          padding: 0 40px;
+
+          h1 {
+            font-size: 40px;
+          }
+          .small-screen {
+            display: block;
+            font-size: 41px;
+            color: teal;
+          }
+        }
+
+        .user {
+          h3 {
+            font-size: 40px;
+          }
+        }
+        .route {
+          height: 65px;
+          font-size: 30px;
+          margin: 10px auto;
+
+          i {
+            width: 60px;
+            font-size: 40px;
+            margin-right: 13px;
+          }
+        }
+      }
+    }
+  }
+  .menu.small-screen {
+    display: none;
   }
 
+  .menu.squeeze {
+    display: none;
+
+    @media screen and (max-width: 850px) {
+      display: block;
+    }
+  }
+
+  header {
+    width: 76vw;
+    height: 12vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: white;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 2px 1px 1px 0.5px rgb(212, 216, 228);
+
+    i {
+      color: teal;
+      font-weight: 900;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    h1 {
+      text-transform: capitalize;
+      color: teal;
+      font: 500 30px "Grand Hotel", cursive;
+    }
+
+    a {
+      text-decoration: none;
+      color: teal;
+      cursor: pointer;
+      font: 500 30px "Grand Hotel", cursive;
+    }
+    a.small-screen {
+      display: none;
+    }
+
+    @media screen and (max-width: 850px) {
+      width: 100vw;
+
+      @media screen and (max-width: 550px) {
+        a.large-screen {
+          display: none;
+        }
+        a.small-screen {
+          display: block;
+        }
+      }
+    }
+  }
+  header.squeeze {
+    width: 100vw;
+    @media screen and (max-width: 850px) {
+      width: 60vw;
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
+    }
+  }
   .content {
-    width: 80vw;
+    width: 76vw;
+    height: 88vh;
     position: fixed;
     right: 0;
-    top: 0;
+    bottom: 0;
     overflow-y: scroll;
-    height: 100vh;
-    background: white;
+    background: rgb(212, 216, 228);
+
+    .blur {
+      z-index: 1;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
+
+    @media screen and (max-width: 850px) {
+      width: 100vw;
+    }
+  }
+  .content.squeeze {
+    width: 100vw;
   }
 }
 </style>

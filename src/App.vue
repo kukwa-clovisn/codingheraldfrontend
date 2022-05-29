@@ -4,7 +4,7 @@
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,400&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
 #app {
   font-family: "Poppins", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +39,9 @@
 .fade-enter-active,
 .fade-leave-active,
 .move-enter-active,
-.move-leave-active {
+.move-leave-active,
+.leave-enter-active,
+.leave-leave-active {
   transition: all 0.5s ease;
 }
 
@@ -58,13 +60,33 @@
   transform: translateX(100vw);
 }
 
+.leave-enter-from {
+  transform: translateX(-50vw);
+}
+
+.leave-leave-to {
+  transform: translateX(-50vw);
+}
+
 button,
 a,
-label {
+label,
+i {
   cursor: pointer;
 
   &:hover {
     transform: scale(0.9);
   }
+}
+
+.blur {
+  width: 100%;
+  height: 100%;
+  background: #1f1c2d;
+  opacity: 0.7;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
 }
 </style>

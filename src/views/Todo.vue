@@ -374,46 +374,40 @@ $white: white;
 $whiteBorder: rgb(238, 238, 238);
 $secondaryCol: teal;
 $tertiaryCol: rgb(193, 248, 193);
+$col: #3d566f;
 
 .main {
   width: 100%;
   height: fit-content;
-  background: linear-gradient(
-    to top,
-    rgba(21, 122, 253, 0.685) 0%,
-    rgba(171, 250, 171, 0.623) 40%,
-    rgba(20, 164, 212, 0.877) 100%
-  );
   background: rgb(212, 216, 228);
   background-attachment: fixed;
   background-size: cover;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin: 0;
   #pic {
-    width: 23%;
+    width: 10%;
     height: auto;
     position: fixed;
     right: 3%;
     top: 20%;
   }
   .content {
-    width: 75%;
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     position: relative;
-    z-index: 1;
     .todo-container {
       position: relative;
       width: 95%;
       height: fit-content;
       background: transparent;
-      padding: 20px;
+      padding: 10px;
       overflow-y: scroll;
 
       h1 {
@@ -430,6 +424,12 @@ $tertiaryCol: rgb(193, 248, 193);
         height: fit-content;
         width: 100%;
         position: relative;
+
+        background: linear-gradient(to bottom, $col, teal);
+        font-weight: 600;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
 
         i {
           margin-right: 6%;
@@ -508,6 +508,7 @@ $tertiaryCol: rgb(193, 248, 193);
         border-radius: 3px;
         border: none;
         background-color: $secondaryCol;
+        background: linear-gradient(to bottom, rgb(55, 220, 193), teal);
         color: white;
         text-transform: capitalize;
         transition: all 0.4s ease;
@@ -764,6 +765,19 @@ $tertiaryCol: rgb(193, 248, 193);
         height: 45px;
         margin: 1% auto;
         text-align: center;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      padding: 0;
+
+      .todo-container {
+        width: 100%;
+
+        h1 {
+          font-size: 20px;
+        }
       }
     }
   }

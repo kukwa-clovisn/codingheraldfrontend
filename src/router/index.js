@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import Home from '@/components/Home'
 import Contact from '@/components/contact'
+import Profile from '@/views/profile'
 
 const routes = [{
         path: '/',
@@ -18,10 +19,14 @@ const routes = [{
         name: 'Contact',
         component: Contact
     }, {
-        path: '/overview/Todo',
+        path: '/overview/profile',
         name: 'Client',
         component: () => import('../components/client.vue'),
         children: [{
+                path: '/overview/profile',
+                name: 'Profile',
+                component: Profile
+            }, {
                 path: '/overview/Currency',
                 name: 'Currency',
                 component: () => import( /* webpackChunkName: "Currency" */ '../views/Currency.vue')
