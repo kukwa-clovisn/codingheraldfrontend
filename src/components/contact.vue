@@ -67,7 +67,7 @@ main {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: rgb(1, 73, 73);
+  background: rgb(3, 35, 35);
 
   .form {
     width: 700px;

@@ -1,24 +1,20 @@
 <template>
-  <div class="content">
+  <main class="content">
     <div
       class="main d-flex justify-content-between align-items-center flex-column"
     >
       <div class="header d-flex justify-content-evenly align-items-center">
         <div
-          class="d-flex justify-content-center align-items-center flex-column"
+          class="d-flex justify-content-center align-items-center"
           title="get to know the value of other currencies..."
         >
-          currency exchange <br />
-          <span>KCN prod.</span>
+          <span>codingheraldapps</span>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <i
-            class="fa fa-laugh"
-            id="laugh"
-            title="learn to always smile no matter what..."
-          ></i>
+          <i class="fa-solid fa-sack-dollar" id="laugh"></i>
         </div>
       </div>
+      <hr />
       <div class="main-body">
         <div
           class="
@@ -30,8 +26,8 @@
           "
         >
           <div class="paragraphs d-flex justify-content-between">
-            <p>amount in {{ val_from }}</p>
-            <p>choose currency from</p>
+            <p :title="val_from">amount in {{ val_from }}</p>
+            <p title="choose currency from...">choose currency from</p>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
@@ -44,30 +40,22 @@
               class="input"
               placeholder="0.00"
             />
-            <input
-              class="choose text-uppercase"
-              id="btn"
-              type="text"
-              list="currencies"
-              v-model="from"
-            />
+            <select class="choose" v-model="from" name="currencies" id="btn">
+              <option
+                v-for="currency in currencyNames"
+                :key="currency.currencyName"
+                :value="currency.id"
+              >
+                {{ currency.currencyName }} ( {{ currency.id }})
+              </option>
+            </select>
           </div>
-
-          <datalist id="currencies">
-            <option
-              :value="currency.id"
-              v-for="currency in currencyNames"
-              :key="currency.currencyName"
-            >
-              {{ currency.currencyName }}
-            </option>
-          </datalist>
         </div>
-        <div class="text-capitalize mx-2">
+        <div class="text-capitalize container-fluid">
           <button
             class="text-capitalize mx-3"
             id="click"
-            @click="convert()"
+            @click="convertCurrency()"
             title="convert to..."
           >
             convert <i class="fa fa-arrow-down"></i>
@@ -83,116 +71,132 @@
           "
         >
           <div class="paragraphs d-flex justify-content-between">
-            <p>value in {{ val_in }}</p>
-            <p>choose currency to...</p>
+            <p :title="val_in">value in {{ val_in }}</p>
+            <p title="choose currency to...">choose currency to...</p>
           </div>
           <div class="d-flex justify-content-between">
             <div class="response">{{ output }}</div>
-            <input
-              type="text"
-              name="currency"
-              id="btn2"
-              class="choose text-uppercase"
-              list="currencies"
-              v-model="to"
-            />
+
+            <select class="choose" v-model="to" name="currencies" id="btn2">
+              <option
+                :value="currency.id"
+                v-for="currency in currencyNames"
+                :key="currency.currencyName"
+              >
+                {{ currency.currencyName }} ({{ currency.id }})
+              </option>
+            </select>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 export default {
   name: "Exchange",
+  setup() {
+    let val = ref(1);
+    let output = ref("");
+    let resp = ref([]);
+    let currencyTwo = ref(false);
+    let val_from = ref("");
+    let val_in = ref("");
+    let from = ref("USD");
+    let to = ref("xAF");
+    let currencyName = ref("");
+    let currencyNames = ref([]);
 
-  data() {
-    return {
-      val: 1,
-      output: "",
-      resp: [],
-      currencyOne: false,
-      currencyTwo: false,
-      val_from: "",
-      val_in: "",
-      from: "USD",
-      to: "XAF",
-      currencyName: "",
-      currencyNames: [],
-    };
-  },
-  mounted() {
-    this.convert();
-  },
-  methods: {
-    convert() {
-      fetch(
-        "https://free.currconv.com/api/v7/convert?q=" +
-          this.from +
-          "_" +
-          this.to +
-          "&compact=ultra&apiKey=473bcd51be8dcd3de8f7"
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res);
-
-          this.resp = Object.keys(res).map((key) => {
-            return res[key];
-          });
-
-          this.val_in = this.to;
-          this.val_from = this.from;
-
-          this.output = eval(this.resp[0] * this.val);
-          console.log(this.resp);
-        });
-
+    onMounted(() => {
       fetch(
         "https://free.currconv.com/api/v7/currencies?apiKey=473bcd51be8dcd3de8f7"
       )
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
-
-          this.currencyName = res.results;
-
-          this.currencyNames = res.results;
-          console.log(this.currencyNames);
+          currencyName.value = res.results;
+          currencyNames.value = res.results;
         });
-    },
+
+      convertCurrency();
+    });
+
+    const convertCurrency = () => {
+      fetch(
+        "https://free.currconv.com/api/v7/convert?q=" +
+          from.value +
+          "_" +
+          to.value +
+          "&compact=ultra&apiKey=473bcd51be8dcd3de8f7"
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          resp.value = Object.keys(res).map((key) => {
+            return res[key];
+          });
+
+          val_from.value = from.value;
+          val_in.value = to.value;
+          output.value = eval(resp.value[0] * val.value);
+        })
+        .catch((err) => err);
+    };
+
+    return {
+      val,
+      output,
+      resp,
+      currencyTwo,
+      val_from,
+      val_in,
+      from,
+      to,
+      currencyName,
+      currencyNames,
+      convertCurrency,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.content {
+$col: #3d566f;
+main {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    rgb(188, 230, 238) 0%,
-    rgb(213, 241, 250) 100%
-  );
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+  padding-top: 0;
 
   .main {
-    width: 500px;
-    margin: 3vh auto;
+    width: 600px;
     border-radius: 10px;
-    height: 80vh;
+    height: fit-content;
+    padding: 20px;
     background: white;
+    position: relative;
+    margin: 0 auto;
 
-    @media screen and (max-width: 600px) {
-      width: 90%;
+    @media screen and (max-width: 660px) {
+      width: 95%;
+      @media screen and (max-width: 520px) {
+        width: 99%;
+        padding: 5px;
+      }
     }
 
     .header {
       width: 90%;
       height: 20vh;
       padding: 0 30px;
-      border-bottom: 2px solid rgb(78, 77, 77);
-
+      flex-wrap: wrap;
+      @media screen and (max-width: 590px) {
+        flex-direction: column;
+      }
       div {
         width: 20%;
         font-size: 1.5em;
@@ -204,12 +208,23 @@ export default {
         }
 
         span {
-          font-size: 15px;
-          color: crimson;
-        }
+          font-size: 35px;
+          background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+          font-weight: 600;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
 
-        #laugh {
-          color: crimson;
+          @media screen and (max-width: 430px) {
+            font-size: 29px;
+          }
+        }
+        i {
+          color: teal;
+
+          @media screen and (max-width: 500px) {
+            font-size: 50px;
+          }
         }
 
         &:first-child {
@@ -218,13 +233,23 @@ export default {
       }
     }
 
+    hr {
+      height: 5px;
+      width: 100%;
+      border-radius: 30px;
+      color: red;
+      background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+      // background: teal;
+    }
+
     .main-body {
       width: 100%;
-      height: 70%;
+      height: fit-content;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       flex-direction: column;
+      padding: 20px 10px;
     }
     input,
     .response {
@@ -234,10 +259,14 @@ export default {
       height: 50px;
       outline: none;
       text-align: center;
-      color: #606060;
+      color: $col;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .input {
       background: transparent;
+      color: $col;
     }
 
     .currencyOne,
@@ -247,60 +276,50 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgb(245, 144, 95);
-      color: white;
-      box-shadow: 0 3px 3px rgb(206, 127, 87);
+      color: red;
     }
-
-    // .btn {
-    //   height: 100%;
-    //   width: fit-content;
-    //   color: white;
-    //   margin-left: 10px;
-    //   border-radius: 0 15px 15px 0;
-
-    //   @media screen and (max-width: 500px) {
-    //     width: 60%;
-    //   }
-    // }
 
     #click {
       transition: all 0.3s ease;
       height: 60px;
-      width: 150px;
+      width: 200px;
+      margin: 20px auto;
       border: none;
-      border-radius: 3px;
-      background: rgb(141, 141, 7);
+      border-radius: 5px;
+      background: teal;
       color: white;
       &:active {
-        transform: translate(20px);
+        transform: scale(0.9);
+      }
+      @media screen and (max-width: 430px) {
+        width: 100%;
       }
     }
 
-    .from {
-      width: 85%;
-      height: 90px;
-      padding-top: 3px;
+    .from,
+    .to {
+      width: 95%;
+      height: 110px;
+      padding: 15px;
       border-radius: 5px;
       background: rgb(238, 234, 244);
       border: 0.5px solid rgb(235, 233, 233);
       transition: all 0.5s ease;
 
-      &:hover {
-        outline: 2px solid rgb(236, 235, 235);
-        background: rgb(211, 210, 210);
-      }
-
       .paragraphs {
-        width: 80%;
-        height: 35%;
+        width: 100%;
+        height: fit-content;
 
         p {
           text-transform: capitalize;
-          font-size: 0.8em;
-          color: rgb(11, 95, 11);
+          font-size: 14px;
+          color: teal;
           cursor: pointer;
-          color: rgb(208, 207, 207);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          padding: 0 5px;
+          padding-left: 0;
         }
       }
 
@@ -308,47 +327,35 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.5em;
+        font-size: 15px;
         background: transparent;
-        width: fit-content;
-      }
-    }
-
-    .to {
-      width: 85%;
-      height: 90px;
-      border-radius: 3px;
-      background: rgb(238, 234, 244);
-      border: 0.5px solid rgb(235, 233, 233);
-      padding-top: 5px;
-
-      &:hover {
-        outline: 3px solid rgb(238, 238, 240);
-        background: rgb(211, 210, 210);
-      }
-
-      .paragraphs {
-        width: 80%;
-        height: 35%;
-
-        p {
-          text-transform: capitalize;
-          font-size: 0.8em;
-          color: rgb(11, 95, 11);
-          cursor: pointer;
-        }
-      }
-
-      .response,
-      .choose {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5em;
+        width: 50%;
+        text-align: center;
         cursor: pointer;
+        border: none;
+        outline: none;
+        color: $col;
+
+        option {
+          border: none;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: teal;
+          }
+        }
       }
-      .choose {
-        background: transparent;
+
+      @media screen and (max-width: 520px) {
+        width: 100%;
+        .from,
+        .to {
+          width: 98%;
+          p {
+            font-size: 11px;
+          }
+        }
       }
     }
   }

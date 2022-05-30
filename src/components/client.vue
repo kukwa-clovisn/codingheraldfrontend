@@ -20,7 +20,7 @@
         <router-link to="/overview/todo" class="route">
           <i class="fa-regular fa-address-book"></i>todo app</router-link
         >
-        <router-link to="/overview/currency" class="route"
+        <router-link to="/overview/locked" class="route"
           ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
         >
         <router-link to="/overview/Exchange" class="route"
@@ -62,10 +62,7 @@
         <router-link to="/overview/todo" class="route" @click="squeezeFunc()">
           <i class="fa-regular fa-address-book"></i>todo app</router-link
         >
-        <router-link
-          to="/overview/currency"
-          class="route"
-          @click="squeezeFunc()"
+        <router-link to="/overview/locked" class="route" @click="squeezeFunc()"
           ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
         >
         <router-link
@@ -92,10 +89,6 @@
       ></a>
     </header>
     <div class="content" :class="{ squeeze: squeeze }">
-      <transition name="fade">
-        <div class="blur" v-if="squeeze" @click="squeeze = !squeeze"></div>
-      </transition>
-
       <transition name="move">
         <router-view />
       </transition>
@@ -168,7 +161,6 @@ main {
     background-attachment: fixed;
     background-size: cover;
     display: flex;
-
     align-items: center;
     flex-direction: column;
     box-shadow: 1px 1px 0.2px 0.5px rgb(212, 216, 228);
@@ -199,7 +191,7 @@ main {
       color: teal;
 
       h3 {
-        font: 600 23px "Poppins", sans-serif;
+        font: 600 20px "Poppins", sans-serif;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -216,7 +208,6 @@ main {
       width: 80%;
       height: 40px;
       text-decoration: none;
-      color: white;
       font: 400 19px "Poppins", sans-serif;
       cursor: pointer;
       color: $col;
@@ -272,13 +263,13 @@ main {
           }
         }
         .route {
-          height: 65px;
-          font-size: 30px;
+          height: 60px;
+          font-size: 24px;
           margin: 10px auto;
 
           i {
             width: 60px;
-            font-size: 40px;
+            font-size: 30px;
             margin-right: 13px;
           }
         }
@@ -364,13 +355,6 @@ main {
     bottom: 0;
     overflow-y: scroll;
     background: rgb(212, 216, 228);
-
-    .blur {
-      z-index: 1;
-      position: fixed;
-      bottom: 0;
-      right: 0;
-    }
 
     @media screen and (max-width: 850px) {
       width: 100vw;

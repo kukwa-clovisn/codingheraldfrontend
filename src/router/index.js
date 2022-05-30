@@ -27,9 +27,9 @@ const routes = [{
                 name: 'Profile',
                 component: Profile
             }, {
-                path: '/overview/Currency',
-                name: 'Currency',
-                component: () => import( /* webpackChunkName: "Currency" */ '../views/Currency.vue')
+                path: '/overview/locked',
+                name: 'Locked',
+                component: () => import( /* webpackChunkName: "locked" */ '../views/locked.vue')
             }, {
                 path: '/overview/Todo',
                 name: 'Todo',
@@ -52,10 +52,6 @@ const routes = [{
         path: '/Register',
         name: 'Register',
         component: () => import( /* webpackChunkName: "Register" */ '../components/Register.vue')
-    }, {
-        path: '/Demo',
-        name: 'Demo',
-        component: () => import( /* webpackChunkName: "Demo" */ '../components/Demo.vue')
     }, {
         path: '/Dashboard',
         name: 'Dashboard',

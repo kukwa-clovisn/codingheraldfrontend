@@ -310,17 +310,16 @@ export default {
     width: 100%;
     height: 100%;
     .form {
-      width: 450px;
+      width: 600px;
       height: 74vh;
       border: 0.5px solid rgb(224, 223, 223);
       border-radius: 10px;
       background: white;
       margin: auto;
       position: relative;
-      top: 4vh;
 
-      @media screen and (max-width: 768px) {
-        width: 70vw;
+      @media screen and (max-width: 680px) {
+        width: 95%;
       }
       .form-head {
         width: 100%;
@@ -343,7 +342,7 @@ export default {
         }
       }
       .form-input {
-        width: 90%;
+        width: 100%;
         height: 20%;
         background: rgb(238, 234, 244);
         border-radius: 10px;
@@ -394,7 +393,7 @@ export default {
       }
     }
     .currency {
-      width: 450px;
+      width: 600px;
       height: 74vh;
       border: 0.5px solid rgb(224, 223, 223);
       border-radius: 10px;
@@ -402,9 +401,9 @@ export default {
       margin: auto;
       position: relative;
       top: 4vh;
-      @media screen and (max-width: 1000px) {
-        width: 400px;
-      }
+      // @media screen and (max-width: 1000px) {
+      //   width: 400px;
+      // }
 
       .currency-head {
         width: 100%;

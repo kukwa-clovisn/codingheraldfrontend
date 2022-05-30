@@ -41,8 +41,10 @@
 .move-enter-active,
 .move-leave-active,
 .leave-enter-active,
-.leave-leave-active {
-  transition: all 0.5s ease;
+.leave-leave-active,
+.appear-enter-active,
+.appear-leave-active {
+  transition: all 0.4s ease;
 }
 
 .fade-leave-to {
@@ -50,22 +52,24 @@
   transform: translateY(-30px);
 }
 
-.move-enter-from {
+.fade-move {
+  transition: all 0.4s ease;
+  position: absolute;
+}
+.move-enter-from,
+.move-leave-to {
   opacity: 0;
+  transform: scale(1.6);
+}
+
+.leave-enter-from,
+.leave-leave-to {
   transform: translateX(-100vw);
 }
 
-.move-leave-to {
+.appear-enter-from,
+.appear-leave-to {
   opacity: 0;
-  transform: translateX(100vw);
-}
-
-.leave-enter-from {
-  transform: translateX(-50vw);
-}
-
-.leave-leave-to {
-  transform: translateX(-50vw);
 }
 
 button,

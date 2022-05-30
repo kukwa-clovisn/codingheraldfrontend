@@ -1,14 +1,17 @@
 <template>
   <div class="page">
     <header>
-      <nav>
+      <nav class="large-screen">
         <router-link to="/" class="route">home</router-link>
       </nav>
       <nav>
         <h1>coding <span>herald</span></h1>
       </nav>
-      <nav>
+      <nav class="large-screen">
         <router-link to="/Register" class="route">sign up</router-link>
+      </nav>
+      <nav class="small-screen">
+        <i class="fa-solid fa-bars" @click="toggle = !toggle"></i>
       </nav>
     </header>
     <form @submit.prevent="login" class="log-in">
@@ -49,11 +52,17 @@
     </form>
     <img src="../assets/desk.svg" id="desk" alt="learning never ends" />
     <img src="../assets/list.svg" id="pic" alt="codingHerald" />
+    <transition name="appear">
+      <div class="items" v-if="toggle">
+        <a href="/" class="route">Home</a>
+        <a href="/register">sign up</a>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 export default {
@@ -65,7 +74,7 @@ export default {
       username: "",
       password: "",
     });
-
+    let toggle = ref(false);
     let errormsg = reactive({
       invalidMsg: "",
       valid: false,
@@ -96,15 +105,9 @@ export default {
           }
         })
         .catch((err) => console.log(err));
-
-      //  let config = {
-      //       headers: {
-      //         Authorization: `Bearer ${res.token}`,
-      //       },
-      //     };
     };
 
-    return { user, errormsg, login };
+    return { user, toggle, errormsg, login };
   },
 };
 </script>
@@ -132,6 +135,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,20 +148,14 @@ export default {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      margin: 0 30px;
 
       h1 {
         text-transform: capitalize;
-        font: 700 30px "Poppins", sans-serif;
+        font: 700 25px "Poppins", sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(
-          210deg,
-          rgba(2, 82, 187, 0.685),
-          rgb(179, 135, 3),
-          rgb(34, 66, 114)
-        );
+        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -165,16 +163,34 @@ export default {
 
       .route {
         cursor: pointer;
-        margin: 0 25px;
         text-decoration: none;
         text-transform: capitalize;
-        color: rgb(7, 24, 49);
+        color: teal;
         font: 600 17px "Poppins", sans-serif;
         transition: all 0.3s ease;
 
         &:hover {
           color: rgba(2, 82, 187, 0.685);
           border-bottom: 2px solid rgba(2, 82, 187, 0.685);
+        }
+      }
+    }
+    nav.small-screen {
+      display: none;
+    }
+
+    @media screen and (max-width: 625px) {
+      flex-direction: row-reverse;
+      nav.large-screen {
+        display: none;
+      }
+      nav.small-screen {
+        display: block;
+        position: relative;
+        i {
+          font-size: 30px;
+          color: teal;
+          cursor: pointer;
         }
       }
     }
@@ -196,7 +212,8 @@ export default {
       text-transform: capitalize;
       padding: 5px;
       margin: 2% auto;
-      color: rgba(2, 82, 187, 0.785);
+      color: teal;
+      opacity: 0.785;
       font-size: 25px;
       cursor: pointer;
       font-weight: 600;
@@ -242,12 +259,15 @@ export default {
       margin: 10px auto;
       margin-bottom: 20px;
       display: block;
+      z-index: 0.9;
 
       label {
         display: block;
         padding: 3px 30px;
+        padding-left: 10px;
         text-transform: capitalize;
         cursor: pointer;
+        color: teal;
       }
 
       input {
@@ -274,6 +294,10 @@ export default {
           border: 2px solid rgb(4, 178, 221);
         }
       }
+
+      @media screen and (max-width: 400px) {
+        width: 99%;
+      }
     }
 
     button {
@@ -285,7 +309,7 @@ export default {
       border: none;
       border-radius: 60px;
       outline: none;
-      background-color: #224272;
+      background-color: teal;
       color: white;
       cursor: pointer;
       transition: all 0.3s ease-out;
@@ -313,6 +337,10 @@ export default {
       &:active {
         transform: scale(0.8);
       }
+
+      @media screen and (max-width: 400px) {
+        width: 97%;
+      }
     }
 
     .errormsg {
@@ -327,16 +355,47 @@ export default {
       margin-left: 5%;
       font-size: 13px;
       cursor: pointer;
+      color: teal;
 
       a {
         text-decoration: none;
         color: brown;
+        margin-right: 10px;
       }
 
       span {
         float: right;
         margin-right: 5%;
+
+        @media screen and (max-width: 417px) {
+          float: left;
+        }
       }
+    }
+  }
+
+  .items {
+    position: fixed;
+    top: 10vh;
+    left: 1%;
+    background: teal;
+    width: 100px;
+    height: 80px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+
+    a {
+      width: 100%;
+      height: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: white;
     }
   }
 
@@ -352,6 +411,7 @@ export default {
     top: 10vh;
     right: 3%;
     width: 450px;
+    z-index: 0.5;
   }
 }
 </style>

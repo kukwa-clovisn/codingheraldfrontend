@@ -1,57 +1,59 @@
 <template>
-  <div class="main" :class="{ bg: report }">
-    <div class="weather container">
-      <div
-        class="search_field d-flex justify-content-center align-items-center"
-      >
-        <input
-          type="search"
-          name="search"
-          id="search"
-          v-model="val"
-          placeholder="search for weather forcast for a city/town"
-          required
-        />
-        <input
-          type="button"
-          id="btn"
-          @click="fetchData()"
-          value="Get Forcast"
-        />
-      </div>
-      <div
-        v-if="report"
-        class="details d-flex justify-content-center align-items-center"
-      >
-        <div class="pressure d-flex justify-content-center align-items-center">
-          {{ pressure }}
-          <span class="pressure-heading text-capitalize"
-            >pressure reading!</span
-          >
-        </div>
-        <div class="humidity d-flex justify-content-center align-items-center">
-          {{ humidity }}
-          <span class="humidity-heading text-capitalize">humidity value!</span>
-        </div>
-      </div>
-
-
-      <div class="results">
-        <p class="text-white time">{{ hrs }}</p>
-        <p class="text-white city-name">{{ city }} - {{ country }}</p>
-      </div>
-      <div class="title" v-if="report">
-        <div class="temp d-flex justify-content-center align-items-center">
-          <span class="side-bar">temperature today!</span>
-          {{ temp }}<sup>o</sup>
-          <span class="desp">{{ description }}</span>
-        </div>
-        <div class="weather-footer text-uppercase d-flex align-items-center">
-          weather today!
-        </div>
+  <main>
+    <div class="first-page">
+      <i class="fa-solid fa-cloud-sun-rain" id="icon"></i>
+      <i class="fa-solid fa-water" id="icon2"></i>
+      <h1>Check out weather statistics of any area worldwide of your choice</h1>
+      <div class="content">
+        <h2>codingheraldapps</h2>
+        <transition name="appear" appear>
+          <form @submit.prevent="fetchData()" v-if="!report">
+            <label for="city">Enter city name:</label>
+            <input
+              type="text"
+              name="city"
+              id="city"
+              v-model="val"
+              placeholder="Enter city name...."
+              required
+            />
+            <button type="submit">Get forcast</button>
+          </form>
+        </transition>
+        <transition name="move">
+          <div class="details" v-if="report">
+            <button @click="report = !report">back</button>
+            <h3>{{ country }}</h3>
+            <p>{{ city }}</p>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>Temperature(<sup>o</sup>C)</th>
+                  <td>{{ temp }}<sup>o</sup>C</td>
+                </tr>
+                <tr>
+                  <th>Pressure(atm)</th>
+                  <td>{{ pressure }}atm</td>
+                </tr>
+                <tr>
+                  <th>Humidity</th>
+                  <td>{{ humidity }}</td>
+                </tr>
+                <tr>
+                  <th>Description</th>
+                  <td>{{ description }}</td>
+                </tr>
+                <tr>
+                  <th>Time</th>
+                  <td>{{ hrs }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </transition>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -75,6 +77,7 @@ export default {
     fetchData() {
       if (this.val !== "") {
         this.report = true;
+
         fetch(
           "http://api.openweathermap.org/data/2.5/weather?q=" +
             this.val +
@@ -109,116 +112,231 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
+$col: #3d566f;
+main {
   width: 100%;
-  min-height: 100%;
-  background: url(../assets/forcast.jpg);
-  background-size: cover;
-  background-attachment: fixed;
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  padding: 10px 0 0 0;
 
-  .weather {
-    padding: 10px;
-    margin: 10px;
-    width: 95%;
-    height: 90vh;
-    margin: 2% auto;
-    padding: 5px;
+  .first-page {
+    width: 90%;
+    margin: auto;
+    height: fit-content;
+    position: relative;
 
-    .search_field {
-      width: 90%;
-      margin: 0 auto;
-      height: 10vh;
-
-      #search {
-        width: 400px;
-        height: 50px;
-        padding: 20px 5px;
-        text-align: center;
-        border: none;
-        outline: none;
-        border-radius: 30px 0 0 30px;
-      }
-
-      #btn {
-        border-radius: 0 30px 30px 0;
-        border: none;
-        outline: none;
-        height: 50px;
-        width: 120px;
-      }
-    }
-
-    .details {
-      width: 400px;
-      height: 90px;
-      border: 1px solid white;
-      font-size: 30px;
-      position: relative;
-      left: 55%;
-      top: 10vh;
-      border: none;
-      border-radius: 5px;
-
-      .pressure {
-        background: white;
-        width: 50%;
-        position: relative;
-        height: 100%;
-        padding-top: 20px;
-        cursor: pointer;
-
-        .pressure-heading {
-          position: absolute;
-          top: 5px;
-          left: 20%;
-          font-size: 15px;
-        }
-      }
-
-      .humidity {
-        width: 50%;
-        height: 100%;
-        position: relative;
-        background: crimson;
-        color: white;
-        padding-top: 20px;
-        cursor: pointer;
-
-        .humidity-heading {
-          position: absolute;
-          top: 5px;
-          left: 20%;
-          font-size: 15px;
-        }
-      }
-    }
-
-    .img {
+    #icon,
+    #icon2 {
+      font-size: 250px;
+      color: teal;
       position: absolute;
-      top: 15%;
+      top: 25%;
       right: 10%;
-      width: 130px;
+      opacity: 0.2;
+      z-index: 0.1;
     }
 
-    .results {
-      .time {
+    #icon2 {
+      left: 0;
+      opacity: 0.1;
+      top: 5%;
+    }
+    h1 {
+      font: 600 30px "Poppins", sans-serif;
+      padding: 20px;
+      color: teal;
+      width: 80%;
+      white-space: pre-wrap;
+      position: relative;
+
+      @media screen and (max-width: 1000px) {
+        font-size: 25px;
+        width: 95%;
+
+        @media screen and (max-width: 490px) {
+          font-size: 20px;
+          width: 100%;
+          padding: 10px;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      background: transparent;
+      position: relative;
+      h2 {
+        font: 600 24px "Grand Hotel", cursive;
+        padding: 15px;
+        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      form {
+        width: 600px;
+        height: fit-content;
+        padding: 20px;
+
+        label {
+          width: 90%;
+          height: 40px;
+          padding: 0;
+          text-align: left;
+          padding-bottom: 4px;
+          display: flex;
+          align-items: center;
+          font: 500 22px "Poppins", sans-serif;
+          color: teal;
+          text-transform: capitalize;
+        }
+        input {
+          width: 90%;
+          height: 50px;
+          border: none;
+          outline: none;
+          box-shadow: 0 0 2px 1px whitesmoke;
+          padding: 3px 20px;
+          border-radius: 2px;
+          margin-bottom: 20px;
+        }
+        button {
+          width: 90%;
+          height: 50px;
+          border: none;
+          background: teal;
+          border-radius: 2px;
+          color: white;
+          text-transform: capitalize;
+        }
+
+        @media screen and (max-width: 650px) {
+          width: 95%;
+          padding: 10px;
+          input,
+          label,
+          button {
+            width: 100%;
+          }
+        }
+      }
+      .details {
+        width: 100%;
+        height: fit-content;
+
+        button {
+          width: 200px;
+          height: 40px;
+          font-size: 15px;
+          background: teal;
+          color: white;
+          border: none;
+          border-radius: 1px;
+          margin-bottom: 20px;
+        }
+        h3,
+        p {
+          color: $col;
+        }
+
+        p {
+          background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        table {
+          width: 90%;
+          margin: 20px 0;
+          background: teal;
+          border-radius: 10px;
+          tr {
+            background: transparent;
+
+            th {
+              font: 500 16px "Poppins", sans-serif;
+              color: white;
+              background: transparent;
+              padding: 10px;
+            }
+            td {
+              font: 400 14px "Poppins", sans-serif;
+              color: white;
+              background: transparent;
+            }
+          }
+
+          @media screen and (max-width: 570px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .details {
+    width: 400px;
+    height: 90px;
+    border: 1px solid white;
+    font-size: 30px;
+    position: relative;
+    border: none;
+    border-radius: 5px;
+
+    .pressure {
+      background: white;
+      width: 50%;
+      position: relative;
+      height: 100%;
+      padding-top: 20px;
+      cursor: pointer;
+
+      .pressure-heading {
         position: absolute;
-        bottom: 15vh;
-        right: 5%;
-        cursor: pointer;
+        top: 5px;
+        left: 20%;
+        font-size: 15px;
       }
-      .city-name {
-        position: relative;
-        left: 40%;
-        top: 19vh;
-        font-size: 50px;
-        text-transform: uppercase;
-        cursor: pointer;
+    }
+
+    .humidity {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      background: crimson;
+      color: white;
+      padding-top: 20px;
+      cursor: pointer;
+
+      .humidity-heading {
+        position: absolute;
+        top: 5px;
+        left: 20%;
+        font-size: 15px;
       }
+    }
+  }
+
+  .img {
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    width: 130px;
+  }
+
+  .results {
+    .time {
+      position: absolute;
+      bottom: 15vh;
+      right: 5%;
+      cursor: pointer;
+    }
+    .city-name {
+      position: relative;
+      font-size: 50px;
+      text-transform: uppercase;
+      cursor: pointer;
     }
   }
 
@@ -256,26 +374,6 @@ export default {
         cursor: pointer;
       }
     }
-
-    .weather-footer {
-      width: 95vw;
-      height: 120px;
-      background: rgb(221, 43, 12);
-      color: white;
-      padding-left: 15%;
-      padding-top: 1%;
-      font-size: 45px;
-      cursor: pointer;
-    }
-  }
-}
-.main.bg {
-  background: url(../assets/fog.jpg);
-  background-size: cover;
-  background-attachment: fixed;
-
-  footer {
-    margin-top: 2vh;
   }
 }
 </style>

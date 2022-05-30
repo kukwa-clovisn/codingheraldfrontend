@@ -3,14 +3,14 @@
     <div>
       <br />
       <div class="logo-main">
-        <div class="logo"></div>
+        <div class="logo"><span>CH</span></div>
         <p>
-          <span title="Kukwa Clovis Ngong">kcn</span> <br /><br />
+          <span title="codingheraldapps">codingheraldapps</span> <br /><br />
           is inviting you to sign up <i class="fa fa-thumbs-up"></i>
         </p>
         <h2>
-          <span class="online">57,345 online</span>
-          <span class="members">45,935210 members</span>
+          <span class="online">free</span>
+          <span class="members">4 Apps</span>
         </h2>
       </div>
       <br />
@@ -36,8 +36,10 @@
         <p class="lead error" v-if="error">{{ errormsg }}</p>
         <button class="registerBtn" type="submit">next</button>
 
-        <p class="d-flex justify-content-between align-items-center">
-          <router-link to="/login">already have an account?sign in</router-link>
+        <p>
+          <router-link to="/login" class="a"
+            >already have an account?sign in</router-link
+          >
           <button type="button">
             <router-link to="/" class="link"
               ><i class="fa fa-home"></i>home</router-link
@@ -59,7 +61,9 @@
         <button class="registerBtn" type="submit">next</button>
 
         <p class="d-flex justify-content-between align-items-center">
-          <router-link to="/">already have an account?sign in</router-link>
+          <router-link to="/" class="a"
+            >already have an account?sign in</router-link
+          >
           <button
             type="button"
             @click="
@@ -98,7 +102,9 @@
         <button class="registerBtn" type="submit">sign up</button>
 
         <p class="d-flex justify-content-between align-items-center">
-          <router-link to="/">already have an account?sign in</router-link>
+          <router-link to="/" class="a"
+            >already have an account?sign in</router-link
+          >
           <button
             type="button"
             @click="
@@ -115,14 +121,14 @@
       </form>
 
       <footer>
-        by registering you agree to KCN's Terms of Service and Privacy Policy
+        by registering you agree to codingherald's Terms of Service and Privacy
+        Policy
       </footer>
     </div>
   </div>
 </template>
 
 <script>
-// import {ref} from '@vue/reactivity';
 export default {
   name: "Register",
   data() {
@@ -141,20 +147,6 @@ export default {
       emails: [],
     };
   },
-  // created() {
-  //   fetch("http://localhost:5000/Database")
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log(res[0]);
-
-  //       for (let i = 0; i < res.length; i++) {
-  //         this.names.push(res[i].name);
-  //         this.emails.push(res[i].email);
-  //       }
-  //       console.log(this.names);
-  //       console.log(this.names.includes("Kukwa Clovis Ngong"));
-  //     });
-  // },
   methods: {
     next() {
       if (this.username !== "" && this.username.length > 5) {
@@ -266,7 +258,7 @@ export default {
   height: 100vh;
   margin: 0;
   padding-top: 3vh;
-  background: rgb(206, 205, 205);
+  background: rgb(63, 66, 67);
 }
 .logo-main {
   width: 100%;
@@ -283,12 +275,11 @@ export default {
     cursor: pointer;
     border: 4px solid rgb(55, 107, 146);
     font-size: 35px;
-    img {
-      width: 100%;
-      color: red;
-      border-radius: 50%;
+    background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+    span {
+      font: 700 20px "Jacques Francois Shadow", sans-serif;
+      color: white;
     }
-    // animation: round 2s infinite linear;
   }
 
   @keyframes round {
@@ -307,10 +298,13 @@ export default {
     font-size: 12px;
 
     span {
-      text-transform: uppercase;
-      color: rgb(59, 165, 93);
-      font-size: 14px;
+      font-size: 21px;
       cursor: pointer;
+      font-family: "Grand Hotel", cursive;
+      background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
 
@@ -329,7 +323,8 @@ export default {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: rgb(59, 165, 93);
+
+        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
         margin: 0 3% 0 0;
       }
     }
@@ -341,7 +336,7 @@ export default {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: rgb(189, 189, 189);
+        background: teal;
         margin: 0 3% 0 0;
       }
     }
@@ -375,20 +370,25 @@ h2 {
 }
 
 div {
-  animation: load 1s 1 linear alternate forwards;
-  width: 40%;
+  width: 600px;
+  height: fit-content;
   margin: 3vh auto;
   border-radius: 10px;
   color: white;
   background: rgb(54, 57, 63);
   @media screen and (max-width: 768px) {
     width: 80%;
+
+    @media screen and (max-width: 500px) {
+      width: 95%;
+    }
   }
   .logo {
     margin: 2% auto;
   }
 
   form {
+    height: fit-content;
     label {
       display: block;
       text-align: left;
@@ -412,7 +412,7 @@ div {
     button {
       width: 85%;
       height: 50px;
-      background: rgb(88, 101, 242);
+      background: teal;
       border: none;
       border-radius: 5px;
       color: white;
@@ -423,7 +423,7 @@ div {
       transition: all 0.3s ease-out;
 
       &:hover {
-        background: rgb(119, 130, 252);
+        background: rgb(4, 188, 188);
       }
     }
     p {
@@ -432,17 +432,21 @@ div {
       margin: 0 auto;
       color: white;
       font-size: 12px;
-      letter-spacing: 1px;
       display: flex;
+      padding: 0;
       justify-content: space-between;
       align-items: center;
       position: relative;
-      a {
+      .a {
+        width: 60%;
         display: block;
         width: fit-content;
-        color: rgb(5, 165, 228);
+        margin-bottom: 5px;
+        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-decoration: none;
-        // text-align: left;
         transition: all 0.3s ease;
         text-transform: capitalize;
         &:hover {
@@ -454,18 +458,33 @@ div {
       }
 
       button {
-        width: 100px;
-        position: absolute;
-        right: 0;
+        width: 40%;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
+        color: white;
         .link {
-          color: white;
+          color: white !important;
           text-decoration: none;
+
+          i {
+            margin-right: 5px;
+            color: white !important;
+          }
+
           &:hover {
             border: none;
           }
+        }
+      }
+
+      @media screen and (max-width: 550px) {
+        flex-direction: column;
+        height: fit-content;
+
+        button {
+          width: 100%;
         }
       }
     }
@@ -482,20 +501,13 @@ div {
     }
   }
 
-  @keyframes load {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
   footer {
-    width: 100%;
+    width: 85%;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    margin: 2% 0;
+    margin: 10px auto;
     padding: 10px;
     font-size: 12px;
     text-transform: capitalize;
