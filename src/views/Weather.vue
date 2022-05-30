@@ -85,8 +85,6 @@ export default {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
-
             this.country = res.sys.country;
 
             this.city = res.name;
