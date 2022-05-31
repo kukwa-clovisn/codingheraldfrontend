@@ -47,7 +47,7 @@
       </button>
       <p>
         don't have an account? <router-link to="/Register">sign up</router-link>
-        <span><a href=""> forgot password?</a></span>
+        <span><a href="/forgot_password"> forgot password?</a></span>
       </p>
     </form>
     <img src="../assets/desk.svg" id="desk" alt="learning never ends" />
@@ -86,7 +86,7 @@ export default {
     const login = () => {
       axios
         .post(
-          "api/login",
+          "api/signin",
           {
             username: user.username,
             password: user.password,
@@ -99,10 +99,13 @@ export default {
         )
         .then((res) => {
           if (res.statusText === "OK") {
-            router.push("/overview/Todo");
-            localStorage.setItem("codingheraldtoken", res.data.token);
-            localStorage.setItem("codingheraldtokenid", res.data.id);
+            localStorage.setItem("accessToken", res.data.accessToken);
+            localStorage.setItem("accessId", res.data.accessId);
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${localStorage.getItem("accessToken")}`;
           }
+          router.push("/overview/Todo");
         })
         .catch((err) => console.log(err));
     };

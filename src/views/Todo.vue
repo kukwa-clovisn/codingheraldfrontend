@@ -194,7 +194,7 @@ export default {
     let status = ref(false);
     let username = ref("");
     let password = ref("");
-    let getFromLocalStorage = localStorage.getItem("codingheraldtokenid");
+    let getFromLocalStorage = localStorage.getItem("accessId");
     let token_id = ref("");
     let response = ref(false);
     let confirmation = ref(false);
@@ -211,7 +211,7 @@ export default {
 
     const displayTodo = async () => {
       try {
-        await axios("api/user/" + `${token_id.value}`)
+        await axios("api/todo/" + `${token_id.value}`)
           .then(async (res) => {
             todoItems.value = await res.data.todos;
 
@@ -232,7 +232,7 @@ export default {
       try {
         await axios
           .post(
-            "api/user/" + `${id}`,
+            "api/todo/" + `${id}`,
             {
               data,
             },
@@ -263,7 +263,7 @@ export default {
       parseData.value.done = false;
 
       if (userData.value.trim().length !== 0 && userData.value !== "") {
-        axios("api/user/" + `${token_id.value}`)
+        axios("api/todo/" + `${token_id.value}`)
           .then(async (res) => {
             todoItems.value.push(parseData.value);
             await updateData(todoItems.value, res.data._id);
@@ -283,7 +283,7 @@ export default {
      * function that deletes all todo tasks
      */
     const removeAllTodos = () => {
-      axios("api/user/" + `${token_id.value}`).then(async (res) => {
+      axios("api/todo/" + `${token_id.value}`).then(async (res) => {
         if (
           window.confirm(
             "Are you sure you want to delete all tasks? \n this action is irreversible"
@@ -301,7 +301,7 @@ export default {
      * function that removes a single task
      */
     const removeTask = (index) => {
-      axios("api/user/" + `${token_id.value}`)
+      axios("api/todo/" + `${token_id.value}`)
         .then(async (res) => {
           if (todoItems.value[index].done) {
             todoItems.value = await res.data.todos;
@@ -328,7 +328,7 @@ export default {
      * funtion that adds the status done to a todo task
      */
     const addStatus = (index) => {
-      axios("api/user/" + `${token_id.value}`).then(async (res) => {
+      axios("api/todo/" + `${token_id.value}`).then(async (res) => {
         todoItems.value = res.data.todos;
         if (!todoItems.value[index].done) {
           todoItems.value[index].done = true;
@@ -368,7 +368,7 @@ export default {
     };
 
     const searchTask = (task) => {
-      axios("api/user/" + `${token_id.value}`)
+      axios("api/todo/" + `${token_id.value}`)
         .then((res) => {
           let searchList = ref([]);
           task = task.toLowerCase();

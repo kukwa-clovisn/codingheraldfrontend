@@ -29,7 +29,7 @@
         <router-link to="/login" class="route">get started</router-link>
       </button>
       <button class="demo" title="Get to know more about ACTA...">
-        <router-link to="/overview/todo" id="demo">apps</router-link>
+        <router-link to="/contact" id="demo">contact</router-link>
       </button>
     </div>
     <br />

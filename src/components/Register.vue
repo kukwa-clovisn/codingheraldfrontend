@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Register",
   data() {
@@ -154,28 +155,6 @@ export default {
         this.stepTwo = true;
         this.stepThree = false;
         this.error = false;
-
-        // fetch("http://localhost:8000/user/signup", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        //   },
-        //   credentials: "include",
-        //   body: {
-        //     username: this.username,
-        //     email: this.username + "@gmail.com",
-        //     password: this.username + "passcode",
-        //   },
-        // })
-        //   .then((res) => res.json())
-        //   .then((res) => {
-        //     // Handle response
-        //     console.log("Response: ", res);
-        //   })
-        //   .catch((err) => {
-        // Handle error
-        //   console.log("Error message: ", err);
-        // });
       } else {
         this.error = true;
         this.errormsg = " please fill in your username...";
@@ -196,56 +175,40 @@ export default {
       }
     },
     sign() {
-      if (this.password.length > 6 && this.password === this.confirmPassword) {
-        fetch("api/register", {
-          method: "Post",
-          body: JSON.stringify({
-            username: this.username,
-            email: this.email,
-            password: this.password,
-          }),
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.data.username && res.data.username === this.username) {
-              this.stepOne = true;
-              this.stepTwo = false;
-              this.stepThree = false;
-              this.confirm = false;
-              this.error = true;
-              this.errormsg = res.msg;
-              this.$route.push("/login");
-              console.log(res);
-            } else if (res.data.email && res.data.email === this.email) {
-              this.stepOne = false;
-              this.stepTwo = true;
-              this.stepThree = false;
-              this.confirm = false;
-              this.error = true;
-              this.errormsg = res.msg;
-              console.log(res);
-            } else {
-              this.stepOne = false;
-              this.stepTwo = false;
-              this.stepThree = false;
-              this.confirm = true;
-              this.error = false;
-              console.log(res);
+      if (this.password.length > 4 && this.password === this.confirmPassword) {
+        axios
+          .post(
+            "api/signup",
+            {
+              username: this.username,
+              email: this.email,
+              password: this.password,
+            },
+            {
+              headers: {
+                "Content-type": "application/json",
+              },
             }
+          )
+          .then((res) => {
+            console.log(res);
+            if (res.statusText === "OK") {
+              return this.$route.push("/login");
+            }
+          })
+          .catch((err) => {
+            this.errormsg = err.response.data.msg;
+            this.err = true;
+            this.stepOne = true;
+            this.stepTwo = false;
+            this.stepThree = false;
           });
-      } else if (this.password !== this.confirmPassword) {
-        this.error = true;
-        this.errormsg = "confirm failed. the passwords don't match!";
-        this.password = "";
-        this.confirmPassword = "";
       } else {
-        this.errormsg = "password should contain at least 7 mixed characters";
-        this.password = "";
-        this.error = true;
-        this.confirmPassword = "";
+        this.errormsg = "invalid password";
+        this.err = true;
+        this.stepOne = false;
+        this.stepTwo = false;
+        this.stepThree = true;
       }
     },
   },
@@ -258,7 +221,7 @@ export default {
   height: 100vh;
   margin: 0;
   padding-top: 3vh;
-  background: rgb(63, 66, 67);
+  background: rgb(249, 225, 198);
 }
 .logo-main {
   width: 100%;
@@ -459,14 +422,17 @@ div {
 
       button {
         width: 40%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
         margin: 0;
         color: white;
         .link {
           color: white !important;
           text-decoration: none;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           i {
             margin-right: 5px;

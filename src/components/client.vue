@@ -110,13 +110,13 @@ export default {
       username: "",
       email: "",
     });
-    let getFromLocalStorage = ref(localStorage.getItem("codingheraldtokenid"));
+    let getFromLocalStorage = ref(localStorage.getItem("accessId"));
     onMounted(() => {
       if (!getFromLocalStorage.value) {
         return router.push("/login");
       }
 
-      axios("api/user/" + `${getFromLocalStorage.value}`)
+      axios("api/todo/" + `${getFromLocalStorage.value}`)
         .then(async (res) => {
           user.username = res.data.username;
           user.email = res.data.email;

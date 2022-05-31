@@ -5,6 +5,7 @@ import {
 import Home from '@/components/Home'
 import Contact from '@/components/contact'
 import Profile from '@/views/profile'
+import axios from 'axios'
 
 const routes = [{
         path: '/',
@@ -19,9 +20,22 @@ const routes = [{
         name: 'Contact',
         component: Contact
     }, {
-        path: '/overview/profile',
+        path: '/overview/Todo',
         name: 'Client',
         component: () => import('../components/client.vue'),
+        beforeEnter(to, from, next) {
+            axios('api/token').then(res => {
+                console.log(res)
+                if (res.statusText === 'OK') {
+                    next()
+                } else {
+                    next('/login')
+                }
+            }).catch(err => {
+                next('/login')
+                return console.log(err);
+            })
+        },
         children: [{
                 path: '/overview/profile',
                 name: 'Profile',
@@ -66,9 +80,9 @@ const routes = [{
         name: 'chatBox',
         component: () => import('../components/chatBox.vue')
     }, {
-        path: '/online',
-        name: 'online',
-        component: () => import('../components/online.vue')
+        path: '/forgot_password',
+        name: 'Forgot_password',
+        component: () => import('../components/forgot_password.vue')
     }
 ]
 
