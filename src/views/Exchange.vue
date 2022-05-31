@@ -214,6 +214,7 @@ main {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          font-family: "Grand Hotel", cursive;
 
           @media screen and (max-width: 430px) {
             font-size: 29px;
