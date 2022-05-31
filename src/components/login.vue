@@ -107,7 +107,7 @@ export default {
           }
           router.push("/overview/Todo");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     };
 
     return { user, toggle, errormsg, login };
