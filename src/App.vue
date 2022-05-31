@@ -1,6 +1,11 @@
 <template>
-  <router-view />
-  <!-- vuejs projects for beginners code mentor.io //dev projects -->
+  <main id="main">
+    <router-view />
+    <!-- vuejs projects for beginners code mentor.io //dev projects -->
+    <span class="to-landing-page reach beamerTrigger"
+      ><a class="a"><i class="fa-solid fa-bell"></i></a
+    ></span>
+  </main>
 </template>
 
 <style lang="scss">
@@ -92,5 +97,40 @@ i {
   bottom: 0;
   left: 0;
   margin: 0;
+}
+
+.to-landing-page {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  z-index: 1;
+
+  .a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+}
+.reach {
+  left: 10px;
+  border-radius: 100%;
+  width: 55px;
+  height: 55px;
+  background: rgba(230, 101, 129, 1);
+  a {
+    i {
+      font-size: 20px;
+    }
+  }
+}
+#main {
+  width: 100%;
 }
 </style>
