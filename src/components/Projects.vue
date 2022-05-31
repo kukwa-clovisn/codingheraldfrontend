@@ -7,7 +7,7 @@
   <div class="projects">
     <span class="fas fa-sun c1"></span>
     <i class="fas fa-star c2"></i>
-    <div class="project chat">
+    <!-- <div class="project chat">
       <div class="content" id="content">
         <div class="left-div">
           <h1>HeraldsChat</h1>
@@ -37,7 +37,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="project todo">
       <h1>dayGoal</h1>
       <span>Write out your todos' and follow up to achieve them</span>
@@ -132,7 +132,7 @@ header {
 .projects {
   width: 100vw;
   margin: 0 auto;
-  padding: 5px 20px;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -255,6 +255,7 @@ header {
     border-radius: 5px;
     // position: relative;
     z-index: 1;
+    margin: auto;
     margin-bottom: 20px;
 
     @media screen and (max-width: 1111px) {
@@ -403,7 +404,7 @@ header {
       text-align: center;
       text-transform: capitalize;
       font-weight: 600;
-      font-family: "Russo One", sans-serif;
+      font-family: "Nunito Sans", sans-serif;
       padding-top: 5px;
     }
     span {
@@ -498,7 +499,7 @@ header {
       text-transform: capitalize;
       padding: 10px;
       font-weight: 700;
-      font-family: "Russo One", sans-serif;
+      font-family: "Nunito Sans", sans-serif;
     }
     span {
       display: block;
@@ -562,7 +563,7 @@ header {
         text-transform: capitalize;
         padding: 10px;
         font-weight: 700;
-        font-family: "Russo One", sans-serif;
+        font-family: "Nunito Sans", sans-serif;
       }
       span {
         display: block;

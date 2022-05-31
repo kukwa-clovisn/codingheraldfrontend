@@ -39,9 +39,11 @@
           required
         />
       </div>
-      <p class="errormsg text-danger text-center" v-if="errormsg.valid">
-        {{ errormsg.invalidMsg }}
-      </p>
+      <transition name="appear">
+        <p class="errormsg text-danger text-center" v-if="errormsg.valid">
+          {{ errormsg.invalidMsg }}
+        </p>
+      </transition>
       <button id="log-in" class="btn" type="submit">
         log in <i class="fa fa-arrow-right"></i>
       </button>
@@ -98,6 +100,7 @@ export default {
           }
         )
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("accessId", res.data.accessId);
@@ -107,7 +110,14 @@ export default {
           }
           router.push("/overview/Todo");
         })
-        .catch((err) => err);
+        .catch((err) => {
+          console.log(err);
+          errormsg.valid = true;
+          errormsg.invalidMsg = "Acess Denied";
+          setTimeout(() => {
+            errormsg.valid = false;
+          }, 5000);
+        });
     };
 
     return { user, toggle, errormsg, login };

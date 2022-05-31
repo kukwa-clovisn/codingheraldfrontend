@@ -32,9 +32,10 @@
           ></span>
           <button @click="addTodo()">add todo item</button>
         </div>
+        <transition name="fade">
+          <div class="errorDiv">
+            <div class="blur"></div>
 
-        <div class="errorDiv">
-          <transition name="fade">
             <form
               @submit.prevent="updateTask(edit.num, edit.task)"
               class="edit-form"
@@ -59,29 +60,30 @@
                 <i class="far fa-edit edit" title="Edit task..."></i>
               </button>
             </form>
-          </transition>
-          <transition name="fade">
             <button
-              @click="edit.val = false"
+              @click="
+                edit.val = false;
+                search.val = false;
+              "
               v-if="edit.val"
               title="close task editing"
             >
               close
             </button>
-          </transition>
-          <transition name="fade">
-            <p id="error" class="py-3" v-if="invalidTask">
-              please add a valid task ❣️KCN❣️
-            </p>
-          </transition>
-        </div>
-        <div class="errorDiv">
-          <transition name="fade">
+          </div>
+        </transition>
+        <transition name="fade">
+          <p id="error" class="py-3" v-if="invalidTask">
+            please add a valid task ❣️KCN❣️
+          </p>
+        </transition>
+        <transition name="fade">
+          <div class="errorDiv" v-if="search.val">
+            <div class="blur"></div>
             <form
               @submit.prevent="searchTask(search.task)"
               class="edit-form"
               id="edit-form"
-              v-if="search.val"
             >
               <input
                 type="text"
@@ -98,18 +100,18 @@
                 ></i>
               </button>
             </form>
-          </transition>
-          <transition name="fade">
             <button
-              @click="edit.val = false"
+              @click="
+                edit.val = false;
+                search.val = false;
+              "
               v-if="search.val"
               title="close task editing"
             >
               close
             </button>
-          </transition>
-        </div>
-
+          </div>
+        </transition>
         <div class="todoItems">
           <transition-group tag="ul" appear name="fade">
             <li
@@ -117,15 +119,24 @@
               v-for="(todo, index) in todoItems"
               :key="index"
             >
-              <p>
+              <div class="item">
+                <p @click="readTask(todo.name, todo.date)">{{ todo.date }}</p>
+
+                <p
+                  class="content"
+                  :title="todo.name"
+                  @click="readTask(todo.name, todo.date)"
+                >
+                  {{ todo.name }}
+                </p>
+                <p @click="readTask(todo.name, todo.date)">
+                  <span>Read</span>
+                </p>
+              </div>
+              <div class="icons">
                 <button @click="editTask(index, todo.name)">
                   <i class="far fa-edit edit" title="Edit task!"></i>
                 </button>
-
-                {{ todo.date }}
-              </p>
-
-              <p class="content" :title="todo.name">
                 <input
                   type="checkbox"
                   name="done"
@@ -134,14 +145,12 @@
                   @change="addStatus(index)"
                   title="check task!"
                 />
-                {{ todo.name }}
-              </p>
-              <span @click="removeTask(index)" title="Delete task">
                 <i
                   class="fa fa-trash"
+                  @click="removeTask(index)"
                   style="color: white; font-size: 1.2em"
                 ></i>
-              </span>
+              </div>
             </li>
           </transition-group>
         </div>
@@ -154,6 +163,21 @@
     </div>
 
     <img src="../assets/list.svg" id="pic" alt="" />
+    <transition name="appear">
+      <div class="read-task" v-if="read">
+        <div class="blur" @click="read = !read"></div>
+        <div class="read-content">
+          <i class="fa-solid fa-rectangle-xmark" @click="read = !read"></i>
+
+          <p>
+            {{ profile.profileName }} <br />
+            {{ profile.profileEmail }}
+          </p>
+          <h3>Was written on:{{ taskDate }}</h3>
+          <p>{{ popTask }}</p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -198,6 +222,9 @@ export default {
     let token_id = ref("");
     let response = ref(false);
     let confirmation = ref(false);
+    let read = ref(false);
+    let popTask = ref("");
+    let taskDate = ref("");
 
     onMounted(() => {
       if (getFromLocalStorage == null) {
@@ -261,6 +288,7 @@ export default {
       parseData.value.name = userData.value;
       parseData.value.date = new Date();
       parseData.value.done = false;
+      displayTodo();
 
       if (userData.value.trim().length !== 0 && userData.value !== "") {
         axios("api/todo/" + `${token_id.value}`)
@@ -304,8 +332,11 @@ export default {
       axios("api/todo/" + `${token_id.value}`)
         .then(async (res) => {
           if (todoItems.value[index].done) {
-            todoItems.value = await res.data.todos;
-            todoItems.value.splice(index, 1); //detete that item you've choosen
+            if (window.confirm("Do you want to delete this task?")) {
+              todoItems.value = await res.data.todos;
+              todoItems.value.splice(index, 1); //detete that item you've choosen
+            }
+
             await updateData(todoItems.value, res.data._id);
             return;
           }
@@ -331,11 +362,16 @@ export default {
       axios("api/todo/" + `${token_id.value}`).then(async (res) => {
         todoItems.value = res.data.todos;
         if (!todoItems.value[index].done) {
-          todoItems.value[index].done = true;
-          isDone.value = true;
+          if (
+            window.confirm(
+              `Do you want to mark task ${index + 1} as completed?`
+            )
+          ) {
+            todoItems.value[index].done = true;
+            isDone.value = true;
+          }
 
           await updateData(todoItems.value, res.data._id);
-          return;
         }
       });
     };
@@ -354,6 +390,7 @@ export default {
       edit.val = true;
       edit.num = index;
       search.val = false;
+      displayTodo();
     };
 
     /**
@@ -385,8 +422,15 @@ export default {
         .catch((err) => err);
     };
 
+    const readTask = (task, date) => {
+      read.value = true;
+      popTask.value = task;
+      taskDate.value = date;
+    };
+
     return {
       edit,
+      taskDate,
       valid,
       isDone,
       invalid,
@@ -402,6 +446,8 @@ export default {
       profile,
       todo,
       search,
+      read,
+      popTask,
       searchTask,
       addStatus,
       updateTask,
@@ -410,6 +456,7 @@ export default {
       removeAllTodos,
       addTodo,
       displayTodo,
+      readTask,
     };
   },
 };
@@ -443,7 +490,7 @@ $col: #3d566f;
     top: 20%;
   }
   .content {
-    width: 90%;
+    width: 98%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -452,7 +499,7 @@ $col: #3d566f;
     position: relative;
     .todo-container {
       position: relative;
-      width: 95%;
+      width: 100%;
       height: fit-content;
       background: transparent;
       padding: 10px;
@@ -489,7 +536,7 @@ $col: #3d566f;
       }
 
       #inputItem {
-        width: 100%;
+        width: 90%;
         height: 50px;
         margin: auto;
         display: block;
@@ -501,7 +548,7 @@ $col: #3d566f;
       }
 
       .addItem {
-        width: 100%;
+        width: 90%;
         height: fit-content;
         display: flex;
         margin: 15px auto;
@@ -576,7 +623,7 @@ $col: #3d566f;
       }
 
       .errorDiv {
-        width: 100%;
+        width: 90%;
         height: fit-content;
         margin: 0 auto;
         display: flex;
@@ -645,55 +692,114 @@ $col: #3d566f;
           overflow-y: scroll;
           background: transparent;
           position: relative;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
           &::-webkit-scrollbar {
             background: transparent;
             width: 5px;
           }
 
           li {
-            width: 100%;
-            height: fit-content;
-            margin: 10px auto;
-            padding: 5px 3px;
+            width: 200px;
+            height: 190px;
+            margin: 5px;
+            padding: 5px;
             list-style-type: none;
             font-size: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             display: block;
             text-transform: capitalize;
             position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
             background: $white;
 
-            span {
-              width: 11%;
+            .item {
+              width: 100%;
               height: 100%;
+              p {
+                cursor: pointer;
+                font-size: 15px;
+                width: 95%;
+                height: 15%;
+                padding: 2px 10px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                overflow: hidden;
+                white-space: pre-line;
+                text-overflow: ellipsis;
+                transition: all 0.3s ease;
+                font-size: 10px;
+
+                span {
+                  position: relative;
+                }
+              }
+
+              .content {
+                align-items: flex-start;
+                font-size: 13px;
+                height: 63%;
+                padding: 5px;
+              }
+            }
+            .icons {
+              width: 100%;
+              height: 20%;
               position: absolute;
-              right: -20%;
-              top: 0;
-              background: #e74c3c;
+              right: 0;
+              bottom: -21%;
+              background: teal;
               display: flex;
-              justify-content: center;
+              justify-content: space-between;
               align-items: center;
-              border-radius: 0 5px 5px 0;
+              border-radius: 0 0 8px 8px;
               transition: all 0.3s ease;
               cursor: pointer;
+              padding: 0 15px;
+
+              button {
+                background: none;
+                width: fit-content;
+                height: fit-content;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                background: transparent;
+              }
 
               i {
-                border-radius: 5px;
-                font-size: 26px;
+                font-size: 19px;
                 color: white;
                 cursor: pointer;
                 transition: all 0.5s ease;
 
                 &:active {
-                  transform: scale(0.7);
+                  transform: scale(0.8);
                 }
               }
-            }
 
-            &:hover {
-              span {
-                right: 0;
+              .taskStatus {
+                width: 20px;
+                height: 20px;
+                border: none;
+                display: block;
+                margin: 0 5px;
+                margin-left: 0;
+                box-shadow: 0 0 2px 1px whitesmoke;
+                outline: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:checked {
+                  display: block;
+                  background: teal;
+                }
               }
             }
 
@@ -708,89 +814,55 @@ $col: #3d566f;
               }
             }
 
-            p {
-              cursor: pointer;
-              font-size: 15px;
-              width: 90%;
-              height: fit-content;
-              padding: 2px 10px;
-              margin: 0;
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              transition: all 0.3s ease;
-              &:nth-child(odd) {
-                font-size: 10px;
-              }
-
-              .taskStatus {
-                width: 20px;
-                height: 20px;
-                border: none;
+            &:hover {
+              .item {
+                height: 80%;
                 display: block;
-                margin: 0 5px;
-                margin-left: 0;
-                box-shadow: 0 0 1px 1px $primaryCol;
-                outline: none;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                &:hover {
-                  border-radius: 100%;
-                }
-
-                &:checked {
-                  display: block;
-                }
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
               }
-              button {
-                background: none;
-                width: fit-content;
-                height: fit-content;
-                cursor: pointer;
-                outline: none;
-                margin: 0;
-
-                .edit {
-                  font-size: 13px;
-                  color: $secondaryCol;
-                  cursor: pointer;
-                  transition: all 0.3s ease;
-                  &:hover {
-                    transform: scale(0.8);
-                  }
-                }
+              .icons {
+                bottom: 0;
               }
             }
 
-            &:hover {
-              height: fit-content;
+            @media screen and (max-width: 975px) {
+              width: 300px;
 
-              .content {
-                width: 81%;
-                height: fit-content;
-                overflow: scroll;
-                display: block;
-                position: relative;
-                overflow-x: hidden;
-                white-space: pre-wrap;
-                text-overflow: unset;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                word-break: break-all;
-                font-size: 0.8em;
+              @media screen and (max-width: 700px) {
+                width: 48%;
+
+                @media screen and (max-width: 450px) {
+                  width: 95%;
+                  margin: 10px auto;
+                }
               }
             }
           }
 
           li.done {
             background: $tertiaryCol;
+            background: linear-gradient(
+              to bottom,
+              rgb(55, 220, 193),
+              rgb(3, 160, 160)
+            );
 
             .content {
-              text-decoration: line-through;
+              // text-decoration: line-through;
+              flex-direction: column;
+
+              &::before {
+                content: "Important:";
+                text-decoration: none;
+                font-size: 1.1em;
+                color: white;
+                font-family: "Grand Hotel", cursive;
+                display: block;
+              }
             }
           }
         }
@@ -894,6 +966,60 @@ $col: #3d566f;
 
   button:active {
     transform: scale(0.8);
+  }
+}
+
+.read-task,
+.errorDiv {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  .blur {
+    background: rgb(60, 60, 60);
+    opacity: 0.3;
+  }
+
+  form,
+  button {
+    z-index: 1;
+  }
+
+  .read-content {
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 7px;
+    z-index: 1;
+
+    i {
+      font-size: 30px;
+      color: crimson;
+      cursor: pointer;
+    }
+
+    h3 {
+      color: teal;
+      font: 500 16px "Poppins", sans-serif;
+      padding: 5px;
+    }
+
+    p {
+      line-height: 23px;
+      font: 400 15px "Poppins", sans-serif;
+      padding: 5px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 95%;
+    }
   }
 }
 

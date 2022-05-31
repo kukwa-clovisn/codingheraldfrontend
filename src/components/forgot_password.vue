@@ -213,7 +213,7 @@ $fallback: rgb(19, 37, 62);
 $col: #3d566f;
 
 main {
-  background: rgb(249, 225, 198);
+  // background: rgb(249, 225, 198);
   width: 100%;
   padding: 0;
 
@@ -229,6 +229,11 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
+    background: url(../assets/login.png);
+    background-position: left;
+    background-attachment: fixed;
+    background-size: 30% auto;
+    background-repeat: no-repeat;
 
     form {
       width: 500px;

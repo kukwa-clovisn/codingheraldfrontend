@@ -22,103 +22,109 @@
         >
         or <router-link to="/Todo" class="link">Todo app</router-link>
       </h2>
-      <form @submit.prevent="next" v-if="stepOne">
-        <label for="username">username:</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="What should we call you?"
-          required
-          class="text-capitalize"
-          v-model="username"
-        />
-        <p class="lead error" v-if="error">{{ errormsg }}</p>
-        <button class="registerBtn" type="submit">next</button>
+      <transition name="fade">
+        <form @submit.prevent="next" v-if="stepOne">
+          <label for="username">username:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="What should we call you?"
+            required
+            class="text-capitalize"
+            v-model="username"
+          />
+          <p class="lead error" v-if="error">{{ errormsg }}</p>
+          <button class="registerBtn" type="submit">next</button>
 
-        <p>
-          <router-link to="/login" class="a"
-            >already have an account?sign in</router-link
-          >
-          <button type="button">
-            <router-link to="/" class="link"
-              ><i class="fa fa-home"></i>home</router-link
+          <p>
+            <router-link to="/login" class="a"
+              >already have an account?sign in</router-link
             >
-          </button>
-        </p>
-      </form>
-      <form @submit.prevent="nextStep" v-if="stepTwo">
-        <label for="useremail">user email:</label>
-        <input
-          type="email"
-          name="useremail"
-          id="useremail"
-          placeholder="your Email address..."
-          required
-          v-model="email"
-        />
-        <p class="lead error" v-if="error">{{ errormsg }}</p>
-        <button class="registerBtn" type="submit">next</button>
+            <button type="button">
+              <router-link to="/" class="link"
+                ><i class="fa fa-home"></i>home</router-link
+              >
+            </button>
+          </p>
+        </form>
+      </transition>
+      <transition name="fade">
+        <form @submit.prevent="nextStep" v-if="stepTwo">
+          <label for="useremail">user email:</label>
+          <input
+            type="email"
+            name="useremail"
+            id="useremail"
+            placeholder="your Email address..."
+            required
+            v-model="email"
+          />
+          <p class="lead error" v-if="error">{{ errormsg }}</p>
+          <button class="registerBtn" type="submit">next</button>
 
-        <p class="d-flex justify-content-between align-items-center">
-          <router-link to="/" class="a"
-            >already have an account?sign in</router-link
-          >
-          <button
-            type="button"
-            @click="
-              this.stepOne = true;
-              this.stepTwo = false;
-              this.stepThree = false;
-              this.error = false;
-              this.confirm = false;
-            "
-          >
-            <i class="fa fa-arrow-left"></i>back
-          </button>
-        </p>
-      </form>
-      <form @submit.prevent="sign" v-if="stepThree">
-        <label for="userpassword">user password:</label>
-        <input
-          type="password"
-          name="userpassword"
-          id="userpassword"
-          placeholder="Enter a strong password..."
-          required
-          v-model="password"
-        />
-        <input
-          type="password"
-          name="confirmpassword"
-          id="confirmpassword"
-          placeholder="confirm your password"
-          required
-          v-model="confirmPassword"
-        />
-        <p class="lead error" v-if="error">
-          {{ errormsg }}
-        </p>
-        <button class="registerBtn" type="submit">sign up</button>
+          <p class="d-flex justify-content-between align-items-center">
+            <router-link to="/" class="a"
+              >already have an account?sign in</router-link
+            >
+            <button
+              type="button"
+              @click="
+                this.stepOne = true;
+                this.stepTwo = false;
+                this.stepThree = false;
+                this.error = false;
+                this.confirm = false;
+              "
+            >
+              <i class="fa fa-arrow-left"></i>back
+            </button>
+          </p>
+        </form>
+      </transition>
+      <transition name="fade">
+        <form @submit.prevent="sign" v-if="stepThree">
+          <label for="userpassword">user password:</label>
+          <input
+            type="password"
+            name="userpassword"
+            id="userpassword"
+            placeholder="Enter a strong password..."
+            required
+            v-model="password"
+          />
+          <input
+            type="password"
+            name="confirmpassword"
+            id="confirmpassword"
+            placeholder="confirm your password"
+            required
+            v-model="confirmPassword"
+          />
+          <p class="lead error" v-if="error">
+            {{ errormsg }}
+          </p>
+          <button class="registerBtn" type="submit">sign up</button>
 
-        <p class="d-flex justify-content-between align-items-center">
-          <router-link to="/" class="a"
-            >already have an account?sign in</router-link
-          >
-          <button
-            type="button"
-            @click="
-              this.stepOne = false;
-              this.stepTwo = true;
-              this.stepThree = false;
-              this.confirm = false;
-              this.error = false;
-            "
-          >
-            <i class="fa fa-arrow-left"></i> back
-          </button>
-        </p>
-      </form>
+          <p class="d-flex justify-content-between align-items-center">
+            <router-link to="/" class="a"
+              >already have an account?sign in</router-link
+            >
+            <button
+              type="button"
+              @click="
+                this.stepOne = false;
+                this.stepTwo = true;
+                this.stepThree = false;
+                this.confirm = false;
+                this.error = false;
+              "
+            >
+              <i class="fa fa-arrow-left"></i> back
+            </button>
+          </p>
+        </form>
+      </transition>
 
       <footer>
         by registering you agree to codingherald's Terms of Service and Privacy
@@ -222,9 +228,16 @@ export default {
   margin: 0;
   padding-top: 3vh;
   background: rgb(249, 225, 198);
+  background: url(../assets/Sign-up.png);
+  background-position: left;
+  background-attachment: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 20px 3px;
 }
 .logo-main {
   width: 100%;
+
   .logo {
     width: 60px;
     height: 60px;

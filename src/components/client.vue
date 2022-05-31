@@ -29,7 +29,7 @@
         <router-link to="/overview/weather" class="route"
           ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
         >
-        <router-link to="/" class="route">
+        <router-link to="/" @click="logoutFunc()" class="route">
           <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
         >
       </div>
@@ -74,7 +74,7 @@
         <router-link to="/overview/weather" class="route" @click="squeezeFunc()"
           ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
         >
-        <router-link to="/" class="route">
+        <router-link to="/" @click="logoutFunc()" class="route">
           <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
         >
       </div>
@@ -122,14 +122,20 @@ export default {
           user.email = res.data.email;
         })
         .catch((err) => {
+          router.push("/login");
           return err;
         });
     });
 
+    function logoutFunc() {
+      localStorage.setItem("accessToken", "");
+      router.push("/");
+    }
+
     function squeezeFunc() {
       squeeze.value = !squeeze.value;
     }
-    return { squeeze, squeezeFunc, user };
+    return { squeeze, squeezeFunc, user, logoutFunc };
   },
 };
 </script>
@@ -191,13 +197,13 @@ main {
       color: teal;
 
       h3 {
-        font: 600 20px "Poppins", sans-serif;
+        font: 600 17px "Poppins", sans-serif;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
       p {
-        font: 500 16px "Poppins", sans-serif;
+        font: 500 14px "Poppins", sans-serif;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -210,7 +216,7 @@ main {
       text-decoration: none;
       font: 400 19px "Poppins", sans-serif;
       cursor: pointer;
-      color: $col;
+      color: rgb(2, 141, 141);
       padding: 10px;
       margin: 8px auto;
       margin-left: 18%;

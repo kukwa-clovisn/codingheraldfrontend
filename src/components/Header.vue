@@ -136,18 +136,18 @@ main {
 
       .logoName {
         color: rgb(176, 77, 38);
-        font: 800 50px "Poppins", sans-serif;
+        font: 800 45px "Poppins", sans-serif;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
 
         &::before {
           content: "";
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
           border-radius: 100%;
           position: absolute;
           top: 0;
@@ -157,8 +157,8 @@ main {
 
         &::after {
           content: "";
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
           border-radius: 100%;
           position: absolute;
           top: 0;
