@@ -27,7 +27,7 @@
               >
             </li>
             <li>
-              <a href="/https://advancedtechacademy.herokuapp.com"
+              <a href="https://advancedtechacademy.herokuapp.com"
                 ><i class="fa-solid fa-music"></i>piano lessons</a
               >
             </li>
