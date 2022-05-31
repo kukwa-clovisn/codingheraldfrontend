@@ -352,7 +352,7 @@ main {
     height: 88vh;
     position: fixed;
     right: 0;
-    bottom: 0;
+    top: 12vh;
     overflow-y: scroll;
     background: rgb(212, 216, 228);
 
