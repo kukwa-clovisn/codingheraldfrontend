@@ -1091,7 +1091,7 @@ $col: #3d566f;
     height: 60px;
     border: none;
     border-radius: 30px;
-    background: crimson;
+    background: tomato;
     color: white;
     display: block;
     margin: 10px auto;
