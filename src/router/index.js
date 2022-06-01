@@ -32,7 +32,7 @@ const routes = [{
                 }
             }).catch(err => {
                 next('/login')
-                return console.log(err);
+                return err;
             })
         },
         children: [{
