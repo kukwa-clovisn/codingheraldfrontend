@@ -32,86 +32,13 @@
           ></span>
           <button @click="addTodo()">add todo item</button>
         </div>
-        <transition name="fade">
-          <div class="errorDiv">
-            <div class="blur"></div>
 
-            <form
-              @submit.prevent="updateTask(edit.num, edit.task)"
-              class="edit-form"
-              id="edit-form"
-              v-if="edit.val"
-            >
-              <input
-                type="hidden"
-                v-model="edit.num"
-                class="task-id"
-                required
-              />
-              <textarea
-                type="text"
-                name="edit"
-                id="edit"
-                placeholder="Edit task here...."
-                v-model="edit.task"
-                required
-              ></textarea>
-              <button type="submit">
-                <i class="far fa-edit edit" title="Edit task..."></i>
-              </button>
-            </form>
-            <button
-              @click="
-                edit.val = false;
-                search.val = false;
-              "
-              v-if="edit.val"
-              title="close task editing"
-            >
-              close
-            </button>
-          </div>
-        </transition>
         <transition name="fade">
           <p id="error" class="py-3" v-if="invalidTask">
             please add a valid task ❣️KCN❣️
           </p>
         </transition>
-        <transition name="fade">
-          <div class="errorDiv" v-if="search.val">
-            <div class="blur"></div>
-            <form
-              @submit.prevent="searchTask(search.task)"
-              class="edit-form"
-              id="edit-form"
-            >
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Search..."
-                v-model="search.task"
-                required
-              />
-              <button type="submit">
-                <i
-                  class="fa-solid fa-magnifying-glass edit"
-                  title="Search task(s)"
-                ></i>
-              </button>
-            </form>
-            <button
-              @click="
-                edit.val = false;
-                search.val = false;
-              "
-              v-if="search.val"
-              title="close task editing"
-            >
-              close
-            </button>
-          </div>
-        </transition>
+
         <div class="todoItems">
           <transition-group tag="ul" appear name="fade">
             <li
@@ -122,11 +49,7 @@
               <div class="item">
                 <p @click="readTask(todo.name, todo.date)">{{ todo.date }}</p>
 
-                <p
-                  class="content"
-                  :title="todo.name"
-                  @click="readTask(todo.name, todo.date)"
-                >
+                <p class="content" :title="todo.name">
                   {{ todo.name }}
                 </p>
                 <p @click="readTask(todo.name, todo.date)">
@@ -155,13 +78,92 @@
           </transition-group>
         </div>
         <p id="pending">
-          you have <span id="count">{{ todoCount }}</span
-          >pending tasks
+          you have <span id="count">{{ todoCount }}</span> Memories
         </p>
         <button id="reset" @click="removeAllTodos()">clear all todos</button>
       </div>
     </div>
+    <transition name="fade">
+      <div class="errorDiv" v-if="edit.val">
+        <div
+          class="blur"
+          @click="
+            edit.val = false;
+            search.val = false;
+          "
+        ></div>
 
+        <form
+          @submit.prevent="updateTask(edit.num, edit.task)"
+          class="edit-form"
+          id="edit-form"
+        >
+          <input type="hidden" v-model="edit.num" class="task-id" required />
+          <textarea
+            type="text"
+            name="edit"
+            id="edit"
+            placeholder="Edit task here...."
+            v-model="edit.task"
+            required
+          ></textarea>
+          <button type="submit">
+            <i class="far fa-edit edit" title="Edit task..."></i>
+          </button>
+        </form>
+        <button
+          v-if="edit.val"
+          title="close task editing"
+          @click="
+            edit.val = false;
+            search.val = false;
+          "
+        >
+          close
+        </button>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="errorDiv" v-if="search.val">
+        <div
+          class="blur"
+          @click="
+            edit.val = false;
+            search.val = false;
+          "
+        ></div>
+        <form
+          @submit.prevent="searchTask(search.task)"
+          class="edit-form"
+          id="edit-form"
+        >
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+            v-model="search.task"
+            required
+          />
+          <button type="submit">
+            <i
+              class="fa-solid fa-magnifying-glass edit"
+              title="Search task(s)"
+            ></i>
+          </button>
+        </form>
+        <button
+          v-if="search.val"
+          title="close task editing"
+          @click="
+            edit.val = false;
+            search.val = false;
+          "
+        >
+          close
+        </button>
+      </div>
+    </transition>
     <img src="../assets/list.svg" id="pic" alt="" />
     <transition name="appear">
       <div class="read-task" v-if="read">
@@ -490,19 +492,18 @@ $col: #3d566f;
     top: 20%;
   }
   .content {
-    width: 98%;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px;
     position: relative;
     .todo-container {
       position: relative;
       width: 100%;
       height: fit-content;
       background: transparent;
-      padding: 10px;
       overflow-y: scroll;
       z-index: 1;
 
@@ -536,15 +537,22 @@ $col: #3d566f;
       }
 
       #inputItem {
-        width: 90%;
-        height: 50px;
+        width: 95%;
+        height: 150px;
         margin: auto;
+        margin-left: 0;
         display: block;
-        padding: 10px 10px 3px 10px;
+        padding: 20px;
         outline: none;
         border: none;
-        background: transparent;
-        border-bottom: 2px solid teal;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 2px 1px whitesmoke;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(0.9);
+        }
       }
 
       .addItem {
@@ -594,11 +602,11 @@ $col: #3d566f;
       }
       button {
         width: 40%;
-        height: 45px;
+        height: 50px;
         float: right;
         padding: 5px;
         margin: 10px 0;
-        border-radius: 3px;
+        border-radius: 30px;
         border: none;
         background-color: $secondaryCol;
         background: linear-gradient(to bottom, rgb(55, 220, 193), teal);
@@ -678,7 +686,7 @@ $col: #3d566f;
 
       .todoItems {
         width: 100%;
-        max-height: 600px;
+        max-height: 1000px;
         margin: 5px auto;
         padding: 10px 0;
         overflow-y: scroll;
@@ -852,7 +860,6 @@ $col: #3d566f;
             );
 
             .content {
-              // text-decoration: line-through;
               flex-direction: column;
 
               &::before {
@@ -979,6 +986,7 @@ $col: #3d566f;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 1;
 
   .blur {
@@ -989,6 +997,44 @@ $col: #3d566f;
   form,
   button {
     z-index: 1;
+  }
+
+  form {
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+
+    input,
+    textarea {
+      width: 65%;
+      height: fit-content;
+      outline: none;
+      border: none;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    display: flex;
+    justify-content: center;
+
+    button {
+      background: teal;
+      width: 35%;
+    }
+  }
+
+  button {
+    width: 30%;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    background: crimson;
+    color: white;
+    display: block;
+    margin: 10px auto;
   }
 
   .read-content {
