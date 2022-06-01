@@ -3,7 +3,7 @@
     <transition name="leave">
       <div class="menu" :class="{ squeeze: squeeze }" v-if="!squeeze">
         <div class="logo">
-          <h1>codingherald</h1>
+          <h1>coding<span>herald</span></h1>
           <i
             class="fa-solid fa-align-left small-screen"
             @click="squeezeFunc()"
@@ -82,7 +82,7 @@
 
     <header :class="{ squeeze: squeeze }">
       <i class="fa-solid fa-align-left" @click="squeezeFunc()"></i>
-      <h1>dashboard</h1>
+      <h1>Dash<span>board</span></h1>
       <a href="/contact" class="large-screen">contact</a>
       <a href="/contact" class="small-screen"
         ><i class="fa-solid fa-phone"></i
@@ -179,10 +179,12 @@ main {
       align-items: center;
 
       h1 {
-        text-transform: capitalize;
         font: 600 30px "Grand Hotel", sans-serif;
         color: teal;
         text-align: center;
+        span {
+          color: #e66581;
+        }
       }
       .small-screen {
         display: none;
@@ -197,13 +199,13 @@ main {
       color: teal;
 
       h3 {
-        font: 600 17px "Poppins", sans-serif;
+        font: 600 15px "Poppins", sans-serif;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
       p {
-        font: 500 14px "Poppins", sans-serif;
+        font: 500 12px "Poppins", sans-serif;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -214,9 +216,13 @@ main {
       width: 80%;
       height: 40px;
       text-decoration: none;
-      font: 400 19px "Poppins", sans-serif;
+      font: 500 17px "Poppins", sans-serif;
       cursor: pointer;
-      color: rgb(2, 141, 141);
+      // background: linear-gradient(to bottom, rgb(55, 220, 193), teal);
+      // background-clip: text;
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
+      color: teal;
       padding: 10px;
       margin: 8px auto;
       margin-left: 18%;
@@ -316,9 +322,11 @@ main {
     }
 
     h1 {
-      text-transform: capitalize;
-      color: teal;
+      color: #e66581;
       font: 500 30px "Grand Hotel", cursive;
+      span {
+        color: teal;
+      }
     }
 
     a {

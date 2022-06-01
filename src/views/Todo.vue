@@ -370,7 +370,7 @@ export default {
         if (!todoItems.value[index].done) {
           if (
             window.confirm(
-              `Do you want to mark task ${index + 1} as completed?`
+              `Do you want to mark task ${index + 1} as completed or important?`
             )
           ) {
             todoItems.value[index].done = true;
@@ -526,7 +526,7 @@ $col: #3d566f;
         width: 100%;
         position: relative;
 
-        background: linear-gradient(to bottom, $col, teal);
+        background: linear-gradient(to right, teal 10%, #e66581 70%);
         font-weight: 600;
         background-clip: text;
         -webkit-background-clip: text;
@@ -755,15 +755,16 @@ $col: #3d566f;
                   align-items: center;
                   justify-content: flex-start;
                   position: relative;
-                  background: linear-gradient(
-                    to bottom,
-                    rgb(206, 5, 163),
-                    gold
-                  );
-                  font-weight: 600;
-                  background-clip: text;
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;
+                  // background: linear-gradient(
+                  //   to bottom,
+                  //   rgb(90, 2, 71),
+                  //   #fb6f8d
+                  // );
+                  // font-weight: 600;
+                  // background-clip: text;
+                  // -webkit-background-clip: text;
+                  // -webkit-text-fill-color: transparent;
+                  color: #c95b73;
                   font: 700 21px "Poppins", sans-serif;
 
                   i {
