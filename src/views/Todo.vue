@@ -53,7 +53,9 @@
                   {{ todo.name }}
                 </p>
                 <p @click="readTask(todo.name, todo.date)">
-                  <span>Read</span>
+                  <span class="read-icon"
+                    ><i class="fa-brands fa-readme"></i>Read</span
+                  >
                 </p>
               </div>
               <div class="icons">
@@ -70,8 +72,8 @@
                 />
                 <i
                   class="fa fa-trash"
+                  id="trash"
                   @click="removeTask(index)"
-                  style="color: white; font-size: 1.2em"
                 ></i>
               </div>
             </li>
@@ -103,6 +105,8 @@
             type="text"
             name="edit"
             id="edit"
+            cols="10"
+            rows="15"
             placeholder="Edit task here...."
             v-model="edit.task"
             required
@@ -553,6 +557,10 @@ $col: #3d566f;
         &:hover {
           transform: scale(0.9);
         }
+
+        @media screen and (max-width: 768px) {
+          margin: auto;
+        }
       }
 
       .addItem {
@@ -586,7 +594,7 @@ $col: #3d566f;
             }
           }
           @media screen and (max-width: 768px) {
-            width: 50%;
+            width: 60%;
             margin: 10px auto;
             .laugh {
               position: relative;
@@ -618,7 +626,6 @@ $col: #3d566f;
         @media screen and (max-width: 768px) {
           width: 100%;
           display: block;
-          margin: 1% auto;
         }
 
         &:hover {
@@ -646,6 +653,7 @@ $col: #3d566f;
           display: flex;
           justify-content: center;
           align-items: center;
+          flex-direction: column;
           background: transparent;
 
           #edit,
@@ -727,11 +735,15 @@ $col: #3d566f;
             .item {
               width: 100%;
               height: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-direction: column;
               p {
                 cursor: pointer;
                 font-size: 15px;
                 width: 95%;
-                height: 15%;
+                height: 19%;
                 padding: 2px 10px;
                 margin: 0 auto;
                 display: flex;
@@ -743,15 +755,37 @@ $col: #3d566f;
                 transition: all 0.3s ease;
                 font-size: 10px;
 
-                span {
+                .read-icon {
+                  height: 100%;
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
                   position: relative;
+                  background: linear-gradient(
+                    to bottom,
+                    rgb(206, 5, 163),
+                    gold
+                  );
+                  font-weight: 600;
+                  background-clip: text;
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  font: 700 21px "Poppins", sans-serif;
+
+                  i {
+                    font-size: 27px;
+                    color: tomato;
+                    cursor: pointer;
+                    margin-right: 5px;
+                  }
                 }
               }
 
               .content {
                 align-items: flex-start;
                 font-size: 13px;
-                height: 63%;
+                height: 62%;
                 padding: 5px;
               }
             }
@@ -772,23 +806,30 @@ $col: #3d566f;
 
               button {
                 background: none;
-                width: fit-content;
+                width: 17px;
                 height: fit-content;
                 cursor: pointer;
                 outline: none;
                 border: none;
+                border-radius: 0;
                 background: transparent;
               }
 
               i {
-                font-size: 19px;
+                font-size: 21px;
                 color: white;
                 cursor: pointer;
                 transition: all 0.5s ease;
+                display: block;
 
                 &:active {
                   transform: scale(0.8);
                 }
+              }
+
+              #trash {
+                color: tomato;
+                font-size: 26px;
               }
 
               .taskStatus {
@@ -797,7 +838,6 @@ $col: #3d566f;
                 border: none;
                 display: block;
                 margin: 0 5px;
-                margin-left: 0;
                 box-shadow: 0 0 2px 1px whitesmoke;
                 outline: none;
                 border-radius: 5px;
@@ -808,17 +848,6 @@ $col: #3d566f;
                   display: block;
                   background: teal;
                 }
-              }
-            }
-
-            i {
-              font-size: 26px;
-              color: white;
-              cursor: pointer;
-              transition: all 0.5s ease;
-
-              &:active {
-                transform: scale(0.7);
               }
             }
 
@@ -843,9 +872,35 @@ $col: #3d566f;
               @media screen and (max-width: 700px) {
                 width: 48%;
 
-                @media screen and (max-width: 450px) {
+                @media screen and (max-width: 550px) {
                   width: 95%;
+                  height: 180px;
                   margin: 10px auto;
+
+                  .item {
+                    height: 100%;
+                    width: 100%;
+                  }
+                  .icons {
+                    width: 25%;
+                    height: 100%;
+                    flex-direction: column;
+                    border-radius: 0 8px 8px 0;
+                    right: -25%;
+                    top: 0;
+                    padding: 10px 0;
+                  }
+
+                  &:hover {
+                    .item {
+                      width: 75%;
+                      height: 100%;
+                    }
+                    .icons {
+                      right: 0;
+                      top: 0;
+                    }
+                  }
                 }
               }
             }
@@ -1003,11 +1058,12 @@ $col: #3d566f;
     width: 90%;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     align-items: center;
 
     input,
     textarea {
-      width: 65%;
+      width: 90%;
       height: fit-content;
       outline: none;
       border: none;
@@ -1016,19 +1072,22 @@ $col: #3d566f;
       border-radius: 10px;
       margin: 10px;
     }
+    textarea {
+      height: 300px;
+    }
 
     display: flex;
     justify-content: center;
 
     button {
       background: teal;
-      width: 35%;
+      width: 90%;
     }
   }
 
   button {
-    width: 30%;
-    height: 50px;
+    width: 90%;
+    height: 60px;
     border: none;
     border-radius: 30px;
     background: crimson;
@@ -1058,13 +1117,17 @@ $col: #3d566f;
     }
 
     p {
+      width: 97%;
+      margin: auto;
+      white-space: pre-wrap;
       line-height: 23px;
       font: 400 15px "Poppins", sans-serif;
       padding: 5px;
+      overflow-x: hidden;
     }
 
     @media screen and (max-width: 768px) {
-      width: 95%;
+      width: 98%;
     }
   }
 }

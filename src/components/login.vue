@@ -100,7 +100,6 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("accessId", res.data.accessId);
@@ -111,12 +110,12 @@ export default {
           router.push("/overview/Todo");
         })
         .catch((err) => {
-          console.log(err);
           errormsg.valid = true;
           errormsg.invalidMsg = "Acess Denied";
           setTimeout(() => {
             errormsg.valid = false;
           }, 5000);
+          return err;
         });
     };
 
