@@ -683,13 +683,6 @@ $col: #3d566f;
             }
           }
         }
-        #error {
-          font-size: 12px;
-          color: rgba(231, 16, 16, 0.938);
-          text-align: center;
-          margin: 0 auto;
-          cursor: pointer;
-        }
       }
 
       .todoItems {
@@ -1029,6 +1022,14 @@ $col: #3d566f;
   button:active {
     transform: scale(0.8);
   }
+}
+
+#error {
+  font-size: 12px;
+  color: rgba(231, 16, 16, 0.938);
+  text-align: center;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
 .read-task,
