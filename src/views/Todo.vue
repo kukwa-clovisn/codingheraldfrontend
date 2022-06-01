@@ -768,7 +768,7 @@ $col: #3d566f;
 
                   i {
                     font-size: 27px;
-                    color: tomato;
+                    color: #e66581;
                     cursor: pointer;
                     margin-right: 5px;
                   }
@@ -821,7 +821,7 @@ $col: #3d566f;
               }
 
               #trash {
-                color: tomato;
+                color: #e66581;
                 font-size: 26px;
               }
 
@@ -1091,7 +1091,7 @@ $col: #3d566f;
     height: 60px;
     border: none;
     border-radius: 30px;
-    background: tomato;
+    background: #e66581;
     color: white;
     display: block;
     margin: 10px auto;
