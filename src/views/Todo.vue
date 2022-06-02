@@ -5,12 +5,15 @@
         <h1 id="text-run">
           {{ profile.profileName }}'s Dairy<i class="far fa-heart"></i>
         </h1>
+        <p class="title" v-if="profile.description.length">
+          {{ profile.description }}
+        </p>
         <textarea
           type="text"
           id="inputItem"
           v-model="userData"
           name="text"
-          placeholder="input new todo item"
+          placeholder="Add new memory"
           @keyup="invalidTask = false"
           required
         ></textarea>
@@ -30,7 +33,9 @@
               @click="displayTodo()"
             ></i
           ></span>
-          <button @click="addTodo()">add todo item</button>
+          <button @click="addTodo()">
+            <i class="fa-solid fa-circle-plus"></i>add memory
+          </button>
         </div>
 
         <transition name="fade">
@@ -177,7 +182,7 @@
 
           <p>
             {{ profile.profileName }} <br />
-            {{ profile.profileEmail }}
+            {{ profile.description }}
           </p>
           <h3>Was written on:{{ taskDate }}</h3>
           <p>{{ popTask }}</p>
@@ -198,7 +203,7 @@ export default {
   setup() {
     let profile = reactive({
       profileName: "",
-      profileEmail: "",
+      description: "",
     });
 
     let valid = ref(false);
@@ -250,7 +255,7 @@ export default {
 
             todoCount.value = todoItems.value.length;
             profile.profileName = res.data.username;
-            profile.profileEmail = res.data.email;
+            profile.description = res.data.description;
           })
           .catch((err) => err);
       } catch (err) {
@@ -479,7 +484,7 @@ $col: #3d566f;
 .main {
   width: 100%;
   height: fit-content;
-  background: rgb(212, 216, 228);
+  background: whitesmoke;
   background-attachment: fixed;
   background-size: cover;
   position: relative;
@@ -513,11 +518,11 @@ $col: #3d566f;
 
       h1 {
         text-transform: capitalize;
-        font-size: 35px;
+        font-size: 30px;
         font-weight: 600;
-        font-family: "Poppins", sans-serif;
-        padding: 20px;
-        color: $secondaryCol;
+        font-family: "Nunito Sans", sans-serif;
+        padding: 30px 0;
+        color: teal;
         margin: auto;
         display: flex;
         justify-content: space-between;
@@ -526,18 +531,19 @@ $col: #3d566f;
         width: 100%;
         position: relative;
 
-        background: linear-gradient(to right, teal 10%, #e66581 70%);
-        font-weight: 600;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
         i {
           margin-right: 6%;
-          color: $secondaryCol;
+          color: #e66581;
           cursor: progress;
           font-size: 30px;
         }
+      }
+
+      .title {
+        width: 100%;
+        text-align: center;
+        color: teal;
+        font-size: 12px;
       }
 
       #inputItem {
@@ -555,7 +561,11 @@ $col: #3d566f;
         transition: all 0.3s ease-in-out;
 
         &:hover {
-          transform: scale(0.9);
+          transform: scaleY(1.2);
+        }
+
+        &:active {
+          transform: scale(1);
         }
 
         @media screen and (max-width: 768px) {
@@ -574,19 +584,20 @@ $col: #3d566f;
 
         span {
           display: flex;
-          justify-content: flex-start;
+          justify-content: space-between;
           align-items: center;
-          width: 20%;
+          width: 40%;
           height: 45px;
           .laugh {
             font-size: 35px;
             margin: 10px 10%;
             color: $secondaryCol;
+
             cursor: pointer;
             transition: all 0.3s ease;
 
             &:hover {
-              color: $secondaryCol;
+              color: #e66581;
             }
 
             &:active {
@@ -755,21 +766,14 @@ $col: #3d566f;
                   align-items: center;
                   justify-content: flex-start;
                   position: relative;
-                  // background: linear-gradient(
-                  //   to bottom,
-                  //   rgb(90, 2, 71),
-                  //   #fb6f8d
-                  // );
-                  // font-weight: 600;
-                  // background-clip: text;
-                  // -webkit-background-clip: text;
-                  // -webkit-text-fill-color: transparent;
-                  color: #c95b73;
-                  font: 700 21px "Poppins", sans-serif;
+
+                  color: #3d3d3d;
+                  font: 600 19px "Poppins", sans-serif;
+                  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
                   i {
                     font-size: 27px;
-                    color: #e66581;
+                    color: rgb(223, 224, 224);
                     cursor: pointer;
                     margin-right: 5px;
                   }
@@ -789,7 +793,7 @@ $col: #3d566f;
               position: absolute;
               right: 0;
               bottom: -21%;
-              background: teal;
+              background: rgb(3, 184, 184);
               display: flex;
               justify-content: space-between;
               align-items: center;
@@ -822,7 +826,7 @@ $col: #3d566f;
               }
 
               #trash {
-                color: #e66581;
+                color: #cc0832;
                 font-size: 26px;
               }
 

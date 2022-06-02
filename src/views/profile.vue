@@ -38,8 +38,10 @@
           <div class="img">
             <img src="../assets/todo.jpg" alt="" />
           </div>
+          <span class="about">About</span>
           <p>
             {{ description }}
+            <label for="slang"><i class="fa-solid fa-pen"></i></label>
           </p>
           <div class="slang">
             <form @submit.prevent="updateTitle()">
@@ -388,7 +390,7 @@ export default {
 
       h1 {
         padding: 10px;
-        font: 800 30px "Poppins", sans-serif;
+        font: 600 30px "Poppins", sans-serif;
         color: teal;
         margin-bottom: 0;
         padding-bottom: 0;
@@ -409,6 +411,11 @@ export default {
           width: 0 auto;
         }
       }
+
+      .about {
+        color: teal;
+        padding-left: 10px;
+      }
       p {
         padding: 0 10px;
         font: 500 14px "Poppins", sans-serif;
@@ -416,7 +423,15 @@ export default {
         width: 100%;
         max-height: 60px;
         overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         overflow-y: scroll;
+
+        i {
+          color: teal;
+          font-size: 22px;
+        }
       }
       .slang {
         width: 100%;
@@ -463,21 +478,19 @@ export default {
           display: block;
           margin: auto;
         }
+        h1,
+        h3,
+        h4,
+        .about,
+        p {
+          padding-left: 0;
+        }
 
-        @media screen and (max-width: 430px) {
-          h1,
-          h3,
-          h4,
-          p {
-            padding-left: 0;
-          }
-
-          h1 {
-            font-size: 25px;
-          }
-          .slang {
-            left: 0;
-          }
+        h1 {
+          font-size: 20px;
+        }
+        .slang {
+          left: 0;
         }
       }
     }

@@ -10,28 +10,33 @@
           ></i>
         </div>
         <div class="user">
-          <h3 :title="user.username">{{ user.username }}</h3>
-          <p :title="user.email">{{ user.email }}</p>
+          <div class="img">
+            <img src="../assets/todo.jpg" alt="" />
+          </div>
+          <div class="user-info">
+            <h3 :title="user.username">{{ user.username }}</h3>
+            <p :title="user.description">{{ user.description }}</p>
+          </div>
         </div>
 
         <router-link to="/overview/profile" class="route">
-          <i class="fa-solid fa-address-card"></i> profile</router-link
-        >
+          <i class="fa-solid fa-address-card"></i><span>profile</span>
+        </router-link>
         <router-link to="/overview/todo" class="route">
-          <i class="fa-regular fa-address-book"></i>todo app</router-link
-        >
+          <i class="fa-regular fa-address-book"></i><span>todo app</span>
+        </router-link>
         <router-link to="/overview/locked" class="route"
-          ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
-        >
+          ><i class="fa-solid fa-bitcoin-sign"></i><span>crypto</span>
+        </router-link>
         <router-link to="/overview/Exchange" class="route"
-          ><i class="fa-solid fa-sack-dollar"></i>exchange</router-link
-        >
+          ><i class="fa-solid fa-sack-dollar"></i><span>exchange</span>
+        </router-link>
         <router-link to="/overview/weather" class="route"
-          ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
-        >
+          ><i class="fa-solid fa-cloud-sun-rain"></i><span>weather</span>
+        </router-link>
         <router-link to="/" @click="logoutFunc()" class="route">
-          <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
-        >
+          <i class="fa-solid fa-right-from-bracket"></i><span>logout</span>
+        </router-link>
       </div>
     </transition>
     <transition name="leave">
@@ -41,15 +46,20 @@
         v-if="squeeze"
       >
         <div class="logo">
-          <h1>codingherald</h1>
+          <h1>coding<span>herald</span></h1>
           <i
-            class="fa-solid fa-align-left small-screen"
+            class="fa-solid fa-align-right small-screen"
             @click="squeezeFunc()"
           ></i>
         </div>
         <div class="user">
-          <h3 :title="user.username">{{ user.username }}</h3>
-          <p :title="user.email">{{ user.email }}</p>
+          <div class="img">
+            <img src="../assets/todo.jpg" alt="" />
+          </div>
+          <div class="user-info">
+            <h3 :title="user.username">{{ user.username }}</h3>
+            <p :title="user.description">{{ user.description }}</p>
+          </div>
         </div>
 
         <router-link
@@ -57,26 +67,26 @@
           class="route"
           @click="squeezeFunc()"
         >
-          <i class="fa-solid fa-address-card"></i> profile</router-link
-        >
+          <i class="fa-solid fa-address-card"></i><span>profile</span>
+        </router-link>
         <router-link to="/overview/todo" class="route" @click="squeezeFunc()">
-          <i class="fa-regular fa-address-book"></i>todo app</router-link
-        >
+          <i class="fa-regular fa-address-book"></i><span>todo app</span>
+        </router-link>
         <router-link to="/overview/locked" class="route" @click="squeezeFunc()"
-          ><i class="fa-solid fa-bitcoin-sign"></i>crypto</router-link
-        >
+          ><i class="fa-solid fa-bitcoin-sign"></i><span>crypto</span>
+        </router-link>
         <router-link
           to="/overview/Exchange"
           class="route"
           @click="squeezeFunc()"
-          ><i class="fa-solid fa-sack-dollar"></i>exchange</router-link
-        >
+          ><i class="fa-solid fa-sack-dollar"></i><span>exchange</span>
+        </router-link>
         <router-link to="/overview/weather" class="route" @click="squeezeFunc()"
-          ><i class="fa-solid fa-cloud-sun-rain"></i>weather</router-link
-        >
+          ><i class="fa-solid fa-cloud-sun-rain"></i> <span>weather</span>
+        </router-link>
         <router-link to="/" @click="logoutFunc()" class="route">
-          <i class="fa-solid fa-right-from-bracket"></i>logout</router-link
-        >
+          <i class="fa-solid fa-right-from-bracket"></i><span>logout</span>
+        </router-link>
       </div>
     </transition>
 
@@ -108,7 +118,7 @@ export default {
 
     let user = reactive({
       username: "",
-      email: "",
+      description: "",
     });
     let getFromLocalStorage = ref(localStorage.getItem("accessId"));
     onMounted(() => {
@@ -119,7 +129,7 @@ export default {
       axios("api/todo/" + `${getFromLocalStorage.value}`)
         .then(async (res) => {
           user.username = res.data.username;
-          user.email = res.data.email;
+          user.description = res.data.description;
         })
         .catch((err) => {
           router.push("/login");
@@ -169,18 +179,22 @@ main {
     display: flex;
     align-items: center;
     flex-direction: column;
-    box-shadow: 1px 1px 0.2px 0.5px rgb(212, 216, 228);
+    overflow: auto;
+    overflow-x: hidden;
+    box-shadow: 1px 1px 0px 0.5px whitesmoke;
 
     .logo {
-      height: 12vh;
+      height: 16vh;
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      background: teal;
+      margin: 0;
 
       h1 {
         font: 600 30px "Grand Hotel", sans-serif;
-        color: teal;
+        color: white;
         text-align: center;
         span {
           color: #e66581;
@@ -193,56 +207,101 @@ main {
     }
 
     .user {
-      width: 90%;
-      margin: 7px auto;
-      padding: 0 10px;
-      color: teal;
+      width: 100%;
+      height: fit-content;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: whitesmoke;
 
-      h3 {
-        font: 600 15px "Poppins", sans-serif;
+      .img {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: Center;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+
+        img {
+          height: 100%;
+          width: auto;
+          cursor: pointer;
+        }
       }
-      p {
-        font: 500 12px "Poppins", sans-serif;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+
+      .user-info {
+        width: 55%;
+        padding-left: 10px;
+
+        h3 {
+          font: 550 18px "Poppins", sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: rgb(87, 87, 87);
+          padding: 0;
+          margin: 0;
+        }
+        p {
+          font: 500 15px "Poppins", sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: rgb(150, 148, 148);
+          margin: 0;
+          padding: 3px 0;
+        }
       }
     }
 
     .route {
-      width: 80%;
-      height: 40px;
+      width: 100%;
+      height: 60px;
       text-decoration: none;
-      font: 500 17px "Poppins", sans-serif;
       cursor: pointer;
-      // background: linear-gradient(to bottom, rgb(55, 220, 193), teal);
-      // background-clip: text;
-      // -webkit-background-clip: text;
-      // -webkit-text-fill-color: transparent;
-      color: teal;
-      padding: 10px;
-      margin: 8px auto;
-      margin-left: 18%;
       text-transform: capitalize;
       display: flex;
-      justify-content: flex-start;
+      justify-content: flex-end;
       align-items: center;
+      background: white;
 
       i {
         width: 40px;
         margin-right: 8px;
         font-size: 25px;
+        color: rgb(190, 193, 193);
+      }
+
+      span {
+        width: 70%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(50, 50, 50);
+        border-bottom: 1px solid rgb(229, 228, 228);
+        transform: none;
       }
 
       &.router-link-exact-active {
-        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
-        font-weight: 600;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        background: whitesmoke;
+
+        span,
+        i {
+          font-weight: 600;
+          font-size: 1.1rem;
+          color: #e66581;
+        }
+      }
+
+      &:hover {
+        transform: none;
       }
     }
 
@@ -262,10 +321,12 @@ main {
           h1 {
             font-size: 40px;
           }
+          i {
+            color: white;
+          }
           .small-screen {
             display: block;
             font-size: 41px;
-            color: teal;
           }
         }
 
@@ -276,13 +337,13 @@ main {
         }
         .route {
           height: 60px;
-          font-size: 24px;
-          margin: 10px auto;
 
           i {
             width: 60px;
             font-size: 30px;
-            margin-right: 13px;
+          }
+          span {
+            font-size: 19px;
           }
         }
       }
@@ -312,7 +373,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
-    box-shadow: 2px 1px 1px 0.5px rgb(212, 216, 228);
+    box-shadow: 2px 1px 0px 0.5px whitesmoke;
 
     i {
       color: teal;
@@ -368,7 +429,7 @@ main {
     right: 0;
     top: 12vh;
     overflow-y: scroll;
-    background: rgb(212, 216, 228);
+    background: whitesmoke;
 
     @media screen and (max-width: 850px) {
       width: 100vw;
