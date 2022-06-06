@@ -1,5 +1,9 @@
 <template>
   <div class="main">
+    <div class="c3">
+      <i class="fa-regular fa-address-book"></i>
+      <span>see all your memories</span>
+    </div>
     <div class="content">
       <div class="todo-container">
         <h1 id="text-run">
@@ -193,7 +197,7 @@
 </template>
 
 <script>
-// import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { onMounted } from "vue";
 import { ref, reactive } from "vue";
 import axios from "axios";
@@ -205,6 +209,8 @@ export default {
       profileName: "",
       description: "",
     });
+
+    const router = useRouter();
 
     let valid = ref(false);
     const invalidTask = ref(false);
@@ -257,8 +263,12 @@ export default {
             profile.profileName = res.data.username;
             profile.description = res.data.description;
           })
-          .catch((err) => err);
+          .catch((err) => {
+            router.push("/login");
+            return err;
+          });
       } catch (err) {
+        router.push("/login");
         return err;
       }
     };
@@ -484,15 +494,76 @@ $col: #3d566f;
 .main {
   width: 100%;
   height: fit-content;
-  background: whitesmoke;
+  background: rgb(235, 234, 234);
   background-attachment: fixed;
   background-size: cover;
+  background-position: center center;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
   padding: 0;
+
+  .c1,
+  .c2,
+  .c3 {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    background: teal;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    i {
+      color: white;
+      font-size: 20px;
+    }
+    span {
+      color: white;
+      font-size: 7px;
+    }
+  }
+
+  .c1 {
+    top: 13vh;
+    left: 10%;
+    animation: run1 10s alternate linear forwards infinite;
+  }
+  .c3 {
+    top: 14vh;
+    right: 15%;
+    background: white;
+
+    animation: run3 15s 3 alternate linear forwards;
+
+    i,
+    span {
+      color: teal;
+    }
+  }
+
+  @keyframes run1 {
+    from {
+      top: 13vh;
+    }
+    to {
+      top: 90vh;
+    }
+  }
+
+  @keyframes run3 {
+    from {
+      top: 90vh;
+    }
+    to {
+      top: 14vh;
+    }
+  }
+
   #pic {
     width: 10%;
     height: auto;
@@ -628,10 +699,10 @@ $col: #3d566f;
         border-radius: 30px;
         border: none;
         background-color: $secondaryCol;
-        background: linear-gradient(to bottom, rgb(55, 220, 193), teal);
+        background: linear-gradient(to bottom, rgb(21, 186, 159), teal);
         color: white;
         text-transform: capitalize;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         cursor: pointer;
 
         @media screen and (max-width: 768px) {
@@ -640,11 +711,7 @@ $col: #3d566f;
         }
 
         &:hover {
-          background: rgb(2, 155, 155);
-        }
-
-        &:active {
-          transform: scale(0.8);
+          background: #e66581;
         }
       }
 
@@ -931,12 +998,14 @@ $col: #3d566f;
       #pending {
         text-align: center;
         padding: 3px;
+        color: teal;
+        position: relative;
         margin: 0 auto;
         text-transform: capitalize;
 
         #count {
           padding: 0 5px;
-          color: red;
+          color: #e66581;
         }
       }
 

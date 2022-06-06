@@ -40,9 +40,9 @@ const routes = [{
                 name: 'Profile',
                 component: Profile
             }, {
-                path: '/overview/locked',
-                name: 'Locked',
-                component: () => import( /* webpackChunkName: "locked" */ '../views/locked.vue')
+                path: '/overview/imageCompressor',
+                name: 'imageCompressor',
+                component: () => import( /* webpackChunkName: "imageCompressor" */ '../views/imageCompressor.vue')
             }, {
                 path: '/overview/Todo',
                 name: 'Todo',

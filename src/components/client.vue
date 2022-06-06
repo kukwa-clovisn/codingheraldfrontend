@@ -9,7 +9,7 @@
             @click="squeezeFunc()"
           ></i>
         </div>
-        <div class="user">
+        <div class="user" @click="toProfile()">
           <div class="img">
             <img src="../assets/todo.jpg" alt="" />
           </div>
@@ -25,8 +25,8 @@
         <router-link to="/overview/todo" class="route">
           <i class="fa-regular fa-address-book"></i><span>todo app</span>
         </router-link>
-        <router-link to="/overview/locked" class="route"
-          ><i class="fa-solid fa-bitcoin-sign"></i><span>crypto</span>
+        <router-link to="/overview/imageCompressor" class="route"
+          ><i class="fa-solid fa-bitcoin-sign"></i><span>imageCompressor</span>
         </router-link>
         <router-link to="/overview/Exchange" class="route"
           ><i class="fa-solid fa-sack-dollar"></i><span>exchange</span>
@@ -52,7 +52,7 @@
             @click="squeezeFunc()"
           ></i>
         </div>
-        <div class="user">
+        <div class="user" @click="toProfile()">
           <div class="img">
             <img src="../assets/todo.jpg" alt="" />
           </div>
@@ -72,8 +72,11 @@
         <router-link to="/overview/todo" class="route" @click="squeezeFunc()">
           <i class="fa-regular fa-address-book"></i><span>todo app</span>
         </router-link>
-        <router-link to="/overview/locked" class="route" @click="squeezeFunc()"
-          ><i class="fa-solid fa-bitcoin-sign"></i><span>crypto</span>
+        <router-link
+          to="/overview/imageCompressor"
+          class="route"
+          @click="squeezeFunc()"
+          ><i class="fa-solid fa-bitcoin-sign"></i><span>imageCompressor</span>
         </router-link>
         <router-link
           to="/overview/Exchange"
@@ -145,7 +148,11 @@ export default {
     function squeezeFunc() {
       squeeze.value = !squeeze.value;
     }
-    return { squeeze, squeezeFunc, user, logoutFunc };
+
+    function toProfile() {
+      router.push("/overview/profile");
+    }
+    return { squeeze, squeezeFunc, user, logoutFunc, toProfile };
   },
 };
 </script>
@@ -215,6 +222,7 @@ main {
       justify-content: flex-start;
       align-items: center;
       background: whitesmoke;
+      cursor: pointer;
 
       .img {
         width: 90px;

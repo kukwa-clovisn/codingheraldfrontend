@@ -25,8 +25,21 @@
       <transition name="fade">
         <div class="image" v-if="!squeeze">
           <div class="img">
-            <img src="../assets/todo.jpg" alt="" />
+            <img src="../assets/todo.jpg" v-if="!user.image" alt="" />
+            <img :src="user.image" v-if="user.image" alt="" />
           </div>
+          <!-- <form
+            @change="updateProfile"
+            class="change-img"
+            enctype="multipart/form-data"
+          >
+            <label for="usr-img">
+              <i class="fa-solid fa-upload" v-if="!changeImg"></i>
+              <input type="file" name="image" id="usr-img" />
+            </label>
+
+            <button type="submit">upload</button>
+          </form> -->
         </div>
       </transition>
       <transition name="fade">
@@ -102,11 +115,15 @@ export default {
     let user = reactive({
       username: "",
       email: "",
+      image: "",
       memories: 0,
       allMemories: 0,
     });
 
+    let changeImg = ref(false);
+
     let user_id = ref(localStorage.getItem("accessId"));
+    // let user_token = ref(localStorage.getItem("accessToken"));
     let read = ref(false);
     let memoriesArr = ref([]);
     let readMemoryText = ref("");
@@ -119,7 +136,7 @@ export default {
     let squeeze = ref(false);
 
     onMounted(() => {
-      axios("/api/todo/" + user_id.value)
+      axios(`/api/todo/${user_id.value}`)
         .then((res) => {
           if (res.statusText === "OK") {
             user.username = res.data.username;
@@ -155,7 +172,7 @@ export default {
     function updateTitle() {
       axios
         .post(
-          "api/todo/user/" + `${user_id.value}`,
+          `api/todo/user/${user_id.value}`,
           {
             description: title.value,
           },
@@ -168,11 +185,17 @@ export default {
         .then((res) => {
           description.value = title.value;
           title.value = "";
+
           return res;
         })
         .catch((err) => {
           return err;
         });
+    }
+
+    function updateProfile(e) {
+      const formData = new FormData();
+      formData.append("file", e.target.files[0]);
     }
 
     return {
@@ -185,8 +208,11 @@ export default {
       squeeze,
       title,
       description,
+      changeImg,
+      user_id,
       readMemory,
       updateTitle,
+      updateProfile,
       logoutFunc,
     };
   },
@@ -214,8 +240,8 @@ export default {
     box-shadow: 1px 0 4px 5px rgb(1, 114, 114);
 
     @media screen and (max-width: 550px) {
-      height: 90%;
-      width: 97%;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -349,6 +375,8 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      z-index: 1;
 
       .img {
         width: 100%;
@@ -360,6 +388,49 @@ export default {
         height: 100%;
         width: auto;
         cursor: pointer;
+      }
+
+      .change-img {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        width: 50px;
+        height: 50px;
+
+        i {
+          color: white;
+          font-size: 19px;
+        }
+        label {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: teal;
+          border-radius: 100%;
+        }
+        input {
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          border: none;
+          visibility: hidden;
+          background: transparent;
+        }
+        button {
+          width: 100%;
+          height: 100%;
+          background: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 12px;
+        }
       }
 
       @media screen and (max-width: 550px) {
@@ -488,6 +559,10 @@ export default {
 
         h1 {
           font-size: 20px;
+
+          @media screen and (max-width: 350px) {
+            font-size: 16px;
+          }
         }
         .slang {
           left: 0;
@@ -499,8 +574,9 @@ export default {
     }
 
     @media screen and (max-width: 550px) {
-      height: 75%;
+      height: 83%;
       top: 15%;
+      // left: 0;
     }
   }
 

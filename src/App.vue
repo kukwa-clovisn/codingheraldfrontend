@@ -82,6 +82,7 @@ a,
 label,
 i {
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
     transform: scale(0.9);

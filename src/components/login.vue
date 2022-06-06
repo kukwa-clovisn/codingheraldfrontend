@@ -105,7 +105,7 @@ export default {
             localStorage.setItem("accessId", res.data.accessId);
             axios.defaults.headers.common[
               "Authorization"
-            ] = `Bearer ${localStorage.getItem("accessToken")}`;
+            ] = `Bearer ${res.data.accessToken}`;
           }
           router.push("/overview/Todo");
         })
