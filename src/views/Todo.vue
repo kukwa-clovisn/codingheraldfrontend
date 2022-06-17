@@ -524,6 +524,8 @@ $col: #3d566f;
   align-items: center;
   margin: 0;
   padding: 0;
+  padding-bottom: 20px;
+  overflow-y: scroll;
 
   .c1,
   .c2,
@@ -1166,7 +1168,7 @@ $col: #3d566f;
 .read-task,
 .errorDiv {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   position: absolute;
   top: 0;
   right: 0;
@@ -1214,6 +1216,7 @@ $col: #3d566f;
     background: white;
     border-radius: 7px;
     padding: 20px;
+    // margin: 20px auto;
     h1 {
       color: #e66581;
       text-transform: capitalize;
@@ -1270,12 +1273,13 @@ $col: #3d566f;
   }
 
   .read-content {
-    width: 90%;
-    height: auto;
-    padding: 20px;
+    width: 97%;
+    height: fit-content;
+    padding: 20px 10px;
     background: white;
     border-radius: 7px;
     z-index: 1;
+    margin: 20px auto;
 
     i {
       font-size: 30px;
@@ -1294,8 +1298,8 @@ $col: #3d566f;
       margin: auto;
       white-space: pre-wrap;
       line-height: 23px;
-      font: 400 15px "Poppins", sans-serif;
-      padding: 5px;
+      font: 400 14px "Poppins", sans-serif;
+      // padding: 5px;
       overflow-x: hidden;
     }
 
