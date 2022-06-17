@@ -600,12 +600,12 @@ $col: #3d566f;
     top: 20%;
   }
   .content {
-    width: 99%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0;
     position: relative;
     .todo-container {
       position: relative;
@@ -614,6 +614,8 @@ $col: #3d566f;
       background: transparent;
       overflow-y: scroll;
       z-index: 1;
+      padding: 0 !important;
+      margin: 0;
 
       h1 {
         text-transform: capitalize;
@@ -647,10 +649,9 @@ $col: #3d566f;
       }
 
       #inputItem {
-        width: 95%;
+        width: 97%;
         height: 150px;
         margin: auto;
-        margin-left: 0;
         display: block;
         padding: 20px;
         outline: none;
@@ -720,7 +721,7 @@ $col: #3d566f;
         }
       }
       button {
-        width: 40%;
+        width: 42%;
         height: 50px;
         float: right;
         padding: 5px;
@@ -745,7 +746,7 @@ $col: #3d566f;
       }
 
       .errorDiv {
-        width: 90%;
+        width: 95%;
         height: fit-content;
         margin: 0 auto;
         display: flex;
@@ -794,8 +795,8 @@ $col: #3d566f;
 
       .todoItems {
         width: 100%;
-        max-height: 100%;
-        margin: 5px auto;
+        max-height: 1200px;
+        margin: 5px 0;
         padding: 10px 0;
         overflow-y: scroll;
 
@@ -803,6 +804,7 @@ $col: #3d566f;
           width: 100%;
           height: 100%;
           padding: 0;
+          padding-left: 1px;
           margin: 0 auto;
           overflow: hidden;
           overflow-y: scroll;
@@ -907,7 +909,7 @@ $col: #3d566f;
               right: 0;
               bottom: -21%;
               display: flex;
-              justify-content: space-around;
+              justify-content: space-evenly;
               align-items: center;
               border-radius: 0 0 8px 8px;
               transition: all 0.3s ease;
