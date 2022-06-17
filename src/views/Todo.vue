@@ -980,7 +980,7 @@ $col: #3d566f;
                 width: 48%;
 
                 @media screen and (max-width: 550px) {
-                  width: 95%;
+                  width: 100%;
                   height: 180px;
                   margin: 10px auto;
 
