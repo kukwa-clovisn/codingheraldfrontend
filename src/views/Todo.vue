@@ -7,7 +7,9 @@
     <div class="content">
       <div class="todo-container">
         <h1 id="text-run">
-          {{ profile.profileName }}'s Dairy<i class="far fa-heart"></i>
+          {{ profile.profileName.split(" ")[0] }}'s Dairy<i
+            class="far fa-heart"
+          ></i>
         </h1>
         <p class="title" v-if="profile.description.length">
           {{ profile.description }}
@@ -145,7 +147,7 @@
                 search.val = false;
               "
             >
-              close
+              &times;close
             </button>
           </div>
         </form>
@@ -173,23 +175,27 @@
             v-model="search.task"
             required
           />
-          <button type="submit">
-            <i
-              class="fa-solid fa-magnifying-glass edit"
-              title="Search task(s)"
-            ></i>
-          </button>
+
+          <div class="buttons">
+            <button type="submit">
+              <i
+                class="fa-solid fa-magnifying-glass edit"
+                title="Search task(s)"
+              ></i
+              >Search
+            </button>
+            <button
+              v-if="search.val"
+              title="close task editing"
+              @click="
+                edit.val = false;
+                search.val = false;
+              "
+            >
+              &times; close
+            </button>
+          </div>
         </form>
-        <button
-          v-if="search.val"
-          title="close task editing"
-          @click="
-            edit.val = false;
-            search.val = false;
-          "
-        >
-          close
-        </button>
       </div>
     </transition>
     <img src="../assets/list.svg" id="pic" alt="" />
@@ -594,7 +600,7 @@ $col: #3d566f;
     top: 20%;
   }
   .content {
-    width: 95%;
+    width: 99%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -615,6 +621,7 @@ $col: #3d566f;
         font-weight: 600;
         font-family: "Nunito Sans", sans-serif;
         padding: 30px 0;
+        padding-left: 5px;
         color: teal;
         margin: auto;
         display: flex;
@@ -787,7 +794,7 @@ $col: #3d566f;
 
       .todoItems {
         width: 100%;
-        max-height: 1000px;
+        max-height: 100%;
         margin: 5px auto;
         padding: 10px 0;
         overflow-y: scroll;
@@ -1216,7 +1223,6 @@ $col: #3d566f;
     background: white;
     border-radius: 7px;
     padding: 20px;
-    // margin: 20px auto;
     h1 {
       color: #e66581;
       text-transform: capitalize;
