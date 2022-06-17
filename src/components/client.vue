@@ -102,9 +102,11 @@
       ></a>
     </header>
     <div class="content" :class="{ squeeze: squeeze }">
-      <transition name="move">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="move">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>
