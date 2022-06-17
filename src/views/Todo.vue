@@ -56,12 +56,24 @@
               :key="index"
             >
               <div class="item">
-                <p @click="readTask(todo.name, todo.date)">{{ todo.date }}</p>
+                <p @click="readTask(todo.name, todo.date, index)">
+                  <span class="span">{{ index + 1 }}</span> {{ todo.date }}
+                </p>
 
-                <p class="content" :title="todo.name">
+                <p
+                  class="content large-screen-only"
+                  :title="todo.name"
+                  @click="readTask(todo.name, todo.date, index)"
+                >
                   {{ todo.name }}
                 </p>
-                <p @click="readTask(todo.name, todo.date)">
+                <p class="content small-screen-only" :title="todo.name">
+                  {{ todo.name }}
+                </p>
+                <p
+                  class="small-screen-only"
+                  @click="readTask(todo.name, todo.date, index)"
+                >
                   <span class="read-icon"
                     ><i class="fa-brands fa-readme"></i>Read</span
                   >
@@ -109,6 +121,7 @@
           class="edit-form"
           id="edit-form"
         >
+          <h1>Edit <span>task</span> {{ edit.num + 1 }}</h1>
           <input type="hidden" v-model="edit.num" class="task-id" required />
           <textarea
             type="text"
@@ -120,20 +133,22 @@
             v-model="edit.task"
             required
           ></textarea>
-          <button type="submit">
-            <i class="far fa-edit edit" title="Edit task..."></i>
-          </button>
+          <div class="buttons">
+            <button type="submit">
+              <i class="far fa-edit edit" title="Edit task..."></i>submit
+            </button>
+            <button
+              v-if="edit.val"
+              title="close task editing"
+              @click="
+                edit.val = false;
+                search.val = false;
+              "
+            >
+              close
+            </button>
+          </div>
         </form>
-        <button
-          v-if="edit.val"
-          title="close task editing"
-          @click="
-            edit.val = false;
-            search.val = false;
-          "
-        >
-          close
-        </button>
       </div>
     </transition>
     <transition name="fade">
@@ -188,7 +203,9 @@
             {{ profile.profileName }} <br />
             {{ profile.description }}
           </p>
-          <h3>Was written on:{{ taskDate }}</h3>
+          <h3>
+            Task<span>{{ taskIndex + 1 }}</span> Was written on:{{ taskDate }}
+          </h3>
           <p>{{ popTask }}</p>
         </div>
       </div>
@@ -242,6 +259,7 @@ export default {
     let read = ref(false);
     let popTask = ref("");
     let taskDate = ref("");
+    let taskIndex = ref("");
 
     onMounted(() => {
       if (getFromLocalStorage == null) {
@@ -443,15 +461,17 @@ export default {
         .catch((err) => err);
     };
 
-    const readTask = (task, date) => {
+    const readTask = (task, date, index) => {
       read.value = true;
       popTask.value = task;
       taskDate.value = date;
+      taskIndex.value = index;
     };
 
     return {
       edit,
       taskDate,
+      taskIndex,
       valid,
       isDone,
       invalid,
@@ -789,8 +809,8 @@ $col: #3d566f;
           }
 
           li {
-            width: 200px;
-            height: 190px;
+            width: 240px;
+            height: 130px;
             margin: 5px;
             padding: 5px;
             list-style-type: none;
@@ -807,12 +827,11 @@ $col: #3d566f;
               width: 100%;
               height: 100%;
               display: flex;
-              justify-content: space-between;
+              justify-content: space-around;
               align-items: center;
               flex-direction: column;
               p {
                 cursor: pointer;
-                font-size: 15px;
                 width: 95%;
                 height: 19%;
                 padding: 2px 10px;
@@ -826,6 +845,20 @@ $col: #3d566f;
                 transition: all 0.3s ease;
                 font-size: 10px;
 
+                .span {
+                  color: white;
+                  font-size: 10px;
+                  font-weight: 700;
+                  margin-right: 10px;
+                  width: 18px;
+                  height: 18px;
+                  border-radius: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background: #e66581;
+                }
+
                 .read-icon {
                   height: 100%;
                   width: 100%;
@@ -835,11 +868,11 @@ $col: #3d566f;
                   position: relative;
 
                   color: #3d3d3d;
-                  font: 600 19px "Poppins", sans-serif;
+                  font: 600 17px "Poppins", sans-serif;
                   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
                   i {
-                    font-size: 27px;
+                    font-size: 24px;
                     color: rgb(223, 224, 224);
                     cursor: pointer;
                     margin-right: 5px;
@@ -849,25 +882,28 @@ $col: #3d566f;
 
               .content {
                 align-items: flex-start;
-                font-size: 13px;
+                font-size: 11px;
                 height: 62%;
                 padding: 5px;
               }
+              .small-screen-only {
+                display: none;
+              }
             }
+
             .icons {
               width: 100%;
               height: 20%;
               position: absolute;
               right: 0;
               bottom: -21%;
-              background: rgb(3, 184, 184);
               display: flex;
-              justify-content: space-between;
+              justify-content: space-around;
               align-items: center;
               border-radius: 0 0 8px 8px;
               transition: all 0.3s ease;
               cursor: pointer;
-              padding: 0 15px;
+              background: transparent;
 
               button {
                 background: none;
@@ -881,8 +917,8 @@ $col: #3d566f;
               }
 
               i {
-                font-size: 21px;
-                color: white;
+                font-size: 17px;
+                color: teal;
                 cursor: pointer;
                 transition: all 0.5s ease;
                 display: block;
@@ -894,12 +930,12 @@ $col: #3d566f;
 
               #trash {
                 color: #cc0832;
-                font-size: 26px;
+                font-size: 17px;
               }
 
               .taskStatus {
-                width: 20px;
-                height: 20px;
+                width: 17px;
+                height: 17px;
                 border: none;
                 display: block;
                 margin: 0 5px;
@@ -925,6 +961,10 @@ $col: #3d566f;
                 justify-content: space-between;
                 align-items: center;
                 flex-direction: column;
+                p {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
               }
               .icons {
                 bottom: 0;
@@ -945,6 +985,13 @@ $col: #3d566f;
                   .item {
                     height: 100%;
                     width: 100%;
+
+                    .large-screen-only {
+                      display: none;
+                    }
+                    .small-screen-only {
+                      display: block;
+                    }
                   }
                   .icons {
                     width: 25%;
@@ -954,6 +1001,11 @@ $col: #3d566f;
                     right: -25%;
                     top: 0;
                     padding: 10px 0;
+                    background: #03b8b8;
+
+                    i {
+                      color: white;
+                    }
                   }
 
                   &:hover {
@@ -983,12 +1035,17 @@ $col: #3d566f;
               flex-direction: column;
 
               &::before {
-                content: "Important:";
+                content: "Important|completed";
                 text-decoration: none;
                 font-size: 1.1em;
                 color: white;
                 font-family: "Grand Hotel", cursive;
                 display: block;
+              }
+            }
+            .icons {
+              i {
+                color: white;
               }
             }
           }
@@ -1121,12 +1178,30 @@ $col: #3d566f;
 
   .blur {
     background: rgb(60, 60, 60);
-    opacity: 0.3;
+    opacity: 0.5;
   }
 
   form,
   button {
     z-index: 1;
+  }
+
+  h3 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      border-radius: 100%;
+      background: teal;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 5px;
+    }
   }
 
   form {
@@ -1135,14 +1210,28 @@ $col: #3d566f;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 7px;
+    padding: 20px;
+    h1 {
+      color: #e66581;
+      text-transform: capitalize;
+      font: 600 30px "Grand Hotel", sans-serif;
 
+      span {
+        color: teal;
+        text-transform: capitalize;
+        margin: 0 10px;
+      }
+    }
     input,
     textarea {
       width: 90%;
       height: fit-content;
       outline: none;
       border: none;
-      background: white;
+      background: whitesmoke;
       padding: 20px;
       border-radius: 10px;
       margin: 10px;
@@ -1151,28 +1240,37 @@ $col: #3d566f;
       height: 300px;
     }
 
-    display: flex;
-    justify-content: center;
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
 
-    button {
-      background: teal;
       width: 90%;
+      button {
+        width: 300px;
+        height: 50px;
+        border: none;
+        border-radius: 5px;
+        background: #e66581;
+        color: white;
+        display: block;
+        margin: 10px;
+
+        @media screen and (max-width: 650px) {
+          width: 100%;
+          margin: 10px auto;
+        }
+      }
+
+      button[type="submit"] {
+        background: teal;
+      }
     }
   }
 
-  button {
-    width: 90%;
-    height: 60px;
-    border: none;
-    border-radius: 30px;
-    background: #e66581;
-    color: white;
-    display: block;
-    margin: 10px auto;
-  }
-
   .read-content {
-    width: 80%;
+    width: 90%;
     height: auto;
     padding: 20px;
     background: white;
