@@ -28,7 +28,7 @@
             <img src="../assets/todo.jpg" v-if="!user.image" alt="" />
             <img :src="user.image" v-if="user.image" alt="" />
           </div>
-          <!-- <form
+          <form
             @change="updateProfile"
             class="change-img"
             enctype="multipart/form-data"
@@ -39,7 +39,7 @@
             </label>
 
             <button type="submit">upload</button>
-          </form> -->
+          </form>
         </div>
       </transition>
       <transition name="fade">
@@ -426,7 +426,7 @@ export default {
         button {
           width: 100%;
           height: 100%;
-          background: white;
+          // background: white;
           border: none;
           border-radius: 5px;
           font-size: 12px;
