@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
+#container {
+  width: 100vw;
+  height: fit-content;
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#container .card-container {
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+  margin: 10px;
+}
+#container .card-container .card-header {
+  height: 45%;
+  width: 100%;
+  background: #1d3b67;
+  position: relative;
+  border: none;
+}
+#container .card-container .card-header .img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  bottom: -20%;
+  left: 23%;
+  border: 3px solid white;
+  box-shadow: 0 0 1px 2px #1d3b67;
+}
+#container .card-container .card-header .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 400px) {
+  #container .card-container .card-header .img {
+    width: 150px;
+    height: 150px;
+  }
+}
+#container .card-container .card-header .card-media {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 0;
+  top: 2%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+#container .card-container .card-header .card-media i {
+  font-size: 19px;
+  color: #e7e6e6;
+  margin: 5px 10px;
+  cursor: pointer;
+}
+#container .card-container .card-header:hover {
+  background: #2b528d;
+}
+#container .card-container .card-body {
+  width: 100%;
+  height: 55%;
+  padding: 0 10px;
+  padding-top: 11%;
+}
+#container .card-container .card-body .card-title {
+  text-align: center;
+  font: 600 23px "Nunito Sans", sans-serif;
+  color: #494949;
+  padding: 10px 5px;
+  width: 90%;
+  margin: auto;
+}
+#container .card-container .card-body .card-description {
+  text-align: center;
+  font: 500 13px "Poppins", sans-serif;
+  padding: 10px 4px;
+  width: 90%;
+  margin: auto;
+  color: #313131;
+}
+#container .card-container .card-body .card-buttons {
+  width: 95%;
+  margin: auto;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#container .card-container .card-body .card-buttons .btn {
+  width: 140px;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  text-decoration: none;
+  background: #2e5693;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+#container .card-container .card-body .card-buttons .btn:hover {
+  transform: scale(0.9);
+  background: #23436e;
+}
+#container .card-container .card-body .card-buttons .btn:active {
+  transform: scale(0.8);
+}
+#container .card-container .card-body .card-buttons .btn:last-child {
+  background: transparent;
+  box-shadow: 0 0 1px 1px #1ca0de;
+  color: #1ca0de;
+}
+#container .card-container .card-body:hover {
+  background: whitesmoke;
+}
+#container .card-container:hover {
+  background: linear-gradient(to bottom left, #1ca0de, #0c1725);
+}
+#container .card-container:hover .card-header {
+  background: linear-gradient(to top left, #1ca0de, #0c1725);
+}
+#container .card-container:hover .card-body {
+  background: linear-gradient(to bottom left, #1ca0de, #0c1725);
+  color: white;
+}
+#container .card-container:hover .card-body .card-title,
+#container .card-container:hover .card-body .card-description {
+  color: white;
+}
+@media screen and (max-width: 400px) {
+  #container .card-container {
+    width: 93vw;
+    height: 470px;
+  }
+  #container .card-container .card-header {
+    height: 35%;
+  }
+  #container .card-container .card-body {
+    height: 65%;
+  }
+  #container .card-container .card-body .card-title {
+    font-size: 19px;
+    padding-top: 15px;
+  }
+  #container .card-container .card-body .card-description {
+    font-size: 12px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -77,6 +77,16 @@
   opacity: 0;
 }
 
+.slide-in-enter-from {
+  transform: translateY(15vh);
+}
+.slide-in-active {
+  transition: all 0.3s ease;
+}
+.slide-in-leave-to {
+  transform: translateY(20vh);
+}
+
 button,
 a,
 label,
@@ -86,6 +96,9 @@ i {
 
   &:hover {
     transform: scale(0.9);
+  }
+  &:active {
+    transform: scale(0.8);
   }
 }
 

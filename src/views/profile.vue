@@ -443,7 +443,7 @@ export default {
 
     .credentials {
       width: 58%;
-      height: 100%;
+      min-height: 100%;
       position: relative;
       transition: all 2s ease;
 

@@ -322,7 +322,7 @@ main {
 
       @media screen and (max-width: 700px) {
         width: 100vw;
-        overflow-y: scroll;
+        overflow-y: auto;
         .logo {
           height: 20vh;
           justify-content: space-between;

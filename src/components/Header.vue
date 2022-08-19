@@ -35,8 +35,6 @@
         </div>
       </transition>
       <nav>
-        <router-link to="/Register" class="route-to">sign up</router-link>
-
         <router-link to="/login" class="route-to">sign in</router-link>
       </nav>
     </header>
@@ -45,7 +43,12 @@
         <router-link to="/" class="logoName">Codingherald</router-link>
       </nav>
       <nav id="bars" @click="toggleMenu()">
-        <i class="fa-solid fa-bars" id="menu-bars"></i>
+        <i
+          class="fa-solid fa-bars menu-bars"
+          id="menu-bars"
+          v-if="!showApps"
+        ></i
+        ><i class="fa-solid fa-xmark menu-bars" v-if="showApps"></i>
       </nav>
       <transition name="fade">
         <div id="app-list" v-if="showApps">
@@ -211,7 +214,7 @@ main {
             align-items: center;
             text-decoration: none;
             text-transform: capitalize;
-            font: 600 16px "Poppins", sans-serif;
+            font: 500 14px "Poppins", sans-serif;
             color: teal;
 
             i {
@@ -225,15 +228,15 @@ main {
     }
 
     #bars {
-      font-size: 2em;
-      width: 15%;
+      font-size: 33px;
+      width: 20%;
       text-align: center;
       position: relative;
       color: rgb(2, 126, 109);
       cursor: pointer;
       transition: all 0.3s ease;
 
-      #menu-bar {
+      .menu-bars {
         transition: all 0.2s ease;
 
         &:hover {
@@ -245,16 +248,16 @@ main {
       }
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       display: none;
     }
   }
 
   .small-screens {
     display: none;
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
       display: flex;
-      width: 97%;
+      width: 100%;
       margin: auto;
       .logo {
         width: 50%;
@@ -265,19 +268,34 @@ main {
 
       #app-list {
         height: fit-content;
-        bottom: -280%;
+        bottom: -294%;
         left: 0;
         ul {
           flex-direction: column;
           height: fit-content;
+          padding: 0;
+          width: 100%;
 
           li {
-            width: 50%;
+            width: 100%;
+            margin: 0;
 
             a {
+              padding-left: 15px;
               display: flex;
               justify-content: flex-start;
               align-items: center;
+
+              i {
+                padding-right: 10px;
+              }
+            }
+            &:hover {
+              background: #efefef;
+              border-left: 5px solid rgb(176, 77, 38);
+            }
+            &:active {
+              transform: scale(1);
             }
           }
         }

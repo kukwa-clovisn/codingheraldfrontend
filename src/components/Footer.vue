@@ -2,45 +2,54 @@
   <footer class="d-flex flex-row justify-content-between align-items-start p-5">
     <div>
       <h3>ABOUT</h3>
-      <li class="text-left text-capitalize text-white">Contact</li>
-      <li class="text-left text-capitalize text-white">Blog</li>
-      <li class="text-left text-capitalize text-white">Community</li>
-      <li class="text-left text-capitalize text-white">CAKE Token</li>
+      <li class="text-left text-capitalize text-white">
+        <a href="https://codingherald.herokuapp.com/contact">Contact</a>
+      </li>
+      <li class="text-left text-capitalize text-white">
+        <a href="https://advancedtechacademy.herokuapp.com/blog">Blog</a>
+      </li>
+      <li class="text-left text-capitalize text-white">
+        <a href="https://advancedtechacademy.heorkuapp.com/blog">Community</a>
+      </li>
     </div>
     <div>
       <h3>HELP</h3>
-      <li class="text-left text-capitalize text-white">Customer Support</li>
-      <li class="text-left text-capitalize text-white">Troubleshooting</li>
+      <li class="text-left text-capitalize text-white">
+        <a href="">Client support</a>
+      </li>
       <li class="text-left text-capitalize text-white">Guides</li>
-    </div>
-    <div>
-      <h3>DEVELOPERS</h3>
       <li class="text-left text-capitalize text-white">
         <a href="https://github.com/kukwa-clovisn">Github</a>
       </li>
-      <li class="text-left text-capitalize text-white">Documentation</li>
-      <li class="text-left text-capitalize text-white">Bug Bounty</li>
-      <li class="text-left text-capitalize text-white">Audits</li>
-      <li class="text-left text-capitalize text-white">Careers</li>
     </div>
+
     <div class="text-white">
       <i class="fa fa-user-circle"></i>
-      <span class="mx-2">CodingHerald</span>
+      <span class="mx-2">Codingherald</span>
     </div>
     <div class="text-white">
-      <h2>online</h2>
+      <h2>online handles</h2>
       <div class="d-flex justify-content-evenly align-items-center">
-        <i class="fab fa-twitter icon"></i>
-        <i class="fab fa-telegram icon"></i>
-        <i class="fab fa-whatsapp icon"></i>
-        <i class="fab fa-instagram icon"></i>
-        <i class="fab fa-youtube icon"></i>
+        <a
+          href="https://www.youtube.com/channel/UCKu1y3terjWMgZxyz73RucQ"
+          class="route"
+        >
+          <i class="fab fa-youtube"></i
+        ></a>
+
+        <a href="https://www.facebook.com/237atech/" class="route">
+          <i class="fa-brands fa-facebook"></i
+        ></a>
+        <a href="https://wa.link/geye6o" class="route"
+          ><i class="fa-brands fa-whatsapp"></i
+        ></a>
+        <a href="https://twitter.com/KukwaNgong" class="route"
+          ><i class="fa-brands fa-twitter"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/codingherald/" class="route"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
       </div>
-    </div>
-    <hr />
-    <div class="text-white kcn">
-      &copy;<i style="color: brown">codingherald</i
-      ><span class="text-uppercase" style="color: gold">kcn</span>2021
     </div>
   </footer>
 </template>
@@ -66,7 +75,8 @@ footer {
   li {
     list-style-type: none;
     text-align: left;
-    margin: 3% 0;
+    margin: 10px 0;
+    cursor: pointer;
     a {
       text-decoration: none;
       color: #fff;
@@ -84,16 +94,21 @@ footer {
     }
     h2 {
       color: goldenrod;
-      font-size: 21px;
+      font-size: 19px;
       text-align: center;
       padding: 5px;
       transition: all 0.3s ease;
     }
-  }
-  .kcn {
-    position: absolute;
-    left: 30%;
-    bottom: 2vh;
+
+    a {
+      text-decoration: none;
+      color: rgb(234, 231, 231);
+      cursor: pointer;
+
+      i {
+        font-size: 21px;
+      }
+    }
   }
 }
 </style>

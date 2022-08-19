@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 div {
-  width: max-content;
+  width: fit-content;
   height: 60px;
   position: absolute;
   top: 28%;

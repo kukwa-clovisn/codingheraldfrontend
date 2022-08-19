@@ -2,8 +2,15 @@
   <main>
     <Header />
     <Logo />
-    <div class="home d-flex justify-content-between align-items-center">
-      <Block />
+    <div
+      class="
+        home
+        d-none d-md-flex d-sm-none d-lg-flex
+        justify-content-between
+        align-items-center
+      "
+    >
+      <!-- <Block /> -->
       <img
         src="../assets/desk.svg"
         alt=""
@@ -43,12 +50,12 @@
 import Logo from "./Logo.vue";
 import Footer from "./Footer.vue";
 import Header from "./Header.vue";
-import Block from "./Block.vue";
+// import Block from "./Block.vue";
 import Projects from "./Projects.vue";
 export default {
   name: "Home",
   components: {
-    Block,
+    // Block,
     Logo,
     Footer,
     Header,
@@ -164,9 +171,10 @@ export default {
   }
 }
 .bn {
-  width: 300px;
+  width: fit-content;
+  margin: 0 auto;
+  flex-wrap: wrap;
   position: relative;
-  left: 28%;
 
   button {
     min-width: 150px;
@@ -177,6 +185,7 @@ export default {
     cursor: pointer;
     position: relative;
     top: 0;
+    margin: 10px;
     animation: bounce 3s infinite alternate forwards;
 
     &:last-child {
@@ -222,143 +231,143 @@ export default {
   }
 }
 
-.profile {
-  width: 100%;
-  height: 70vh;
-  background: transparent;
-  padding: 20px;
-  position: relative;
+// .profile {
+//   width: 100%;
+//   height: 70vh;
+//   background: transparent;
+//   padding: 20px;
+//   position: relative;
 
-  .page {
-    width: 60%;
-    height: 60vh;
-    background: white;
-    margin: 0 auto;
-    border-radius: 3px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    position: relative;
+//   .page {
+//     width: 60%;
+//     height: 60vh;
+//     background: white;
+//     margin: 0 auto;
+//     border-radius: 3px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-direction: column;
+//     padding: 20px;
+//     position: relative;
 
-    .close {
-      font-size: 2em;
-      position: absolute;
-      right: 13px;
-      top: 1px;
-      cursor: pointer;
-    }
+//     .close {
+//       font-size: 2em;
+//       position: absolute;
+//       right: 13px;
+//       top: 1px;
+//       cursor: pointer;
+//     }
 
-    .heading {
-      width: 100%;
-      height: 50%;
+//     .heading {
+//       width: 100%;
+//       height: 50%;
 
-      img {
-        height: 90%;
-        display: block;
-        margin: auto;
-        cursor: pointer;
-      }
-      h4 {
-        cursor: pointer;
-      }
-    }
+//       img {
+//         height: 90%;
+//         display: block;
+//         margin: auto;
+//         cursor: pointer;
+//       }
+//       h4 {
+//         cursor: pointer;
+//       }
+//     }
 
-    .advert {
-      width: 100%;
-      height: 10vh;
-      padding: 10px;
-      background: rgb(233, 236, 239);
-      cursor: pointer;
-      transition: all 0.4s ease;
+//     .advert {
+//       width: 100%;
+//       height: 10vh;
+//       padding: 10px;
+//       background: rgb(233, 236, 239);
+//       cursor: pointer;
+//       transition: all 0.4s ease;
 
-      &:active {
-        transform: scale(0.8);
-      }
-      p {
-        color: rgb(54, 51, 51);
-        font-size: 0.7em;
-        text-align: center;
-        line-height: 23px;
+//       &:active {
+//         transform: scale(0.8);
+//       }
+//       p {
+//         color: rgb(54, 51, 51);
+//         font-size: 0.7em;
+//         text-align: center;
+//         line-height: 23px;
 
-        .route {
-          text-decoration: none;
-          color: rgb(255, 145, 0);
-          font-weight: 600;
-        }
-      }
-    }
+//         .route {
+//           text-decoration: none;
+//           color: rgb(255, 145, 0);
+//           font-weight: 600;
+//         }
+//       }
+//     }
 
-    button {
-      min-width: 150px;
-      text-transform: capitalize;
-    }
-  }
-}
+//     button {
+//       min-width: 150px;
+//       text-transform: capitalize;
+//     }
+//   }
+// }
 
-.profile-one {
-  width: 90%;
-  margin: auto;
-  height: 95vh;
-  // background: linear-gradient(
-  //   to right,
-  //   rgb(36, 36, 36) 0%,
-  //   rgb(1, 35, 73) 100%
-  // );
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+// .profile-one {
+//   width: 90%;
+//   margin: auto;
+//   height: 95vh;
+//   // background: linear-gradient(
+//   //   to right,
+//   //   rgb(36, 36, 36) 0%,
+//   //   rgb(1, 35, 73) 100%
+//   // );
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-evenly;
+//   align-items: center;
 
-  .photo {
-    width: 50%;
-    height: 100%;
+//   .photo {
+//     width: 50%;
+//     height: 100%;
 
-    img {
-      width: 100%;
-      display: block;
-      margin: auto;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  }
+//     img {
+//       width: 100%;
+//       display: block;
+//       margin: auto;
+//       border-radius: 5px;
+//       cursor: pointer;
+//     }
+//   }
 
-  .side-content {
-    width: 50%;
-    height: 95vh;
-    margin-left: 1vw;
-    border-radius: 5px;
-    background: white;
+//   .side-content {
+//     width: 50%;
+//     height: 95vh;
+//     margin-left: 1vw;
+//     border-radius: 5px;
+//     background: white;
 
-    @media screen and (max-width: 768px) {
-      width: 80%;
-    }
+//     @media screen and (max-width: 768px) {
+//       width: 80%;
+//     }
 
-    img {
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      display: block;
-      margin: 4vh auto;
-      cursor: pointer;
-    }
+//     img {
+//       width: 230px;
+//       height: 230px;
+//       border-radius: 50%;
+//       display: block;
+//       margin: 4vh auto;
+//       cursor: pointer;
+//     }
 
-    h2 {
-      font-weight: 700;
-      padding: 5px;
-      cursor: pointer;
-    }
+//     h2 {
+//       font-weight: 700;
+//       padding: 5px;
+//       cursor: pointer;
+//     }
 
-    p {
-      text-align: center;
-    }
+//     p {
+//       text-align: center;
+//     }
 
-    button {
-      width: max-content;
-      display: block;
-      margin: 1vh auto;
-    }
-  }
-}
+//     button {
+//       width: max-content;
+//       display: block;
+//       margin: 1vh auto;
+//     }
+//   }
+// }
 </style>
