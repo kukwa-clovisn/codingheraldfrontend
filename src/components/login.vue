@@ -42,6 +42,11 @@
       <transition name="appear">
         <p class="errormsg text-danger text-center" v-if="errormsg.valid">
           {{ errormsg.invalidMsg }}
+        </p></transition
+      >
+      <transition name="appear">
+        <p class="errormsg text-primary text-center" v-if="errormsg.process">
+          {{ errormsg.invalidMsg }}
         </p>
       </transition>
       <button id="log-in" class="btn" type="submit">
@@ -60,15 +65,20 @@
         <a href="/register">sign up</a>
       </div>
     </transition>
+    <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
   </div>
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import Spinner from "./spinner.vue";
 export default {
   name: "Login",
+  components: {
+    Spinner,
+  },
   setup() {
     const router = useRouter();
 
@@ -76,16 +86,31 @@ export default {
       username: "",
       password: "",
     });
+
+    let response = reactive({
+      msg: "",
+      success: false,
+      failed: false,
+    });
+
+    let loader = reactive({
+      percent: 0,
+      state: false,
+      msg: "",
+    });
+
     let toggle = ref(false);
     let errormsg = reactive({
       invalidMsg: "",
       valid: false,
+      process: false,
     });
 
     /**
      * creating a log in validation and authentication
      */
     const login = () => {
+      loader.state = true;
       axios
         .post(
           "api/signin",
@@ -94,32 +119,47 @@ export default {
             password: user.password,
           },
           {
-            headers: {
-              "Content-type": "application/json",
+            onUploadProgress: (uploadEvent) => {
+              response.success = true;
+              loader.msg = `verifying credentials: please wait!`;
+
+              loader.percent = computed(() => {
+                return Math.round(
+                  (uploadEvent.loaded / uploadEvent.total) * 100
+                );
+              });
+
+              if (loader.percent === 100) {
+                response.success = false;
+              }
             },
           }
         )
         .then((res) => {
           if (res.statusText === "OK") {
+            errormsg.process = true;
+            errormsg.invalidMsg = "Successful. loading data....";
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("accessId", res.data.accessId);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${res.data.accessToken}`;
+            router.push("/overview/Todo");
+            loader.state = false;
           }
-          router.push("/overview/Todo");
         })
         .catch((err) => {
           errormsg.valid = true;
-          errormsg.invalidMsg = "Acess Denied";
+          errormsg.invalidMsg = "Error:\\Invalid credentials. Acess Denied";
+          loader.state = false;
           setTimeout(() => {
             errormsg.valid = false;
-          }, 5000);
+          }, 3000);
           return err;
         });
     };
 
-    return { user, toggle, errormsg, login };
+    return { user, response, loader, toggle, errormsg, login };
   },
 };
 </script>

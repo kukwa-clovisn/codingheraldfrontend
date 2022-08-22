@@ -24,22 +24,39 @@
     <div class="center-main">
       <transition name="fade">
         <div class="image" v-if="!squeeze">
-          <div class="img">
-            <img src="../assets/todo.jpg" v-if="!user.image" alt="" />
-            <img :src="user.image" v-if="user.image" alt="" />
+          <div class="img" v-if="!profileImageUpdate.preview">
+            <img :src="profile.image" v-if="profile.image" alt="" />
+            <img src="../assets/todo.jpg" v-else alt="" />
           </div>
-          <form
-            @change="updateProfile"
-            class="change-img"
-            enctype="multipart/form-data"
-          >
-            <label for="usr-img">
-              <i class="fa-solid fa-upload" v-if="!changeImg"></i>
-              <input type="file" name="image" id="usr-img" />
-            </label>
 
-            <button type="submit">upload</button>
-          </form>
+          <div class="img" v-if="profileImageUpdate.preview">
+            <img :src="profileImageUpdate.preview" v-show="preview" alt="" />
+          </div>
+
+          <div class="blur"></div>
+          <div
+            class="input"
+            :class="{ hide: imageBox }"
+            @click="$refs.selectImg.click()"
+          >
+            <input
+              type="file"
+              @change="onChangeFunc"
+              ref="selectImg"
+              name="image"
+              style="display: none"
+            />
+            <button v-if="!profileImageUpdate.preview">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </button>
+          </div>
+          <div
+            class="input"
+            @click="onFileSubmit"
+            v-if="profileImageUpdate.preview"
+          >
+            <button><i class="fa-solid fa-cloud-arrow-up"></i>save</button>
+          </div>
         </div>
       </transition>
       <transition name="fade">
@@ -101,15 +118,18 @@
         <p>{{ readMemoryText }}</p>
       </div>
     </div>
+    <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
   </main>
 </template>
 
 <script>
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, watch, computed } from "vue";
+import Spinner from "../components/spinner.vue";
 export default {
   name: "Profile",
+  components: { Spinner },
   setup() {
     const router = useRouter();
     let user = reactive({
@@ -120,7 +140,32 @@ export default {
       allMemories: 0,
     });
 
+    let profile = reactive({
+      image: null,
+    });
+
+    let preview = ref(null);
+
+    let profileImageUpdate = reactive({
+      image: null,
+      preview: null,
+      selectedImage: null,
+    });
+
+    let loader = reactive({
+      percent: 0,
+      state: false,
+      msg: "",
+    });
+
+    let response = reactive({
+      msg: "",
+      success: false,
+      failed: false,
+    });
+
     let changeImg = ref(false);
+    let imageBox = ref(false);
 
     let user_id = ref(localStorage.getItem("accessId"));
     // let user_token = ref(localStorage.getItem("accessToken"));
@@ -144,6 +189,11 @@ export default {
             user.allMemories = res.data.todos.length;
             if (res.data.description !== "") {
               description.value = res.data.description;
+            }
+            if (res.data.image) {
+              profile.image = `data:image/png;base64,` + res.data.image;
+            } else {
+              profile.image = null;
             }
 
             for (let i = 0; i < res.data.todos.length; i++) {
@@ -198,6 +248,66 @@ export default {
       formData.append("file", e.target.files[0]);
     }
 
+    function onChangeFunc(e) {
+      if (e.target.files[0].size < 1048576) {
+        profileImageUpdate.preview = e.target.files[0];
+        preview.value = e.target.files[0];
+      } else {
+        response.failed = true;
+        response.msg =
+          "Error: image size exceeded. image should be less than 1MB (<1mb)";
+        setTimeout(() => {
+          response.failed = false;
+        }, 3000);
+      }
+    }
+    watch(preview, (preview) => {
+      let fileReader = new FileReader();
+      fileReader.readAsDataURL(preview);
+      fileReader.addEventListener("load", () => {
+        profileImageUpdate.preview = fileReader.result;
+      });
+    });
+    const onFileSubmit = () => {
+      loader.state = true;
+      loader.msg = "uploading photo...please wait";
+      const formdata = new FormData();
+      formdata.append("image", preview.value, preview.value.name);
+      axios
+        .post(`api/user/upload/`, formdata, {
+          onUploadProgress: (uploadEvent) => {
+            response.success = true;
+            loader.msg = `verifying credentials: please wait!`;
+
+            loader.percent = computed(() => {
+              return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
+            });
+
+            if (loader.percent === 100) {
+              response.success = false;
+            }
+          },
+        })
+        .then((res) => {
+          loader.state = false;
+          if (res.statusText === "OK") {
+            profile.image = `data:image/png;base64,` + res.data.image;
+            profileImageUpdate.preview =
+              `data:image/png;base64,` + res.data.image;
+
+            response.success = true;
+            response.msg = "Success! Refresh page to aply changes...";
+
+            setTimeout(() => {
+              response.success = false;
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          loader.state = false;
+        });
+    };
+
     return {
       read,
       user,
@@ -208,11 +318,19 @@ export default {
       squeeze,
       title,
       description,
+      profile,
+      loader,
+      profileImageUpdate,
+      preview,
       changeImg,
+      imageBox,
+      response,
       user_id,
       readMemory,
       updateTitle,
       updateProfile,
+      onChangeFunc,
+      onFileSubmit,
       logoutFunc,
     };
   },
@@ -377,42 +495,61 @@ export default {
       align-items: center;
       position: relative;
       z-index: 1;
+      flex-basis: 1;
+      flex-grow: 1;
 
       .img {
         width: 100%;
         height: 100%;
         overflow: hidden;
+        box-shadow: 0 0 1px #ececec;
+      }
+
+      .drag-and-drop {
+        border: 1px dashed rgb(200, 200, 200);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-transform: capitalize;
+        color: #e66581;
+
+        button {
+          width: 150px;
+          height: 150px;
+          border-radius: 100%;
+          background: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          border: none;
+
+          i {
+            font-size: 40px;
+            color: #e66581;
+          }
+        }
       }
 
       img {
         height: 100%;
-        width: auto;
+        width: 100%;
+        object-fit: cover;
         cursor: pointer;
       }
 
-      .change-img {
+      .input {
         position: absolute;
         bottom: 10%;
         right: 10%;
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 0 4px rgb(148, 147, 147);
 
-        i {
-          color: white;
-          font-size: 19px;
-        }
-        label {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: teal;
-          border-radius: 100%;
-        }
         input {
           width: 100%;
           position: absolute;
@@ -426,17 +563,36 @@ export default {
         button {
           width: 100%;
           height: 100%;
-          // background: white;
+          background: transparent;
           border: none;
           border-radius: 5px;
           font-size: 12px;
+          i {
+            color: rgb(90, 124, 123);
+            font-size: 27px;
+          }
         }
+      }
+
+      .input.hide {
+        display: none;
+      }
+
+      .blur {
+        display: none;
+        opacity: 0.3;
       }
 
       @media screen and (max-width: 550px) {
         width: 15%;
         img {
           display: none;
+        }
+      }
+
+      &:hover {
+        .blur {
+          display: block;
         }
       }
     }
@@ -448,15 +604,17 @@ export default {
       transition: all 2s ease;
 
       h4 {
+        margin-left: 10px;
         width: 90px;
         height: 30px;
         font: 500 12px "Poppins", sans-serif;
-        color: white;
-        background: rgb(133, 132, 132);
+        color: rgb(107, 106, 106);
+        // background: rgb(133, 132, 132);
         border-radius: 2px;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 0 0 1px #e66581, inset 0 0 1px #e66581;
       }
 
       h1 {

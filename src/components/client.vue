@@ -11,7 +11,8 @@
         </div>
         <div class="user" @click="toProfile()">
           <div class="img">
-            <img src="../assets/todo.jpg" alt="" />
+            <img :src="user.photo" v-if="user.photo" alt="" />
+            <img src="../assets/todo.jpg" v-else alt="" />
           </div>
           <div class="user-info">
             <h3 :title="user.username">{{ user.username }}</h3>
@@ -54,7 +55,8 @@
         </div>
         <div class="user" @click="toProfile()">
           <div class="img">
-            <img src="../assets/todo.jpg" alt="" />
+            <img :src="user.photo" v-if="user.photo" alt="" />
+            <img src="../assets/todo.jpg" v-else alt="" />
           </div>
           <div class="user-info">
             <h3 :title="user.username">{{ user.username }}</h3>
@@ -124,6 +126,7 @@ export default {
     let user = reactive({
       username: "",
       description: "",
+      photo: null,
     });
     let getFromLocalStorage = ref(localStorage.getItem("accessId"));
     onMounted(() => {
@@ -135,6 +138,7 @@ export default {
         .then(async (res) => {
           user.username = res.data.username;
           user.description = res.data.description;
+          user.photo = `data:image/png;base64,` + res.data.image;
         })
         .catch((err) => {
           router.push("/login");
@@ -234,6 +238,7 @@ main {
         justify-content: center;
         align-items: Center;
         overflow: hidden;
+        box-shadow: 0 0 4px rgb(225, 225, 225);
 
         img {
           height: 100%;

@@ -198,6 +198,11 @@ export default {
     }
 
     .route {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       color: white;
       text-transform: capitalize;
