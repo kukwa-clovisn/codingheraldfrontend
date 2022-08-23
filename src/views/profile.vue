@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="center-main">
+    <div class="center-main" :class="{ squeeze: squeeze }">
       <transition name="fade">
         <div class="image" v-if="!squeeze">
           <div class="img" v-if="!profileImageUpdate.preview">
@@ -34,6 +34,11 @@
           </div>
 
           <div class="blur"></div>
+          <i
+            class="fa-solid fa-arrow-left close"
+            @click="profileImageUpdate.preview = false"
+            v-if="profileImageUpdate.preview"
+          ></i>
           <div
             class="input"
             :class="{ hide: imageBox }"
@@ -46,7 +51,7 @@
               name="image"
               style="display: none"
             />
-            <button v-if="!profileImageUpdate.preview">
+            <button>
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </button>
           </div>
@@ -55,7 +60,7 @@
             @click="onFileSubmit"
             v-if="profileImageUpdate.preview"
           >
-            <button><i class="fa-solid fa-cloud-arrow-up"></i>save</button>
+            <button><i class="fa-solid fa-floppy-disk"></i>save</button>
           </div>
         </div>
       </transition>
@@ -65,14 +70,47 @@
           <h1>{{ user.username }}</h1>
           <h3>{{ user.email }}</h3>
           <p>Dairy: {{ user.allMemories }} memories</p>
-          <div class="img">
-            <img src="../assets/todo.jpg" alt="" />
+          <div class="small-screen-image">
+            <div class="img" v-if="!profileImageUpdate.preview">
+              <img :src="profile.image" v-if="profile.image" alt="" />
+              <img src="../assets/todo.jpg" v-else alt="" />
+            </div>
+            <div class="img" v-if="profileImageUpdate.preview">
+              <img :src="profileImageUpdate.preview" v-show="preview" alt="" />
+            </div>
+
+            <div
+              class="input"
+              :class="{ hide: imageBox }"
+              @click="$refs.selectImg.click()"
+              v-if="!profileImageUpdate.preview"
+            >
+              <input
+                type="file"
+                @change="onChangeFunc"
+                ref="selectImg"
+                name="image"
+                style="display: none"
+              />
+              <button>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </button>
+            </div>
+            <div
+              class="input"
+              @click="onFileSubmit"
+              v-if="profileImageUpdate.preview"
+            >
+              <button><i class="fa-solid fa-floppy-disk"></i>save</button>
+            </div>
           </div>
           <span class="about">About</span>
-          <p>
-            {{ description }}
-            <label for="slang"><i class="fa-solid fa-pen"></i></label>
-          </p>
+          <div class="title">
+            <p>
+              {{ description }}
+              <label for="slang"><i class="fa-solid fa-pen"></i></label>
+            </p>
+          </div>
           <div class="slang">
             <form @submit.prevent="updateTitle()">
               <input
@@ -118,6 +156,16 @@
         <p>{{ readMemoryText }}</p>
       </div>
     </div>
+    <transition name="pop">
+      <div class="response-div" v-if="response.success || response.failed">
+        <div class="success" v-if="response.success">
+          <i class="fa-solid fa-circle-check"></i>{{ response.msg }}
+        </div>
+        <div class="failed" v-if="response.failed">
+          <i class="fa-solid fa-triangle-exclamation"></i>{{ response.msg }}
+        </div>
+      </div>
+    </transition>
     <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
   </main>
 </template>
@@ -274,10 +322,10 @@ export default {
       const formdata = new FormData();
       formdata.append("image", preview.value, preview.value.name);
       axios
-        .post(`api/user/upload/`, formdata, {
+        .post(`api/user/upload/store`, formdata, {
           onUploadProgress: (uploadEvent) => {
             response.success = true;
-            loader.msg = `verifying credentials: please wait!`;
+            loader.msg = `Uploading photo: please wait!`;
 
             loader.percent = computed(() => {
               return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
@@ -292,8 +340,6 @@ export default {
           loader.state = false;
           if (res.statusText === "OK") {
             profile.image = `data:image/png;base64,` + res.data.image;
-            profileImageUpdate.preview =
-              `data:image/png;base64,` + res.data.image;
 
             response.success = true;
             response.msg = "Success! Refresh page to aply changes...";
@@ -356,7 +402,7 @@ export default {
     justify-content: center;
     align-items: center;
     box-shadow: 1px 0 4px 5px rgb(1, 114, 114);
-
+    position: relative;
     @media screen and (max-width: 550px) {
       height: 100%;
       width: 100%;
@@ -416,6 +462,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+      box-shadow: 0px 1px 0.5px rgb(238, 237, 237);
 
       .menu {
         width: 25%;
@@ -459,7 +506,9 @@ export default {
         }
       }
     }
+
     @media screen and (max-width: 550px) {
+      position: relative;
       width: 85%;
       header {
         .items a {
@@ -478,7 +527,7 @@ export default {
 
   .center-main {
     width: 80%;
-    height: 60%;
+    height: 65%;
     position: absolute;
     top: 20%;
     left: 10%;
@@ -489,7 +538,7 @@ export default {
 
     .image {
       width: 40%;
-      height: 100%;
+      height: 90%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -502,7 +551,15 @@ export default {
         width: 100%;
         height: 100%;
         overflow: hidden;
-        box-shadow: 0 0 1px #ececec;
+        box-shadow: 1px -0.3px 1px #ececec;
+      }
+
+      .close {
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        font-size: 30px;
+        color: white;
       }
 
       .drag-and-drop {
@@ -567,6 +624,11 @@ export default {
           border: none;
           border-radius: 5px;
           font-size: 12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 3px;
           i {
             color: rgb(90, 124, 123);
             font-size: 27px;
@@ -584,7 +646,13 @@ export default {
       }
 
       @media screen and (max-width: 550px) {
-        width: 15%;
+        display: none;
+        .img,
+        .input {
+          box-shadow: none;
+          display: none;
+        }
+
         img {
           display: none;
         }
@@ -599,9 +667,12 @@ export default {
 
     .credentials {
       width: 58%;
-      min-height: 100%;
+      height: 100%;
       position: relative;
       transition: all 2s ease;
+      overflow: hidden;
+      overflow-y: auto;
+      padding: 10px 0 20px 10px;
 
       h4 {
         margin-left: 10px;
@@ -628,23 +699,77 @@ export default {
         font: 400 15px "Nunito Sans", sans-serif;
         padding-left: 10px;
       }
-      .img {
-        width: 120px;
-        height: 120px;
-        border-radius: 100%;
-        display: none;
-        overflow: hidden;
 
-        img {
-          height: 100%;
-          width: 0 auto;
+      .small-screen-image {
+        width: 100%;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        display: none;
+
+        .img {
+          width: 120px;
+          height: 120px;
+          border-radius: 100%;
+          overflow: hidden;
+          margin: 0;
+          box-shadow: 0 0 2px rgb(230, 228, 228);
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .input {
+          position: relative;
+          width: 50px;
+          height: 50px;
+          border-radius: 100%;
+          overflow: hidden;
+          background: white;
+          box-shadow: 0 0 4px rgb(148, 147, 147);
+
+          input {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border: none;
+            visibility: hidden;
+            background: transparent;
+          }
+          button {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            border-radius: 5px;
+            font-size: 10px;
+            i {
+              color: rgb(90, 124, 123);
+              font-size: 27px;
+            }
+          }
         }
       }
-
       .about {
         color: teal;
         padding-left: 10px;
       }
+      .title {
+        width: 100%;
+        height: fit-content;
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       p {
         padding: 0 10px;
         font: 500 14px "Poppins", sans-serif;
@@ -663,11 +788,9 @@ export default {
         }
       }
       .slang {
-        width: 100%;
+        width: 95%;
         height: fit-content;
-        position: absolute;
-        bottom: 0;
-        left: 10px;
+        padding: 10px 0;
 
         form {
           width: 100%;
@@ -701,10 +824,9 @@ export default {
       }
 
       @media screen and (max-width: 550px) {
-        width: 85%;
-
-        .img {
-          display: block;
+        width: 100%;
+        .small-screen-image {
+          display: flex;
           margin: auto;
         }
         h1,
@@ -712,7 +834,7 @@ export default {
         h4,
         .about,
         p {
-          padding-left: 0;
+          padding-left: 5px;
         }
 
         h1 {
@@ -722,9 +844,6 @@ export default {
             font-size: 16px;
           }
         }
-        .slang {
-          left: 0;
-        }
       }
     }
     .credentials.squeeze {
@@ -732,9 +851,17 @@ export default {
     }
 
     @media screen and (max-width: 550px) {
-      height: 83%;
-      top: 15%;
-      // left: 0;
+      height: 90%;
+      width: 85%;
+      top: 10%;
+      left: 15%;
+    }
+  }
+
+  .center-main.squeeze {
+    @media screen and (max-width: 550px) {
+      width: 100%;
+      left: 0;
     }
   }
 
@@ -818,6 +945,44 @@ export default {
         font-size: 14px;
       }
     }
+  }
+}
+
+.response-div {
+  width: 100vw;
+  height: fit-content;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  top: 19vh;
+  left: 0;
+  z-index: 1;
+  div {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1;
+    background: rgb(40, 223, 122);
+    font: 600 18px "Poppins", sans-serif;
+
+    i {
+      color: white;
+      font-size: 25px;
+      padding: 0 3px;
+    }
+  }
+  div.failed {
+    background: crimson;
+    color: white;
+  }
+  @media screen and (max-width: 500px) {
+    top: 60vh;
   }
 }
 </style>

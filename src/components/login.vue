@@ -45,7 +45,7 @@
         </p></transition
       >
       <transition name="appear">
-        <p class="errormsg text-primary text-center" v-if="errormsg.process">
+        <p class="errormsg text-secondary text-center" v-if="errormsg.process">
           {{ errormsg.invalidMsg }}
         </p>
       </transition>
