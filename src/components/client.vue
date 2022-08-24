@@ -26,8 +26,8 @@
         <router-link to="/overview/todo" class="route">
           <i class="fa-regular fa-address-book"></i><span>todo app</span>
         </router-link>
-        <router-link to="/overview/imageCompressor" class="route"
-          ><i class="fa-solid fa-bitcoin-sign"></i><span>imageCompressor</span>
+        <router-link to="/overview/imageCompressor/" class="route"
+          ><i class="fa-solid fa-minimize"></i><span>imageCompressor</span>
         </router-link>
         <router-link to="/overview/Exchange" class="route"
           ><i class="fa-solid fa-sack-dollar"></i><span>exchange</span>
@@ -75,10 +75,10 @@
           <i class="fa-regular fa-address-book"></i><span>todo app</span>
         </router-link>
         <router-link
-          to="/overview/imageCompressor"
+          to="/overview/imageCompressor/"
           class="route"
           @click="squeezeFunc()"
-          ><i class="fa-solid fa-bitcoin-sign"></i><span>imageCompressor</span>
+          ><i class="fa-solid fa-minimize"></i><span>imageCompressor</span>
         </router-link>
         <router-link
           to="/overview/Exchange"
@@ -171,7 +171,6 @@ main {
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
-  background: rgb(212, 216, 228);
   background: white;
   padding: 0;
   margin: 0;

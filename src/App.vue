@@ -19,6 +19,10 @@
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   transition: all 0.3s ease;
 }

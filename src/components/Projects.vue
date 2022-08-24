@@ -33,10 +33,10 @@
                 well structured dairy we provide easy to use
               </p>
               <div class="card-buttons">
-                <router-link to="/overview/Todo" class="btn"
+                <router-link to="/overview/imageCompressor/compress" class="btn"
                   >learn more</router-link
                 >
-                <router-link to="/overview/Todo" class="btn"
+                <router-link to="/overview/imageCompressor/compress" class="btn"
                   >Get Started</router-link
                 >
               </div>
