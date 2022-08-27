@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <header>
+    <!-- <header>
       <nav class="large-screen">
         <router-link to="/" class="route">home</router-link>
       </nav>
@@ -13,52 +13,60 @@
       <nav class="small-screen">
         <i class="fa-solid fa-bars" @click="toggle = !toggle"></i>
       </nav>
-    </header>
-    <form @submit.prevent="login" class="log-in">
-      <h1>welcome to <span id="welcome">KCN'S dairy</span></h1>
-      <div>
-        <label for="name">name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          class="text-capitalize"
-          v-model="user.username"
-          placeholder="Enter your Dairy name..."
-          required
-        />
-      </div>
-      <div>
-        <label for="password">password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          v-model="user.password"
-          placeholder="Enter password..."
-          required
-        />
-      </div>
-      <transition name="appear">
-        <p class="errormsg text-danger text-center" v-if="errormsg.valid">
-          {{ errormsg.invalidMsg }}
-        </p></transition
-      >
-      <transition name="appear">
-        <p class="errormsg text-secondary text-center" v-if="errormsg.process">
-          {{ errormsg.invalidMsg }}
-        </p>
-      </transition>
-      <button id="log-in" class="btn" type="submit">
-        log in <i class="fa fa-arrow-right"></i>
-      </button>
-      <p>
-        don't have an account? <router-link to="/Register">sign up</router-link>
-        <span><a href="/forgot_password"> forgot password?</a></span>
-      </p>
-    </form>
+    </header> -->
+    <Header />
     <img src="../assets/desk.svg" id="desk" alt="learning never ends" />
     <img src="../assets/list.svg" id="pic" alt="codingHerald" />
+    <div class="form-login">
+      <form @submit.prevent="login" class="log-in">
+        <h1>welcome to <span id="welcome">KCN'S dairy</span></h1>
+        <div>
+          <label for="name">name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="text-capitalize"
+            v-model="user.username"
+            placeholder="Enter your Dairy name..."
+            required
+          />
+        </div>
+        <div>
+          <label for="password">password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            v-model="user.password"
+            placeholder="Enter password..."
+            required
+          />
+        </div>
+        <transition name="appear">
+          <p class="errormsg text-danger text-center" v-if="errormsg.valid">
+            {{ errormsg.invalidMsg }}
+          </p></transition
+        >
+        <transition name="appear">
+          <p
+            class="errormsg text-secondary text-center"
+            v-if="errormsg.process"
+          >
+            {{ errormsg.invalidMsg }}
+          </p>
+        </transition>
+        <button id="log-in" class="btn" type="submit">
+          log in <i class="fa fa-arrow-right"></i>
+        </button>
+        <p>
+          don't have an account?
+          <router-link to="/Register">sign up</router-link>
+          <span><a href="/forgot_password"> forgot password?</a></span>
+        </p>
+      </form>
+    </div>
+
     <transition name="appear">
       <div class="items" v-if="toggle">
         <a href="/" class="route">Home</a>
@@ -74,10 +82,12 @@ import { reactive, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import Spinner from "./spinner.vue";
+import Header from "./Header.vue";
 export default {
   name: "Login",
   components: {
     Spinner,
+    Header,
   },
   setup() {
     const router = useRouter();
@@ -166,7 +176,6 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  margin: 0;
   width: 100vw;
   height: 100vh;
   background: linear-gradient(
@@ -177,87 +186,30 @@ export default {
   );
   background-attachment: fixed;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  header {
-    width: 100vw;
-    height: 10vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0 20px;
+  padding: 0;
+  padding-bottom: 20px;
+  margin: 0;
+
+  .form-login {
+    width: 100%;
+    height: fit-content;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    background: white;
-    box-shadow: 0 1px 2px 1px rgb(216, 216, 216);
-
-    nav {
-      width: fit-content;
-      height: fit-content;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-
-      h1 {
-        text-transform: capitalize;
-        font: 700 25px "Poppins", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .route {
-        cursor: pointer;
-        text-decoration: none;
-        text-transform: capitalize;
-        color: teal;
-        font: 600 17px "Poppins", sans-serif;
-        transition: all 0.3s ease;
-
-        &:hover {
-          color: rgba(2, 82, 187, 0.685);
-          border-bottom: 2px solid rgba(2, 82, 187, 0.685);
-        }
-      }
-    }
-    nav.small-screen {
-      display: none;
-    }
-
-    @media screen and (max-width: 625px) {
-      flex-direction: row-reverse;
-      nav.large-screen {
-        display: none;
-      }
-      nav.small-screen {
-        display: block;
-        position: relative;
-        i {
-          font-size: 30px;
-          color: teal;
-          cursor: pointer;
-        }
-      }
-    }
+    overflow-y: auto;
+    position: relative;
   }
 
   .log-in {
     width: 500px;
     height: fit-content;
-    margin: 0 auto;
-    margin-top: 6vh;
     background: white;
     border-radius: 5px;
+    margin-top: 17vh;
     padding: 25px 20px;
     position: relative;
-    z-index: 1;
+    // z-index: 1;
 
     h1 {
       text-align: center;
@@ -405,24 +357,31 @@ export default {
     p {
       padding: 5px;
       margin-left: 5%;
-      font-size: 13px;
+      font-size: 11px;
       cursor: pointer;
       color: teal;
 
       a {
         text-decoration: none;
         color: brown;
-        margin-right: 10px;
+        margin-right: 5px;
       }
 
       span {
         float: right;
-        margin-right: 5%;
+        margin-right: 1%;
+      }
 
-        @media screen and (max-width: 417px) {
-          float: left;
+      @media screen and (max-width: 380px) {
+        span {
+          float: none;
+          display: block;
         }
       }
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 95vw;
     }
   }
 
@@ -452,18 +411,34 @@ export default {
   }
 
   #desk {
-    position: fixed;
+    position: absolute;
     top: 20vh;
     left: 7%;
     height: 380px;
     width: auto;
+
+    @media screen and (max-width: 800px) {
+      height: 130px;
+
+      @media screen and (max-width: 270px) {
+        height: 100px;
+      }
+    }
   }
   #pic {
-    position: fixed;
-    top: 10vh;
+    position: absolute;
+    top: 15vh;
     right: 3%;
-    width: 450px;
+    width: 400px;
     z-index: 0.5;
+
+    @media screen and (max-width: 800px) {
+      width: 300px;
+
+      @media screen and (max-width: 430px) {
+        width: 150px;
+      }
+    }
   }
 }
 </style>

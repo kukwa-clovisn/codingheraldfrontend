@@ -1,8 +1,6 @@
 <template>
-  <main>
-    <div class="header">
-      <Header />
-    </div>
+  <div class="main">
+    <Header />
 
     <div class="form">
       <form @submit.prevent="updatePassword()" v-if="user.step1">
@@ -81,7 +79,7 @@
         <span>{{ user.msg }}</span>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -212,28 +210,29 @@ $baseColor: #072e54;
 $fallback: rgb(19, 37, 62);
 $col: #3d566f;
 
-main {
-  // background: rgb(249, 225, 198);
+.main {
   width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    to top,
+    rgba(21, 122, 253, 0.685) 0%,
+    rgba(171, 250, 171, 0.623) 40%,
+    rgba(20, 164, 212, 0.877) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-y: auto;
   padding: 0;
-
-  .header {
-    background: $fallback;
-    width: 100%;
-  }
+  position: relative;
 
   .form {
     width: 100%;
-    height: 83vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    background: url(../assets/login.png);
-    background-position: left;
-    background-attachment: fixed;
-    background-size: 30% auto;
-    background-repeat: no-repeat;
+    background: transparent;
 
     form {
       width: 500px;
@@ -242,6 +241,7 @@ main {
       border-radius: 7px;
       background: white;
       margin: auto;
+      position: relative;
 
       h1 {
         font-family: "Grand Hotel", cursive;
@@ -308,6 +308,24 @@ main {
       position: absolute;
       bottom: 10px;
       left: 40%;
+    }
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url(../assets/login.png);
+      background-position: left;
+      background-attachment: fixed;
+      background-size: 40% auto;
+      background-repeat: no-repeat;
+
+      @media screen and (max-width: 600px) {
+        background-size: 70% auto;
+      }
     }
   }
 

@@ -21,7 +21,7 @@
           </nav>
           <nav class="nav">
             <i class="fa-solid fa-envelope icon"></i>
-            <p>kukwaclovisngong3@gmail.com</p>
+            <p>codingherald@gmail.com</p>
           </nav>
         </div>
         <form @submit.prevent="sendMessage()">
@@ -206,15 +206,31 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(
+    to top,
+    rgba(21, 122, 253, 0.685) 0%,
+    rgba(171, 250, 171, 0.623) 40%,
+    rgba(20, 164, 212, 0.877) 100%
+  );
+  background-attachment: scroll;
+  background-size: cover;
 
   .home {
+    width: 100px;
+    height: 35px;
     position: fixed;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 20px;
     left: 20px;
     text-decoration: none;
     z-index: 1;
-    color: rgb(169, 245, 245);
-    font: 600 20px "Poppins", sans-serif;
+    color: rgb(151, 152, 152);
+    font: 500 15px "Poppins", sans-serif;
+    background: white;
+    border-radius: 4px;
   }
 
   .contact-form {
@@ -223,7 +239,7 @@ main {
     padding: 30px 5px 20px 5px;
     position: relative;
     margin-bottom: 0;
-    background: linear-gradient(to bottom right, #390764, #b93e82, white);
+    background: transparent;
 
     .bubble {
       width: 200px;
@@ -245,7 +261,14 @@ main {
       overflow: hidden;
       opacity: 1;
       border-radius: 70% 0 0 0;
-      background: linear-gradient(90deg, rgb(12, 105, 105), teal);
+      background: linear-gradient(
+        to top,
+        rgba(21, 122, 253, 0.685) 0%,
+        rgba(171, 250, 171, 0.623) 40%,
+        rgba(20, 164, 212, 0.877) 100%
+      );
+      background-attachment: fixed;
+      background-size: cover;
     }
 
     h1 {
@@ -257,7 +280,7 @@ main {
     }
 
     h6 {
-      color: #c2c2c2;
+      color: #efeded;
       padding: 10px;
       text-align: center;
       font: 400 13px "Poppins", sans-serif;
@@ -287,7 +310,7 @@ main {
         }
         p {
           padding: 0;
-          color: #dbd9d9;
+          color: #f5f5f5;
         }
       }
 
@@ -326,7 +349,7 @@ main {
         text-transform: capitalize;
         width: 100%;
         text-align: center;
-        color: teal;
+        color: rgb(102, 104, 104);
       }
 
       .top-form {
@@ -352,7 +375,7 @@ main {
               text-align: left;
               text-transform: capitalize;
               display: block;
-              color: rgb(24, 109, 109);
+              color: rgb(105, 105, 105);
               font: 700 18px "Poppins", sans-serif;
               width: 100%;
               padding: 2px 0 4px 0;
@@ -373,7 +396,7 @@ main {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: teal;
+                color: rgb(119, 119, 119);
               }
 
               input {
@@ -397,7 +420,7 @@ main {
             text-align: left;
             text-transform: capitalize;
             display: block;
-            color: teal;
+            color: rgb(109, 110, 110);
             font: 800 18px "Poppins", sans-serif;
             width: 100%;
             padding: 2px 0 4px 0;
@@ -437,7 +460,7 @@ main {
         h3 {
           text-align: left;
           text-transform: capitalize;
-          color: teal;
+          color: rgb(136, 136, 136);
           font: 800 19px "Poppins", sans-serif;
           padding: 10px;
           padding-left: 0;
@@ -460,7 +483,7 @@ main {
 
             span {
               text-transform: capitalize;
-              color: teal;
+              color: rgb(125, 125, 125);
               font: 500 16px Poppins, sans-serif;
 
               @media screen and (max-width: 600px) {

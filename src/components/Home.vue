@@ -1,6 +1,9 @@
 <template>
   <main>
-    <Header />
+    <header>
+      <Header />
+    </header>
+
     <Logo />
     <div
       class="
@@ -100,6 +103,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  z-index: 1;
+  background: rgb(212, 216, 228);
+  box-shadow: 0 2px 5px rgb(183, 183, 183);
+}
 .home {
   width: 100%;
   min-height: 35vh;

@@ -151,5 +151,8 @@ i {
 }
 #main {
   width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 </style>

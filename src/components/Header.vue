@@ -1,11 +1,12 @@
 <template>
   <main>
-    <header class="large-screens">
+    <header class="large-screens" :class="{ whiteBg: showApps }">
       <nav class="logo">
         <router-link to="/" class="logoName" title="go to home">CH</router-link>
       </nav>
       <nav @click="dropDownApps()">
-        <span class="route-to">services</span>
+        <router-link to="/" class="route-to">Home</router-link>
+        <span class="route-to">about us</span>
       </nav>
       <transition name="fade">
         <div id="app-list" v-if="showApps">
@@ -35,48 +36,9 @@
         </div>
       </transition>
       <nav>
-        <router-link to="/login" class="route-to">sign in</router-link>
+        <router-link to="/contact" class="route-to">contact</router-link>
+        <router-link to="/register" class="route-to">sign up</router-link>
       </nav>
-    </header>
-    <header class="small-screens" :class="{ whiteBg: showApps }">
-      <nav class="logo" title="In Christ alone#TeamJesus4Life">
-        <router-link to="/" class="logoName">Codingherald</router-link>
-      </nav>
-      <nav id="bars" @click="toggleMenu()">
-        <i
-          class="fa-solid fa-bars menu-bars"
-          id="menu-bars"
-          v-if="!showApps"
-        ></i
-        ><i class="fa-solid fa-xmark menu-bars" v-if="showApps"></i>
-      </nav>
-      <transition name="fade">
-        <div id="app-list" v-if="showApps">
-          <h1>our courses and services</h1>
-          <ul>
-            <li>
-              <a href="https://advancedtechacademy.herokuapp.com"
-                ><i class="fa-solid fa-graduation-cap"></i>academy</a
-              >
-            </li>
-            <li>
-              <a href="/overview/Todo"
-                ><i class="fa-solid fa-calendar-check"></i>dairy</a
-              >
-            </li>
-            <li>
-              <a href="/overview/currency"
-                ><i class="fa-brands fa-bitcoin"></i>cryptoswap</a
-              >
-            </li>
-            <li>
-              <a href="/https://advancedtechacademy.herokuapp.com"
-                ><i class="fa-solid fa-music"></i>piano lessons</a
-              >
-            </li>
-          </ul>
-        </div>
-      </transition>
     </header>
   </main>
 </template>
@@ -99,7 +61,13 @@ export default {
       showApps.value = !showApps.value;
     }
 
-    return { showApps, clicked, toggled, toggleMenu, dropDownApps };
+    return {
+      showApps,
+      clicked,
+      toggled,
+      toggleMenu,
+      dropDownApps,
+    };
   },
 };
 </script>
@@ -109,14 +77,17 @@ main {
   width: 100vw;
   height: fit-content;
   header {
-    width: 95%;
-    height: 15vh;
+    width: 100%;
+    height: 10vh;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: transparent;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
 
     nav {
       display: flex;
@@ -127,8 +98,8 @@ main {
 
       .route-to {
         text-decoration: none;
-        color: teal;
-        font: 600 17px "Poppins", sans-serif;
+        color: rgb(242, 244, 244);
+        font: 500 13px "Poppins", sans-serif;
         text-transform: capitalize;
         cursor: pointer;
       }
@@ -139,29 +110,29 @@ main {
 
       .logoName {
         color: rgb(176, 77, 38);
-        font: 800 45px "Poppins", sans-serif;
+        font: 700 17px "Poppins", sans-serif;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 80px;
-        height: 80px;
+        width: 35px;
+        height: 35px;
 
         &::before {
           content: "";
-          width: 80px;
-          height: 80px;
+          width: 35px;
+          height: 35px;
           border-radius: 100%;
           position: absolute;
           top: 0;
           right: 0;
-          border: 3px solid rgb(176, 77, 38);
+          border: 3px solid teal;
         }
 
         &::after {
           content: "";
-          width: 80px;
-          height: 80px;
+          width: 35px;
+          height: 35px;
           border-radius: 100%;
           position: absolute;
           top: 0;
@@ -178,15 +149,15 @@ main {
 
     #app-list {
       width: 100vw;
-      height: 17vh;
+      height: fit-content;
       background: white;
-      position: absolute;
-      bottom: -100%;
-      left: -2.5%;
+      position: fixed;
+      top: 10vh;
+      left: 0;
       z-index: 1;
 
       h1 {
-        padding: 5px;
+        padding: 10px 5px;
         text-transform: capitalize;
         font: 600 15px "Poppins", sans-serif;
         text-align: center;
@@ -203,6 +174,8 @@ main {
         li {
           list-style-type: none;
           width: 16%;
+          flex-basis: 1;
+          flex-grow: 1;
           height: 9vh;
           cursor: pointer;
 
@@ -214,7 +187,7 @@ main {
             align-items: center;
             text-decoration: none;
             text-transform: capitalize;
-            font: 500 14px "Poppins", sans-serif;
+            font: 500 11px "Poppins", sans-serif;
             color: teal;
 
             i {
@@ -225,14 +198,55 @@ main {
           }
         }
       }
+
+      @media screen and (max-width: 500px) {
+        height: fit-content;
+        top: 10vh;
+        left: 0;
+        box-shadow: 0 7px 5px rgb(220, 219, 219);
+        ul {
+          flex-direction: column;
+          height: fit-content;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          background: rgb(255, 252, 252);
+
+          li {
+            width: 100%;
+            flex-grow: 1;
+            flex-basis: 1;
+            margin: 0;
+            border-top: 1px solid rgb(228, 226, 226);
+
+            a {
+              padding-left: 20px;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+
+              i {
+                padding-right: 20px;
+              }
+            }
+            &:hover {
+              background: #ffffff;
+              border-left: 5px solid rgb(176, 77, 38);
+            }
+            &:active {
+              transform: scale(1);
+            }
+          }
+        }
+      }
     }
 
     #bars {
-      font-size: 33px;
+      font-size: 28px;
       width: 20%;
       text-align: center;
       position: relative;
-      color: rgb(2, 126, 109);
+      color: rgb(255, 255, 255);
       cursor: pointer;
       transition: all 0.3s ease;
 
@@ -248,64 +262,31 @@ main {
       }
     }
 
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  .small-screens {
-    display: none;
-    @media screen and (max-width: 768px) {
-      display: flex;
-      width: 100%;
-      margin: auto;
-      .logo {
-        width: 50%;
-        .logoName {
-          font-size: 15px;
-        }
-      }
-
-      #app-list {
-        height: fit-content;
-        bottom: -294%;
-        left: 0;
-        ul {
-          flex-direction: column;
-          height: fit-content;
-          padding: 0;
-          width: 100%;
-
-          li {
-            width: 100%;
-            margin: 0;
-
-            a {
-              padding-left: 15px;
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-
-              i {
-                padding-right: 10px;
-              }
-            }
-            &:hover {
-              background: #efefef;
-              border-left: 5px solid rgb(176, 77, 38);
-            }
-            &:active {
-              transform: scale(1);
-            }
-          }
+    @media screen and (max-width: 500px) {
+      nav {
+        width: 36%;
+        .route-to {
+          font-size: 9px;
         }
       }
     }
   }
-  .small-screens.whiteBg {
+
+  .large-screens {
+    background: inherit;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  header.whiteBg {
     background: white;
-    width: 100vw;
-    padding: 0 20px;
+    box-shadow: none;
+
+    nav .route-to {
+      color: teal;
+    }
   }
 }
 </style>
