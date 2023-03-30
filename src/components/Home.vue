@@ -72,7 +72,7 @@ export default {
       remove: true,
     };
   },
-  updated() {
+  watch() {
     this.myFunction();
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
         document.body.scrollTop > 50 ||
         document.documentElement.scrollTop > 50
       ) {
-        // alert("we are moving");
+        alert("we are moving");
       }
     },
     change() {

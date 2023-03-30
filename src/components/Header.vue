@@ -37,7 +37,12 @@
       </transition>
       <nav>
         <router-link to="/contact" class="route-to">contact</router-link>
-        <router-link to="/register" class="route-to">sign up</router-link>
+        <router-link to="/register" class="route-to"
+          >sign up
+          <!-- <transition name="trying">
+            <span></span>
+          </transition> -->
+        </router-link>
       </nav>
     </header>
   </main>
@@ -73,6 +78,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.trying.enter-from {
+  width: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: teal;
+  animation: hovering-in 1s linear alternate forwards;
+}
+.trying.enter-to {
+  left: 0;
+  width: 100%;
+}
+.trying.leave-to {
+  animation: hovering-out 1s linear alternate forwards;
+}
 main {
   width: 100vw;
   height: fit-content;
@@ -98,10 +119,37 @@ main {
 
       .route-to {
         text-decoration: none;
-        color: rgb(242, 244, 244);
+        color: teal;
         font: 500 13px "Poppins", sans-serif;
         text-transform: capitalize;
         cursor: pointer;
+        position: relative;
+
+        span {
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background: rgb(3, 183, 183);
+          border-radius: 30px;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background: rgb(4, 155, 155);
+          animation: hovering 1s 2 linear alternate forwards;
+        }
+      }
+    }
+
+    @keyframes hovering {
+      to {
+        width: 100%;
       }
     }
 
