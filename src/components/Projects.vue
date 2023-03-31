@@ -1,126 +1,123 @@
 <template>
   <main>
-    <header class="header">
-      <h1>being in a world of creativity</h1>
-      <h3>Go through our various applications</h3>
+    <header class="header" data-aos="slide-right">
+      <h1 data-aos="slide-up">being in a world of creativity</h1>
+      <h3 data-aos="slide-up">Go through our various applications</h3>
     </header>
     <div class="courses-div">
-      <transition name="slide-in">
-        <div id="container">
-          <div class="card-container">
-            <div class="card-header">
-              <div class="img">
-                <img src="../assets/list.svg" alt="" />
-              </div>
-              <div class="card-media">
-                <a href="https://www.facebook.com/237atech/" class="route">
-                  <i class="fa-brands fa-facebook"></i></a
-                ><a href="https://wa.link/geye6o" class="route"
-                  ><i class="fa-brands fa-whatsapp"></i></a
-                ><a href="https://twitter.com/KukwaNgong" class="route"
-                  ><i class="fa-brands fa-twitter"></i></a
-                ><a
-                  href="https://www.linkedin.com/in/codingherald/"
-                  class="route"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
+      <div id="container">
+        <div class="card-container" data-aos="flip-left">
+          <div class="card-header">
+            <div class="img">
+              <img data-aos="slide-up" src="../assets/list.svg" alt="" />
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Dairy</h2>
-              <p class="card-description">
-                Failing to plan is planning to fail. Plan out your day with the
-                well structured dairy we provide easy to use
-              </p>
-              <div class="card-buttons">
-                <router-link to="/overview/imageCompressor/compress" class="btn"
-                  >learn more</router-link
-                >
-                <router-link to="/overview/imageCompressor/compress" class="btn"
-                  >Get Started</router-link
-                >
-              </div>
+            <div class="card-media">
+              <a href="https://www.facebook.com/237atech/" class="route">
+                <i class="fa-brands fa-facebook"></i></a
+              ><a href="https://wa.link/geye6o" class="route"
+                ><i class="fa-brands fa-whatsapp"></i></a
+              ><a href="https://twitter.com/KukwaNgong" class="route"
+                ><i class="fa-brands fa-twitter"></i></a
+              ><a href="https://www.linkedin.com/in/codingherald/" class="route"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
             </div>
           </div>
-          <div class="card-container">
-            <div class="card-header">
-              <div class="img">
-                <img src="../assets/auth.png" alt="" />
-              </div>
-              <div class="card-media">
-                <a href="https://www.facebook.com/237atech/" class="route">
-                  <i class="fa-brands fa-facebook"></i
-                ></a>
-                <a href="https://wa.link/geye6o" class="route"
-                  ><i class="fa-brands fa-whatsapp"></i></a
-                ><a href="https://twitter.com/KukwaNgong" class="route"
-                  ><i class="fa-brands fa-twitter"></i></a
-                ><a
-                  href="https://www.linkedin.com/in/codingherald/"
-                  class="route"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="card-title">Image compressor</h2>
-              <p class="card-description">
-                Compress you images to a smaller size but still maintain your
-                image quality. Try out our image compressor
-              </p>
-              <div class="card-buttons">
-                <router-link to="/overview/Todo" class="btn"
-                  >learn more</router-link
-                >
-                <router-link to="/overview/Todo" class="btn"
-                  >Get Started</router-link
-                >
-              </div>
-            </div>
-          </div>
-          <div class="card-container">
-            <div class="card-header">
-              <div class="img">
-                <img src="../assets/currency.png" alt="" />
-              </div>
-              <div class="card-media">
-                <a href="https://www.facebook.com/237atech/" class="route">
-                  <i class="fa-brands fa-facebook"></i></a
-                ><a href="https://wa.link/geye6o" class="route"
-                  ><i class="fa-brands fa-whatsapp"></i></a
-                ><a href="https://twitter.com/KukwaNgong" class="route"
-                  ><i class="fa-brands fa-twitter"></i></a
-                ><a
-                  href="https://www.linkedin.com/in/codingherald/"
-                  class="route"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h2 class="card-title">CH swap</h2>
-              <p class="card-description">
-                Get to know the exact value of your currency with respect to
-                other currencies anytime with out CH swap currency converter.
-              </p>
-              <div class="card-buttons">
-                <router-link to="/overview/Todo" class="btn"
-                  >learn more</router-link
-                >
-                <router-link to="/overview/Todo" class="btn"
-                  >Get Started</router-link
-                >
-              </div>
+          <div class="card-body">
+            <h2 class="card-title" data-aos="slide-up">Dairy</h2>
+            <p class="card-description" data-aos="slide-up">
+              Failing to plan is planning to fail. Plan out your day with the
+              well structured dairy we provide easy to use
+            </p>
+            <div class="card-buttons" data-aos="slide-up">
+              <router-link
+                to="/overview/imageCompressor/compress"
+                class="btn"
+                data-aos="slide-up"
+                >learn more</router-link
+              >
+              <router-link
+                to="/overview/imageCompressor/compress"
+                class="btn"
+                data-aos="slide-up"
+                >Get Started</router-link
+              >
             </div>
           </div>
         </div>
-      </transition>
+        <div class="card-container" data-aos="flip-left">
+          <div class="card-header">
+            <div class="img">
+              <img data-aos="slide-up" src="../assets/auth.png" alt="" />
+            </div>
+            <div class="card-media">
+              <a href="https://www.facebook.com/237atech/" class="route">
+                <i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://wa.link/geye6o" class="route"
+                ><i class="fa-brands fa-whatsapp"></i></a
+              ><a href="https://twitter.com/KukwaNgong" class="route"
+                ><i class="fa-brands fa-twitter"></i></a
+              ><a href="https://www.linkedin.com/in/codingherald/" class="route"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title" data-aos="slide-up">Image compressor</h2>
+            <p class="card-description" data-aos="slide-up">
+              Compress you images to a smaller size but still maintain your
+              image quality. Try out our image compressor
+            </p>
+            <div class="card-buttons">
+              <router-link to="/overview/Todo" class="btn" data-aos="slide-up"
+                >learn more</router-link
+              >
+              <router-link to="/overview/Todo" class="btn" data-aos="slide-up"
+                >Get Started</router-link
+              >
+            </div>
+          </div>
+        </div>
+        <div class="card-container" data-aos="flip-left">
+          <div class="card-header">
+            <div class="img">
+              <img data-aos="slide-up" src="../assets/currency.png" alt="" />
+            </div>
+            <div class="card-media">
+              <a href="https://www.facebook.com/237atech/" class="route">
+                <i class="fa-brands fa-facebook"></i></a
+              ><a href="https://wa.link/geye6o" class="route"
+                ><i class="fa-brands fa-whatsapp"></i></a
+              ><a href="https://twitter.com/KukwaNgong" class="route"
+                ><i class="fa-brands fa-twitter"></i></a
+              ><a href="https://www.linkedin.com/in/codingherald/" class="route"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title" data-aos="slide-up">CH swap</h2>
+            <p class="card-description" data-aos="slide-up">
+              Get to know the exact value of your currency with respect to other
+              currencies anytime with out CH swap currency converter.
+            </p>
+            <div class="card-buttons">
+              <router-link to="/overview/Todo" class="btn" data-aos="slide-up"
+                >learn more</router-link
+              >
+              <router-link to="/overview/Todo" class="btn" data-aos="slide-up"
+                >Get Started</router-link
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-// import { ref } from "vue";
 import "../utils/style.css";
 export default {
   name: "Projects",
@@ -147,7 +144,7 @@ header {
   }
   h3 {
     text-align: center;
-    font-size: 23px;
+    font-size: 19px;
     color: teal;
     padding: 5px;
     font-weight: 500;

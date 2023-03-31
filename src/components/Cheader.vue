@@ -110,7 +110,7 @@ export default {
 <style lang="scss" scoped>
 header {
   width: 100%;
-  height: 10vh;
+  height: 13vh;
   display: flex;
   justify-content: space-between;
   align-items: center;

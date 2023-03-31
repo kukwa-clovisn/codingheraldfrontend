@@ -21,7 +21,7 @@
 #container .card-container .card-header {
   height: 45%;
   width: 100%;
-  background: #1d3b67;
+  background: #215564;
   position: relative;
   border: none;
 }
@@ -104,7 +104,7 @@
   border-radius: 30px;
   border: none;
   text-decoration: none;
-  background: #2e5693;
+  background: #215564;
   color: white;
   display: flex;
   justify-content: center;
@@ -123,20 +123,20 @@
 }
 #container .card-container .card-body .card-buttons .btn:last-child {
   background: transparent;
-  box-shadow: 0 0 1px 1px #1ca0de;
-  color: #1ca0de;
+  box-shadow: 0 0 1px 1px #215564;
+  color: #1d4e64;
 }
 #container .card-container .card-body:hover {
   background: whitesmoke;
 }
 #container .card-container:hover {
-  background: linear-gradient(to bottom left, #1ca0de, #0c1725);
+  background: linear-gradient(to bottom left, #2c7387, #215564);
 }
 #container .card-container:hover .card-header {
-  background: linear-gradient(to top left, #1ca0de, #0c1725);
+  background: linear-gradient(to top left, #2d7a8f, #215564);
 }
 #container .card-container:hover .card-body {
-  background: linear-gradient(to bottom left, #1ca0de, #0c1725);
+  background: linear-gradient(to bottom left, #297185, #215564);
   color: white;
 }
 #container .card-container:hover .card-body .card-title,

@@ -2,11 +2,14 @@
   <main>
     <header class="large-screens" :class="{ whiteBg: showApps }">
       <nav class="logo">
-        <router-link to="/" class="logoName" title="go to home">CH</router-link>
+        <router-link to="/" class="logoName" title="go to home"
+          ><img src="../../public/logo-white.jpg" alt=""
+        /></router-link>
       </nav>
-      <nav @click="dropDownApps()">
+      <nav>
         <router-link to="/" class="route-to">Home</router-link>
-        <span class="route-to">about us</span>
+        <span @click="dropDownApps()" class="route-to">about us</span>
+        <a href="/#apps" class="route-to">apps</a>
       </nav>
       <transition name="fade">
         <div id="app-list" v-if="showApps">
@@ -84,7 +87,7 @@ export default {
   left: 0;
   bottom: 0;
   height: 3px;
-  background: teal;
+  background: rgb(33, 85, 100);
   animation: hovering-in 1s linear alternate forwards;
 }
 .trying.enter-to {
@@ -99,15 +102,12 @@ main {
   height: fit-content;
   header {
     width: 100%;
-    height: 10vh;
+    height: 13vh;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
-    position: fixed;
-    top: 0;
-    left: 0;
+    background: rgb(33, 85, 100);
     z-index: 1;
 
     nav {
@@ -119,7 +119,7 @@ main {
 
       .route-to {
         text-decoration: none;
-        color: teal;
+        color: rgb(255, 255, 255);
         font: 500 13px "Poppins", sans-serif;
         text-transform: capitalize;
         cursor: pointer;
@@ -141,8 +141,12 @@ main {
           left: 0;
           width: 0;
           height: 3px;
-          background: rgb(4, 155, 155);
+          background: rgb(241, 210, 3);
           animation: hovering 1s 2 linear alternate forwards;
+        }
+
+        &:hover {
+          color: rgb(248, 212, 9);
         }
       }
     }
@@ -157,40 +161,42 @@ main {
       width: 20%;
 
       .logoName {
-        color: rgb(176, 77, 38);
-        font: 700 17px "Poppins", sans-serif;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        overflow: hidden;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 35px;
-        height: 35px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
 
         &::before {
           content: "";
-          width: 35px;
-          height: 35px;
+          width: 80px;
+          height: 80px;
           border-radius: 100%;
           position: absolute;
           top: 0;
           right: 0;
-          border: 3px solid teal;
+          border: 3px solid rgb(27, 79, 94);
         }
 
         &::after {
           content: "";
-          width: 35px;
-          height: 35px;
+          width: 80px;
+          height: 80px;
           border-radius: 100%;
           position: absolute;
           top: 0;
           right: 0;
-          border: 4px solid teal;
+          border: 4px solid rgb(228, 176, 4);
           transform: rotateY(80deg);
-        }
-
-        &::first-letter {
-          color: teal;
         }
       }
     }
@@ -321,7 +327,7 @@ main {
   }
 
   .large-screens {
-    background: inherit;
+    background: rgb(33, 85, 100);
     position: fixed;
     top: 0;
     left: 0;

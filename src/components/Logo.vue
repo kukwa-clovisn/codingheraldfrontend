@@ -4,13 +4,7 @@
   >
     <div class="media d-flex justify-content-evenly align-items-center">
       <div
-        class="
-          logo
-          d-flex
-          justify-content-center
-          flex-column
-          align-items-center
-        "
+        class="logo d-flex justify-content-center flex-column align-items-center"
       >
         <li>k</li>
         <li>c</li>
@@ -37,27 +31,22 @@ export default {
 
 <style lang="scss">
 .wrapper {
-  background: inherit;
+  background: transparent;
   width: 100%;
-  height: 32vh;
+  height: fit-content;
   position: relative;
+  padding: 20px 0;
 
   .media {
     width: 220px;
     height: 90px;
-    position: absolute;
-    top: 10%;
-    left: 39%;
+
     font-size: 32px;
     font-weight: 700;
-    color: rgb(2, 126, 109);
+    color: rgb(255, 255, 255);
 
     div {
       cursor: pointer;
-    }
-
-    @media screen and (max-width: 425px) {
-      left: 20%;
     }
   }
 
@@ -76,7 +65,7 @@ export default {
       top: 0;
       left: 0;
       border-radius: 50%;
-      border: 3px solid tomato;
+      border: 3px solid rgb(203, 160, 3);
       animation: turn 5s infinite;
     }
     &:after {
@@ -127,18 +116,7 @@ export default {
     height: 72px;
     padding: 0;
     overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    margin: auto;
-    left: 21%;
 
-    @media screen and (max-width: 768px) {
-      left: 2%;
-    }
-
-    @media screen and (max-width: 500px) {
-      left: -40%;
-    }
     li {
       cursor: pointer;
       list-style-type: none;
@@ -152,7 +130,7 @@ export default {
       top: 0;
       font-size: 25px;
       font-weight: 800;
-      color: rgb(176, 77, 38);
+      color: rgb(255, 255, 255);
       animation: move 50s steps(5) infinite;
 
       &:before {
@@ -162,7 +140,7 @@ export default {
         position: absolute;
         bottom: 0;
         left: 0;
-        background: rgb(212, 216, 228);
+        background: rgrgb(33, 85, 100);
         animation: hide 5s infinite alternate forwards;
       }
 
@@ -182,10 +160,6 @@ export default {
         left: 81%;
       }
     }
-  }
-
-  @media screen and(min-width:768px) {
-    margin-top: 15vh;
   }
 }
 </style>

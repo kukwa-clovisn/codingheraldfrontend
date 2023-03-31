@@ -16,9 +16,7 @@ export default {
 div {
   width: fit-content;
   height: 60px;
-  position: absolute;
-  top: 28%;
-  left: 5%;
+
   font-weight: 600;
   font-size: 30px;
   overflow: hidden;
@@ -34,7 +32,7 @@ div {
     padding-left: 10px;
     animation: override 30s infinite steps(3);
     transition: all 0.3s ease;
-    color: rgb(7, 145, 87);
+    color: rgb(255, 255, 255);
 
     @media screen and (max-width: 700px) {
       font-size: 14px;

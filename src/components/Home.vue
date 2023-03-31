@@ -3,47 +3,76 @@
     <header>
       <Header />
     </header>
+    <div class="landing-page">
+      <div class="blur-wrapper"></div>
+      <Logo />
 
-    <Logo />
-    <div
-      class="
-        home
-        d-none d-md-flex d-sm-none d-lg-flex
-        justify-content-between
-        align-items-center
-      "
-    >
-      <!-- <Block /> -->
-      <img
-        src="../assets/desk.svg"
-        alt=""
-        id="desk"
-        class="d-none d-lg-block d-md-block d-sm-none"
-      />
-      <div
-        class="
-          code
-          d-none d-lg-flex d-md-flex d-sm-none
-          align-items-center
-          justify-content-evenly
-          flex-column
-        "
-      >
-        <li>code all-night</li>
-        <li>work hard</li>
-        <li>Jesus first</li>
+      <div class="bn d-flex justify-content-evenly align-items-center">
+        <button class="start" title="sign up to use our apps and products">
+          <a href="#about" class="route">get started</a>
+        </button>
+        <button class="demo" title="Get to know more about ACTA...">
+          <router-link to="/contact" id="demo">contact</router-link>
+        </button>
       </div>
     </div>
-    <div class="bn d-flex justify-content-evenly align-items-center">
-      <button class="start" title="sign up to use our apps and products">
-        <router-link to="/login" class="route">get started</router-link>
-      </button>
-      <button class="demo" title="Get to know more about ACTA...">
-        <router-link to="/contact" id="demo">contact</router-link>
-      </button>
+    <div class="about" id="about">
+      <div class="about-wrapper">
+        <h1 data-aos="slide-up">About us</h1>
+        <p data-aos="slide-up">
+          <span>codingherald</span> is an IT and mulit service organization,
+          with an online and offline academy. We offer services ranging from
+          different IT fields to many other custom trainings and services.
+          <br />
+          We as well have free apps which you can find below to help you ease
+          your work.
+        </p>
+        <p data-aos="slide-up">
+          signup for free and get to know more interesting and fun facts about
+          us!
+        </p>
+
+        <div class="about-content">
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h2>Web development</h2>
+          </div>
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-pen"></i>
+            </div>
+            <h2>Graphic Design</h2>
+          </div>
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <h2>Forex Trading</h2>
+          </div>
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-coins"></i>
+            </div>
+            <h2>Buy & Sell Of Crypto</h2>
+          </div>
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-house"></i>
+            </div>
+            <h2>Real Estate</h2>
+          </div>
+          <div class="service" data-aos="slide-up">
+            <div class="icon">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h2>Custom Trainings</h2>
+          </div>
+        </div>
+      </div>
     </div>
-    <br />
-    <Projects />
+    <Projects id="apps" />
 
     <Footer />
   </main>
@@ -53,12 +82,10 @@
 import Logo from "./Logo.vue";
 import Footer from "./Footer.vue";
 import Header from "./Header.vue";
-// import Block from "./Block.vue";
 import Projects from "./Projects.vue";
 export default {
   name: "Home",
   components: {
-    // Block,
     Logo,
     Footer,
     Header,
@@ -104,88 +131,31 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 10vh;
+  height: 13vh;
   z-index: 1;
-  background: rgb(212, 216, 228);
   box-shadow: 0 2px 5px rgb(183, 183, 183);
 }
-.home {
+
+.landing-page {
   width: 100%;
-  min-height: 35vh;
-  width: 100%;
-  background: inherit;
+  height: 87vh;
+  background: url(../assets/quality-app.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   position: relative;
-
-  .code {
-    position: absolute;
-    background: transparent;
-    right: 24%;
-    top: 0;
-    color: white;
-    height: 23px;
-    overflow: hidden;
-    @media screen and (max-width: 1000px) {
-      right: 28%;
-    }
-
-    @media screen and (max-width: 768px) {
-      right: 30%;
-    }
-
-    li {
-      list-style-type: none;
-      height: 23px;
-      font-size: 0.7em;
-      text-align: left;
-      position: relative;
-      padding: 5px;
-      text-transform: capitalize;
-      top: 23px;
-      animation: code 18s steps(3) infinite;
-      &::after {
-        content: "";
-        width: 100%;
-        height: 23px;
-        position: relative;
-        left: 0;
-        top: -23px;
-        display: flex;
-        animation: show 3s infinite alternate forwards;
-        background: rgb(51, 50, 61);
-      }
-    }
-  }
-
-  @keyframes code {
-    to {
-      top: -44px;
-    }
-  }
-
-  @keyframes show {
-    from {
-      left: 0;
-      width: 100%;
-    }
-    to {
-      left: 100%;
-      width: 0;
-    }
-  }
-  #desk {
-    width: 300px;
-    position: absolute;
-    right: 10%;
-    cursor: pointer;
-  }
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
 }
+
 .bn {
   width: fit-content;
-  margin: 0 auto;
+  margin: 20px auto;
   flex-wrap: wrap;
   position: relative;
 
@@ -194,19 +164,19 @@ header {
     height: 50px;
     border-radius: 30px;
     border: none;
-    background: teal;
+
     cursor: pointer;
     position: relative;
-    top: 0;
+    background: linear-gradient(
+      to top,
+      rgb(226, 178, 3) 0%,
+      rgb(172, 110, 2) 100%
+    );
     margin: 10px;
     animation: bounce 3s infinite alternate forwards;
 
     &:last-child {
-      background: linear-gradient(
-        to top,
-        rgb(110, 42, 8) 0%,
-        rgb(145, 43, 3) 100%
-      );
+      background: teal;
       animation: demo 3s infinite alternate forwards;
     }
 
@@ -249,143 +219,97 @@ header {
   }
 }
 
-// .profile {
-//   width: 100%;
-//   height: 70vh;
-//   background: transparent;
-//   padding: 20px;
-//   position: relative;
+.about {
+  width: 100vw;
+  height: fit-content;
+  .about-wrapper {
+    width: 100%;
+    height: fit-content;
+    padding: 20px auto;
+    padding-top: 30px;
 
-//   .page {
-//     width: 60%;
-//     height: 60vh;
-//     background: white;
-//     margin: 0 auto;
-//     border-radius: 3px;
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     flex-direction: column;
-//     padding: 20px;
-//     position: relative;
+    h1 {
+      text-transform: uppercase;
+      font: 700 40px "Montserrat", "Nunito Sans", sans-serif;
+      padding: 20px 0;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+    p {
+      width: 80%;
+      margin: 10px auto;
 
-//     .close {
-//       font-size: 2em;
-//       position: absolute;
-//       right: 13px;
-//       top: 1px;
-//       cursor: pointer;
-//     }
+      padding: 10px 0;
+      text-align: center;
+      span {
+        color: rgb(146, 124, 3);
+        font-weight: bold;
+      }
+    }
 
-//     .heading {
-//       width: 100%;
-//       height: 50%;
+    .about-content {
+      width: 80%;
+      height: fit-content;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px 20px;
 
-//       img {
-//         height: 90%;
-//         display: block;
-//         margin: auto;
-//         cursor: pointer;
-//       }
-//       h4 {
-//         cursor: pointer;
-//       }
-//     }
+      .service {
+        width: 320px;
+        height: 200px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 0 18px 8px rgb(195, 203, 203);
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
 
-//     .advert {
-//       width: 100%;
-//       height: 10vh;
-//       padding: 10px;
-//       background: rgb(233, 236, 239);
-//       cursor: pointer;
-//       transition: all 0.4s ease;
+        .icon {
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+          background: white;
+          box-shadow: 0 0 15px 8px rgb(210, 221, 222);
+          display: flex;
+          justify-content: center;
+          cursor: pointer;
+          align-items: center;
+          overflow: hidden;
 
-//       &:active {
-//         transform: scale(0.8);
-//       }
-//       p {
-//         color: rgb(54, 51, 51);
-//         font-size: 0.7em;
-//         text-align: center;
-//         line-height: 23px;
+          i {
+            font-size: 40px;
+          }
+        }
 
-//         .route {
-//           text-decoration: none;
-//           color: rgb(255, 145, 0);
-//           font-weight: 600;
-//         }
-//       }
-//     }
+        h2 {
+          font: 600 19px "Montserrat", "Nunito Sans", sans-serif;
+          text-align: center;
+        }
+        &:hover {
+          transform: translateY(-10px);
+          background: orange;
 
-//     button {
-//       min-width: 150px;
-//       text-transform: capitalize;
-//     }
-//   }
-// }
+          .icon {
+            box-shadow: 0 0 17px 8px rgb(185, 121, 1);
+            background: white;
 
-// .profile-one {
-//   width: 90%;
-//   margin: auto;
-//   height: 95vh;
-//   // background: linear-gradient(
-//   //   to right,
-//   //   rgb(36, 36, 36) 0%,
-//   //   rgb(1, 35, 73) 100%
-//   // );
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-evenly;
-//   align-items: center;
+            i {
+              color: rgb(33, 85, 100);
+            }
+          }
 
-//   .photo {
-//     width: 50%;
-//     height: 100%;
-
-//     img {
-//       width: 100%;
-//       display: block;
-//       margin: auto;
-//       border-radius: 5px;
-//       cursor: pointer;
-//     }
-//   }
-
-//   .side-content {
-//     width: 50%;
-//     height: 95vh;
-//     margin-left: 1vw;
-//     border-radius: 5px;
-//     background: white;
-
-//     @media screen and (max-width: 768px) {
-//       width: 80%;
-//     }
-
-//     img {
-//       width: 230px;
-//       height: 230px;
-//       border-radius: 50%;
-//       display: block;
-//       margin: 4vh auto;
-//       cursor: pointer;
-//     }
-
-//     h2 {
-//       font-weight: 700;
-//       padding: 5px;
-//       cursor: pointer;
-//     }
-
-//     p {
-//       text-align: center;
-//     }
-
-//     button {
-//       width: max-content;
-//       display: block;
-//       margin: 1vh auto;
-//     }
-//   }
-// }
+          h2 {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

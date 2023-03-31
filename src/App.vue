@@ -10,8 +10,10 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
 #app {
-  font-family: "Poppins", Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", "Poppins", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -25,6 +27,7 @@ html {
 
 * {
   transition: all 0.3s ease;
+  font-family: "Montserrat", "Poppins", "Nunito Sans", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -106,16 +109,15 @@ i {
   }
 }
 
-.blur {
+.blur,
+.blur-wrapper {
   width: 100%;
   height: 100%;
-  background: #1f1c2d;
-  opacity: 0.7;
+  background: rgb(1, 69, 69);
+  opacity: 0.6;
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  margin: 0;
-  cursor: pointer;
 }
 
 .to-landing-page {
