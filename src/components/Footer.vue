@@ -63,13 +63,14 @@ export default {
 <style lang="scss" scoped>
 footer {
   background: rgb(39, 38, 44);
+  background: rgb(33, 85, 100);
   width: 100%;
   min-height: 30vh;
   flex-wrap: wrap;
   position: relative;
   h3 {
     font-size: 20px;
-    color: rgb(118, 74, 219);
+    color: rgb(215, 183, 5);
     text-align: left;
   }
   li {
