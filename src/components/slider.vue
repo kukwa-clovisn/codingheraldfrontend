@@ -51,6 +51,7 @@ h1 {
       height: 100%;
       width: 100%;
       object-fit: cover;
+      image-orientation: flip;
     }
 
     @media screen and (max-width: 500px) {

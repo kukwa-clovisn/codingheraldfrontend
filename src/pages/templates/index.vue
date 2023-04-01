@@ -25,8 +25,15 @@ import slider from "@/components/slider.vue";
 import { ref } from "vue";
 import templateImageOne from "@/assets/woman-with-phone.jpeg";
 import templateImageTwo from "@/assets/quality-app.jpeg";
+import templateImageThree from "@/assets/team.jpg";
+import templateImageFour from "@/assets/hchat.jpg";
 
-const images = ref([templateImageOne, templateImageTwo]);
+const images = ref([
+  templateImageOne,
+  templateImageTwo,
+  templateImageThree,
+  templateImageFour,
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -42,10 +49,10 @@ const images = ref([templateImageOne, templateImageTwo]);
 
     .slider-container {
       width: 100%;
-      height: 87vh;
+      height: 74vh;
 
       position: absolute;
-      top: 0;
+      top: 13%;
       left: 0;
     }
 
