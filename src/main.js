@@ -8,8 +8,8 @@ import "./interceptors/axios";
 import store from "./composable/store";
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import ElementPlus from "element-plus";
-// import "element-plus/dist/index.css";
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
 
 const app = createApp(App);
 
@@ -22,4 +22,4 @@ AOS.init({
   mirror: false, // whether elements should animate out while scrolling past them
 });
 
-app.use(router).mount("#app");
+app.use(router).use(ElementPlus).mount("#app");

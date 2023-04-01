@@ -10,6 +10,7 @@
         <router-link to="/" class="route-to">Home</router-link>
         <span @click="dropDownApps()" class="route-to">about us</span>
         <a href="/#apps" class="route-to">apps</a>
+        <router-link to="/templates" class="route-to">templates</router-link>
       </nav>
       <transition name="fade">
         <div id="app-list" v-if="showApps">
@@ -148,6 +149,12 @@ main {
         &:hover {
           color: rgb(248, 212, 9);
         }
+      }
+
+      .router-link-active,
+      .router-link-exact-active {
+        color: rgb(255, 235, 18);
+        border-bottom: 2px solid orange;
       }
     }
 

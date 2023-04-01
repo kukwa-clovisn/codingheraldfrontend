@@ -9,6 +9,7 @@ import Weather from "@/views/Weather.vue";
 import Compress from "@/image-handler/compress.vue";
 import Resize from "@/image-handler/resize.vue";
 import Buy from "@/image-handler/buy.vue";
+import templates from "@/pages/templates/index.vue";
 import axios from "axios";
 
 const routes = [
@@ -120,6 +121,11 @@ const routes = [
     path: "/forgot_password",
     name: "Forgot_password",
     component: () => import("../components/forgot_password.vue"),
+  },
+  {
+    name: "Templates",
+    path: "/templates",
+    component: templates,
   },
 ];
 
