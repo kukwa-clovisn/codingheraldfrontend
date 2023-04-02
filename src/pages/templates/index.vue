@@ -15,79 +15,76 @@
       <h1>browse our amazing templates and try them out for free</h1>
       <div class="template-header">
         <div class="template-header-wrapper">
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates"
+            class="template-button"
+            data-aos="slide-up"
             >All templates</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/header-templates"
+            class="template-button"
+            data-aos="slide-up"
             >Header</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/footer-templates"
+            class="template-button"
+            data-aos="slide-up"
             >footer</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/e-commerce-templates"
+            class="template-button"
+            data-aos="slide-up"
             >E-commerce</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/Landing-pages-templates"
+            class="template-button"
+            data-aos="slide-up"
             >landing pages</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/menu-templates"
+            class="template-button"
+            data-aos="slide-up"
             >menu templates</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/form-templates"
+            class="template-button"
+            data-aos="slide-up"
             >forms</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/dashboard-templates"
+            class="template-button"
+            data-aos="slide-up"
             >dashboards</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/button-templates"
+            class="template-button"
+            data-aos="slide-up"
             >buttons</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/button-templates"
+            class="template-button"
+            data-aos="slide-up"
             >animations</router-link
           >
-          <router-link to="#" class="template-button" data-aos="slide-up"
+          <router-link
+            to="/templates/alert-templates"
+            class="template-button"
+            data-aos="slide-up"
             >alerts(modals)</router-link
           >
         </div>
       </div>
-      <div class="flex-container">
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-code"></i>
-          </div>
-          <h2>Header templates</h2>
-        </div>
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-pen"></i>
-          </div>
-          <h2>Footer templates</h2>
-        </div>
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-book"></i>
-          </div>
-          <h2>E-commerce templates</h2>
-        </div>
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-coins"></i>
-          </div>
-          <h2>Landing pages</h2>
-        </div>
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-house"></i>
-          </div>
-          <h2>forms</h2>
-        </div>
-        <div class="flex-item" data-aos="slide-up">
-          <div class="flex-icon">
-            <i class="fa-solid fa-code"></i>
-          </div>
-          <h2>Menu templates</h2>
-        </div>
-      </div>
+
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -223,7 +220,6 @@ const images = ref([
           }
         }
 
-        .router-link-active,
         .router-link-exact-active {
           background: rgb(255, 162, 0);
           color: white;

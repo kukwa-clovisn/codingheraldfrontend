@@ -10,6 +10,16 @@ import Compress from "@/image-handler/compress.vue";
 import Resize from "@/image-handler/resize.vue";
 import Buy from "@/image-handler/buy.vue";
 import templates from "@/pages/templates/index.vue";
+import AllTemplates from "@/components/templates/allTemplates.vue";
+import headerIndex from "@/components/header/index.vue";
+import footerIndex from "@/components/footer/index.vue";
+import menuIndex from "@/components/menu/index.vue";
+import dashboardIndex from "@/components/dashboard/index.vue";
+import alertIndex from "@/components/alert/index.vue";
+import formIndex from "@/components/form/index.vue";
+import EcommerceIndex from "@/components/e-commerce/index.vue";
+import LandingPagesIndex from "@/components/LandingPages/index.vue";
+import buttonIndex from "@/components/button/index.vue";
 import axios from "axios";
 
 const routes = [
@@ -126,6 +136,63 @@ const routes = [
     name: "Templates",
     path: "/templates",
     component: templates,
+    children: [
+      {
+        name: "Templates",
+        path: "",
+        component: AllTemplates,
+      },
+      {
+        name: "header templates",
+        path: "/templates/header-templates",
+        component: headerIndex,
+      },
+      {
+        name: "footer templates",
+        path: "/templates/footer-templates",
+        component: footerIndex,
+      },
+
+      {
+        name: "menu templates",
+        path: "/templates/menu-templates",
+        component: menuIndex,
+      },
+
+      {
+        name: "dashboard templates",
+        path: "/templates/dashboard-templates",
+        component: dashboardIndex,
+      },
+
+      {
+        name: "button templates",
+        path: "/templates/button-templates",
+        component: buttonIndex,
+      },
+      {
+        name: "form templates",
+        path: "/templates/form-templates",
+        component: formIndex,
+      },
+
+      {
+        name: "alert templates",
+        path: "/templates/alert-templates",
+        component: alertIndex,
+      },
+
+      {
+        name: "Ecommerce templates",
+        path: "/templates/e-commerce-templates",
+        component: EcommerceIndex,
+      },
+      {
+        name: "Landing Pages templates",
+        path: "/templates/Landing-pages-templates",
+        component: LandingPagesIndex,
+      },
+    ],
   },
 ];
 
