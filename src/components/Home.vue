@@ -32,39 +32,39 @@
           us!
         </p>
 
-        <div class="about-content">
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+        <div class="flex-container">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-code"></i>
             </div>
             <h2>Web development</h2>
           </div>
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-pen"></i>
             </div>
             <h2>Graphic Design</h2>
           </div>
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-book"></i>
             </div>
             <h2>Forex Trading</h2>
           </div>
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-coins"></i>
             </div>
             <h2>Buy & Sell Of Crypto</h2>
           </div>
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-house"></i>
             </div>
             <h2>Real Estate</h2>
           </div>
-          <div class="service" data-aos="slide-up">
-            <div class="icon">
+          <div class="flex-item" data-aos="slide-up">
+            <div class="flex-icon">
               <i class="fa-solid fa-code"></i>
             </div>
             <h2>Custom Trainings</h2>
@@ -244,70 +244,6 @@ header {
       span {
         color: rgb(146, 124, 3);
         font-weight: bold;
-      }
-    }
-
-    .about-content {
-      width: 80%;
-      height: fit-content;
-      margin: 20px auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 40px 20px;
-
-      .service {
-        width: 320px;
-        height: 200px;
-        border-radius: 8px;
-        background: white;
-        box-shadow: 0 0 18px 8px rgb(195, 203, 203);
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 20px;
-
-        .icon {
-          width: 100px;
-          height: 100px;
-          border-radius: 100%;
-          background: white;
-          box-shadow: 0 0 15px 8px rgb(210, 221, 222);
-          display: flex;
-          justify-content: center;
-          cursor: pointer;
-          align-items: center;
-          overflow: hidden;
-
-          i {
-            font-size: 40px;
-          }
-        }
-
-        h2 {
-          font: 600 19px "Montserrat", "Nunito Sans", sans-serif;
-          text-align: center;
-        }
-        &:hover {
-          transform: translateY(-10px);
-          background: orange;
-
-          .icon {
-            box-shadow: 0 0 17px 8px rgb(185, 121, 1);
-            background: white;
-
-            i {
-              color: rgb(33, 85, 100);
-            }
-          }
-
-          h2 {
-            color: white;
-          }
-        }
       }
     }
   }

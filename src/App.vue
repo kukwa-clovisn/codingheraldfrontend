@@ -157,4 +157,69 @@ i {
   padding: 0;
   margin: 0;
 }
+
+.flex-container {
+  width: 80%;
+  height: fit-content;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+
+  .flex-item {
+    width: 320px;
+    height: 200px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 0 18px 8px rgb(195, 203, 203);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .flex-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      background: white;
+      box-shadow: 0 0 15px 8px rgb(210, 221, 222);
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      align-items: center;
+      overflow: hidden;
+
+      i {
+        font-size: 40px;
+      }
+    }
+
+    h2 {
+      font: 600 19px "Montserrat", "Nunito Sans", sans-serif;
+      text-align: center;
+    }
+    &:hover {
+      transform: translateY(-10px);
+      background: rgb(233, 168, 2);
+
+      .flex-icon {
+        transform: translateX(5px);
+        box-shadow: 0 0 17px 4px rgb(194, 137, 3);
+        background: white;
+
+        i {
+          color: rgb(33, 85, 100);
+        }
+      }
+
+      h2 {
+        color: white;
+      }
+    }
+  }
+}
 </style>
