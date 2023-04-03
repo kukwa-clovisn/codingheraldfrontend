@@ -4,8 +4,8 @@
       <Header />
     </header>
     <div class="landing-page">
-      <div class="blur-wrapper"></div>
-      <Logo />
+      <!-- <div class="blur-wrapper"></div> -->
+      <!-- <Logo /> -->
 
       <div class="bn d-flex justify-content-evenly align-items-center">
         <button class="start" title="sign up to use our apps and products">
@@ -20,16 +20,12 @@
       <div class="about-wrapper">
         <h1 data-aos="slide-up">About us</h1>
         <p data-aos="slide-up">
-          <span>codingherald</span> is an IT and mulit service organization,
-          with an online and offline academy. We offer services ranging from
-          different IT fields to many other custom trainings and services.
+          This an IT and mulit service organization, with an online and offline
+          academy. We offer services ranging from different IT fields to many
+          other custom trainings and services.
           <br />
           We as well have free apps which you can find below to help you ease
           your work.
-        </p>
-        <p data-aos="slide-up">
-          signup for free and get to know more interesting and fun facts about
-          us!
         </p>
 
         <div class="flex-container">
@@ -70,6 +66,13 @@
             <h2>Custom Trainings</h2>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="display" data-aos="slide-left">
+      <div class="blur-wrapper"></div>
+      <div class="buttons">
+        <router-link to="/templates">Browse Templates</router-link>
+        <router-link to="/templates">Browse apps</router-link>
       </div>
     </div>
     <Projects id="apps" />
@@ -139,11 +142,11 @@ header {
 
 .landing-page {
   width: 100%;
-  height: 87vh;
-  background: url(../assets/quality-app.jpeg);
+  height: 100vh;
+  background: url(../assets/atech-blue-1.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
   position: relative;
   background-position: center center;
   display: flex;
@@ -157,15 +160,18 @@ header {
   width: fit-content;
   margin: 20px auto;
   flex-wrap: wrap;
-  position: relative;
+  position: absolute;
+  bottom: 8%;
+  left: auto;
 
   button {
-    min-width: 150px;
+    width: 250px;
     height: 50px;
     border-radius: 30px;
     border: none;
 
     cursor: pointer;
+
     position: relative;
     background: linear-gradient(
       to top,
@@ -173,11 +179,11 @@ header {
       rgb(172, 110, 2) 100%
     );
     margin: 10px;
-    animation: bounce 3s infinite alternate forwards;
+    animation: bounce 3s linear infinite alternate forwards;
 
     &:last-child {
       background: teal;
-      animation: demo 3s infinite alternate forwards;
+      animation: demo 3s linear infinite alternate forwards;
     }
 
     .route {
@@ -197,6 +203,10 @@ header {
       text-transform: capitalize;
       color: white;
     }
+
+    @media screen and (max-width: 400px) {
+      width: 90%;
+    }
   }
 
   @media screen and (max-width: 450px) {
@@ -206,22 +216,23 @@ header {
 
 @keyframes bounce {
   to {
-    top: -30px;
+    transform: translateY(-30px);
   }
 }
 
 @keyframes demo {
   from {
-    top: -30px;
+    transform: translateY(-30px);
   }
   to {
-    top: 0;
+    transform: translateY(0);
   }
 }
 
 .about {
   width: 100vw;
   height: fit-content;
+  background: white;
   .about-wrapper {
     width: 100%;
     height: fit-content;
@@ -237,7 +248,7 @@ header {
     }
     p {
       width: 80%;
-      margin: 10px auto;
+      margin: 20px auto;
 
       padding: 10px 0;
       text-align: center;
@@ -245,6 +256,64 @@ header {
         color: rgb(146, 124, 3);
         font-weight: bold;
       }
+    }
+  }
+}
+.display {
+  width: 100vw;
+  height: 90vh;
+  background: url(../assets/woman-with-phone-design.jpeg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .blur-wrapper {
+    display: none;
+    opacity: 0.4;
+  }
+
+  .buttons {
+    width: 90%;
+    height: fit-content;
+    display: none;
+
+    a {
+      display: flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      height: 50px;
+      padding: 0 25px;
+      border: none;
+      background: white;
+      color: rgb(197, 168, 2);
+      text-decoration: none;
+      text-transform: capitalize;
+      font: 700 17px "Montserrat", "Poppins", sans-serif;
+      margin: 20px auto;
+      border-radius: 30px;
+      position: relative;
+
+      &:last-child {
+        background: rgb(207, 176, 2);
+        color: white;
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 90%;
+      }
+    }
+  }
+
+  &:hover {
+    .blur-wrapper,
+    .buttons {
+      display: block;
     }
   }
 }

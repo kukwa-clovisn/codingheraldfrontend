@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
 #container {
   width: 100vw;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 10px 0;
   position: relative;
@@ -21,7 +22,7 @@
 #container .card-container .card-header {
   height: 45%;
   width: 100%;
-  background: #215564;
+  background: rgb(33, 85, 100);
   position: relative;
   border: none;
 }
@@ -39,7 +40,8 @@
 #container .card-container .card-header .img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 @media screen and (max-width: 400px) {
   #container .card-container .card-header .img {
@@ -48,7 +50,9 @@
   }
 }
 #container .card-container .card-header .card-media {
+  width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: absolute;
   right: 0;
@@ -60,8 +64,8 @@
 }
 #container .card-container .card-header .card-media i {
   font-size: 19px;
-  color: #e7e6e6;
-  margin: 5px 10px;
+  color: rgb(231, 230, 230);
+  margin: 10px;
   cursor: pointer;
 }
 #container .card-container .card-header:hover {
@@ -72,26 +76,28 @@
   height: 55%;
   padding: 0 10px;
   padding-top: 11%;
+  background: rgb(243, 243, 243);
 }
 #container .card-container .card-body .card-title {
   text-align: center;
-  font: 600 23px "Nunito Sans", sans-serif;
-  color: #494949;
+  font: 600 23px "Montserrat", "Nunito Sans", sans-serif;
+  color: rgb(73, 73, 73);
   padding: 10px 5px;
   width: 90%;
   margin: auto;
 }
 #container .card-container .card-body .card-description {
   text-align: center;
-  font: 500 13px "Poppins", sans-serif;
+  font: 500 13px/20px "Montserrat", "Poppins", sans-serif;
   padding: 10px 4px;
   width: 90%;
   margin: auto;
-  color: #313131;
+  color: rgb(49, 49, 49);
 }
 #container .card-container .card-body .card-buttons {
   width: 95%;
   margin: auto;
+  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -104,7 +110,7 @@
   border-radius: 30px;
   border: none;
   text-decoration: none;
-  background: #215564;
+  background: rgb(33, 85, 100);
   color: white;
   display: flex;
   justify-content: center;
@@ -116,32 +122,46 @@
 }
 #container .card-container .card-body .card-buttons .btn:hover {
   transform: scale(0.9);
-  background: #23436e;
+  background: #df9502;
 }
 #container .card-container .card-body .card-buttons .btn:active {
   transform: scale(0.8);
 }
 #container .card-container .card-body .card-buttons .btn:last-child {
   background: transparent;
-  box-shadow: 0 0 1px 1px #215564;
-  color: #1d4e64;
+  box-shadow: 0 0 1px 1px rgb(33, 85, 100);
+  color: rgb(29, 78, 100);
 }
 #container .card-container .card-body:hover {
   background: whitesmoke;
 }
 #container .card-container:hover {
-  background: linear-gradient(to bottom left, #2c7387, #215564);
+  transform: translateY(-10px);
+  background: linear-gradient(to bottom left, rgb(44, 115, 135), rgb(33, 85, 100));
 }
 #container .card-container:hover .card-header {
-  background: linear-gradient(to top left, #2d7a8f, #215564);
+  background: linear-gradient(to top left, rgb(41, 113, 133), rgb(33, 85, 100));
+}
+#container .card-container:hover .card-header .img {
+  border-color: rgb(221, 166, 3);
+  box-shadow: 0 0 1px 2px #ffffff;
 }
 #container .card-container:hover .card-body {
-  background: linear-gradient(to bottom left, #297185, #215564);
+  background: linear-gradient(to bottom left, rgb(41, 113, 133), rgb(33, 85, 100));
   color: white;
 }
-#container .card-container:hover .card-body .card-title,
+#container .card-container:hover .card-body .card-title {
+  color: rgb(239, 205, 11);
+}
 #container .card-container:hover .card-body .card-description {
   color: white;
+}
+#container .card-container:hover .card-body .card-buttons a {
+  background: #df9502;
+}
+#container .card-container:hover .card-body .card-buttons a:last-child {
+  background: white;
+  border: none;
 }
 @media screen and (max-width: 400px) {
   #container .card-container {
@@ -161,6 +181,4 @@
   #container .card-container .card-body .card-description {
     font-size: 12px;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

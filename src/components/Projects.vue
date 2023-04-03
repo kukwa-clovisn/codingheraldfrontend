@@ -128,6 +128,7 @@ export default {
 header {
   padding-top: 30px;
   width: 100vw;
+  background: white;
   height: auto;
 
   h1 {
@@ -163,7 +164,7 @@ header {
   padding-top: 30px;
   padding-bottom: 20px;
   position: relative;
-  background: rgb(212, 216, 228);
+  background: rgb(255, 255, 255);
 
   h1 {
     padding: 10px;

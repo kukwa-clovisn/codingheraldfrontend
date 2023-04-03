@@ -17,7 +17,7 @@
           <h1>our courses and services</h1>
           <ul>
             <li>
-              <a href="https://advancedtechacademy.herokuapp.com"
+              <a href="https://advancedtechacademy.netlify.app"
                 ><i class="fa-solid fa-graduation-cap"></i>academy</a
               >
             </li>
@@ -32,7 +32,7 @@
               >
             </li>
             <li>
-              <a href="https://advancedtechacademy.herokuapp.com"
+              <a href="https://advancedtechacademy.netlify.app"
                 ><i class="fa-solid fa-music"></i>piano lessons</a
               >
             </li>
