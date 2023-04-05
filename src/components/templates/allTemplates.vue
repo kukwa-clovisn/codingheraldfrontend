@@ -18,7 +18,11 @@
       </div>
       <h2>E-commerce templates</h2>
     </div>
-    <div class="flex-item" data-aos="slide-up">
+    <div
+      class="flex-item"
+      data-aos="slide-up"
+      @click="$router.push('/templates/landing-pages')"
+    >
       <div class="flex-icon">
         <i class="fa-solid fa-coins"></i>
       </div>

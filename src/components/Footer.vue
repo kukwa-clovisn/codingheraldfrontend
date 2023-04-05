@@ -3,13 +3,13 @@
     <div>
       <h3>ABOUT</h3>
       <li class="text-left text-capitalize text-white">
-        <a href="https://codingherald.netlify.app/contact">Contact</a>
+        <a href="https://codingherald.onrender.com/contact">Contact</a>
       </li>
       <li class="text-left text-capitalize text-white">
-        <a href="https://advancedtechacademy.netlify.app/blog">Blog</a>
+        <a href="https://advancedtechacademy.onrender.com/blog">Blog</a>
       </li>
       <li class="text-left text-capitalize text-white">
-        <a href="https://advancedtechacademy.netlify.app/blog">Community</a>
+        <a href="https://advancedtechacademy.onrender.com/blog">Community</a>
       </li>
     </div>
     <div>

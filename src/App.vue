@@ -152,6 +152,11 @@ i {
     }
   }
 }
+
+.router-link-exact-active {
+  color: rgb(255, 235, 18);
+  border-bottom: 2px solid orange;
+}
 #main {
   width: 100%;
   overflow-x: hidden;

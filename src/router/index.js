@@ -20,6 +20,8 @@ import formIndex from "@/components/form/index.vue";
 import EcommerceIndex from "@/components/e-commerce/index.vue";
 import LandingPagesIndex from "@/components/LandingPages/index.vue";
 import buttonIndex from "@/components/button/index.vue";
+import landingPages from "@/pages/templates/landingPages/index.vue";
+import templatePreview from "@/pages/templates/template-preview.vue";
 import axios from "axios";
 
 const routes = [
@@ -193,6 +195,16 @@ const routes = [
         component: LandingPagesIndex,
       },
     ],
+  },
+  {
+    name: "landingpages",
+    path: "/templates/landing-pages",
+    component: landingPages,
+  },
+  {
+    name: "Template Preview",
+    path: "/templates/template/preview",
+    component: templatePreview,
   },
 ];
 

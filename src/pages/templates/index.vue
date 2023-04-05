@@ -40,7 +40,7 @@
             >E-commerce</router-link
           >
           <router-link
-            to="/templates/Landing-pages-templates"
+            to="/templates/Landing-pages"
             class="template-button"
             data-aos="slide-up"
             >landing pages</router-link
@@ -95,10 +95,10 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import slider from "@/components/slider.vue";
 import { ref } from "vue";
-import templateImageOne from "@/assets/woman-with-phone.jpeg";
+import templateImageOne from "@/assets/woman-with-phone-design.jpeg";
 import templateImageTwo from "@/assets/quality-app.jpeg";
 import templateImageThree from "@/assets/team.jpg";
-import templateImageFour from "@/assets/hchat.jpg";
+import templateImageFour from "@/assets/atech-blue-1.jpeg";
 
 const images = ref([
   templateImageOne,
@@ -115,17 +115,21 @@ const images = ref([
 
   .landing-page {
     width: 100%;
-    height: 87vh;
+    height: 100vh;
     padding-top: 14vh;
     position: relative;
 
     .slider-container {
       width: 100%;
-      height: 74vh;
+      height: 86vh;
 
       position: absolute;
       top: 13%;
       left: 0;
+
+      .blur-wrapper {
+        display: none;
+      }
     }
 
     .landing-page-wrapper {

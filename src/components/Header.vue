@@ -11,13 +11,16 @@
         <span @click="dropDownApps()" class="route-to">about us</span>
         <a href="/#apps" class="route-to">apps</a>
         <router-link to="/templates" class="route-to">templates</router-link>
+        <a href="https://advancedtechacademy.onrender.com" class="route-to"
+          >academy</a
+        >
       </nav>
       <transition name="fade">
         <div id="app-list" v-if="showApps">
           <h1>our courses and services</h1>
           <ul>
             <li>
-              <a href="https://advancedtechacademy.netlify.app"
+              <a href="https://advancedtechacademy.onrender.com"
                 ><i class="fa-solid fa-graduation-cap"></i>academy</a
               >
             </li>
@@ -32,20 +35,18 @@
               >
             </li>
             <li>
-              <a href="https://advancedtechacademy.netlify.app"
+              <a href="https://advancedtechacademy.onrender.com"
                 ><i class="fa-solid fa-music"></i>piano lessons</a
               >
             </li>
           </ul>
         </div>
       </transition>
-      <nav>
+      <nav class="nav-contacts">
         <router-link to="/contact" class="route-to">contact</router-link>
-        <router-link to="/register" class="route-to"
+        <router-link to="/login" class="route-to">sign in</router-link>
+        <router-link to="/register" class="route-to special"
           >sign up
-          <!-- <transition name="trying">
-            <span></span>
-          </transition> -->
         </router-link>
       </nav>
     </header>
@@ -115,7 +116,7 @@ main {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      width: 30%;
+      width: 40%;
       height: 100%;
 
       .route-to {
@@ -150,12 +151,32 @@ main {
           color: rgb(248, 212, 9);
         }
       }
+      .special {
+        background: white;
+        color: rgb(9, 55, 70);
+        height: 40px;
+        width: 100px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+
+        &:hover {
+          color: white;
+          background: rgb(34, 110, 130);
+        }
+      }
 
       .router-link-active,
       .router-link-exact-active {
         color: rgb(255, 235, 18);
         border-bottom: 2px solid orange;
       }
+    }
+
+    .nav-contacts {
+      width: 30%;
     }
 
     @keyframes hovering {
@@ -212,6 +233,7 @@ main {
       width: 100vw;
       height: fit-content;
       background: white;
+      box-shadow: 0 4px 16px 7px rgb(223, 223, 223);
       position: fixed;
       top: 10vh;
       left: 0;
