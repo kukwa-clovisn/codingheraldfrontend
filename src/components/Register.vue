@@ -224,16 +224,16 @@ export default {
 <style lang="scss" scoped>
 .main {
   width: 100%;
-  height: 100vh;
+  height: fit-content;
   margin: 0;
   padding-top: 3vh;
-  background: rgb(249, 225, 198);
-  background: url(../assets/Sign-up.png);
+  background:linear-gradient(to bottom right, rgb(178, 180, 184),rgb(59, 64, 74)) ;
   background-position: left;
   background-attachment: fixed;
   background-size: contain;
   background-repeat: no-repeat;
   padding: 20px 3px;
+  border-radius: 0;
 }
 .logo-main {
   width: 100%;
@@ -388,7 +388,9 @@ div {
     button {
       width: 85%;
       height: 50px;
-      background: teal;
+ 
+        background: teal;
+        // box-shadow: 0 0 5px 1px rgb(120, 120, 120);
       border: none;
       border-radius: 5px;
       color: white;
@@ -399,7 +401,9 @@ div {
       transition: all 0.3s ease-out;
 
       &:hover {
-        background: rgb(4, 188, 188);
+        background: rgb(2, 97, 97);
+       
+        transform:scale(1);
       }
     }
     p {
@@ -490,7 +494,7 @@ div {
     padding: 10px;
     font-size: 12px;
     text-transform: capitalize;
-    color: #707070;
+    color: #a7a6a6;
     cursor: pointer;
   }
 }

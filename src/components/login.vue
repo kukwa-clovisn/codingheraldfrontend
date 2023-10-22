@@ -179,9 +179,9 @@ export default {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(
-    to top,
-    rgba(21, 122, 253, 0.685) 0%,
-    rgba(171, 250, 171, 0.623) 40%,
+    to bottom,
+    rgb(33,85,100) 20%,
+    rgb(39, 107, 125) 40%,
     rgba(20, 164, 212, 0.877) 100%
   );
   background-attachment: fixed;
